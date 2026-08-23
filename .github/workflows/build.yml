@@ -74,6 +74,12 @@ jobs:
                 scripts/build-iso.sh
             '
 
+      - name: Fix ISO artifact permissions
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo chown -R "$(id -u):$(id -g)" release
+
       - name: Generate ISO checksum
         shell: bash
         run: |
