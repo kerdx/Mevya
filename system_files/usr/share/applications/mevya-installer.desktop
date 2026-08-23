@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Install Mevya Linux
+Name[it]=Installa Mevya Linux
+Comment=Install the live system to the hard drive
+Comment[it]=Installa il sistema live sul disco rigido
+Exec=liveinst
+Icon=org.fedoraproject.AnacondaInstaller
+Terminal=false
+Type=Application
+Categories=System;
+StartupNotify=true
+StartupWMClass=liveinst
