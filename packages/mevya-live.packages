@@ -11,6 +11,12 @@ kernel
 kernel-modules
 kernel-modules-extra
 livesys-scripts
+efibootmgr
+grub2
+grub2-efi-x64
+grub2-efi-x64-cdboot
+grub2-tools
+shim-x64
 greetd
 labwc
 labwc-session

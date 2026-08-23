@@ -36,7 +36,8 @@ aggiornamenti del sistema.
 
 ### Multimedia
 
-La baseline contiene 121 pacchetti tra librerie, plugin e supporto hardware:
+La baseline contiene 127 pacchetti tra desktop, librerie, plugin, boot e
+supporto hardware:
 
 - FFmpeg Fedora, `libavcodec-freeworld` e codec RPM Fusion compatibili con Anaconda;
 - GStreamer base, good, bad, ugly, libav, OpenH264 e PipeWire;
