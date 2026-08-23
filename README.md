@@ -36,12 +36,12 @@ aggiornamenti del sistema.
 
 ### Multimedia
 
-La baseline contiene 119 pacchetti tra librerie, plugin e supporto hardware:
+La baseline contiene 121 pacchetti tra librerie, plugin e supporto hardware:
 
-- FFmpeg, `libavcodec` e codec RPM Fusion;
+- FFmpeg Fedora, `libavcodec-freeworld` e codec RPM Fusion compatibili con Anaconda;
 - GStreamer base, good, bad, ugly, libav, OpenH264 e PipeWire;
-- H.264, H.265, x264, x265, AV1, VP8/VP9 e Opus;
-- LAME e `libfdk-aac` per l’audio;
+- H.264, H.265, x265, AV1, VP8/VP9 e Opus;
+- LAME e `fdk-aac-free` per l’audio;
 - PipeWire, WirePlumber e Bluetooth aptX;
 - libcamera e integrazione GStreamer per videocamere;
 - VA-API, Mesa VA-API/VDPAU e driver Intel;
@@ -112,16 +112,16 @@ non sono installati `livemedia-creator`, `mock` e `ksvalidator`.
 Per generare solo il Kickstart:
 
 ```bash
-./scripts/render-kickstart.sh
+./mevya-clasic/scripts/render-kickstart.sh
 ```
 
 La compose locale richiede un ambiente Fedora con Lorax:
 
 ```bash
-BUILD=1 ./scripts/build-iso.sh
+BUILD=1 ./mevya-clasic/scripts/build-iso.sh
 ```
 
-Lo script salva la ISO in `release/`.
+Lo script salva la ISO in `mevya-clasic/release/`.
 
 ## Build GitHub Actions
 

@@ -57,9 +57,9 @@ pipewire-pulseaudio
 pipewire-utils
 wireplumber
 alsa-plugins-pulseaudio
-ffmpeg
-ffmpeg-libs
-libavcodec-free
+# Keep Fedora's -free FFmpeg stack: Anaconda requires the matching
+# libavcodec-free libraries, while RPM Fusion's ffmpeg-libs conflicts with it.
+ffmpeg-free
 libavcodec-freeworld
 libcamera-gstreamer
 libcamera-tools
@@ -73,7 +73,7 @@ gstreamer1-plugins-bad-free-extras
 gstreamer1-plugins-ugly
 gstreamer1-libav
 gstreamer1-plugin-openh264
-pipewire-plugin-gstreamer
+pipewire-gstreamer
 PackageKit-gstreamer-plugin
 libva
 libva-utils
@@ -85,7 +85,6 @@ opus
 pipewire-codec-aptx
 nv-codec-headers
 lame
-x264
 x265
 rpmfusion-free-release
 rpmfusion-nonfree-release
