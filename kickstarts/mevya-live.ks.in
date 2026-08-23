@@ -22,7 +22,6 @@ repo --name=fedora-updates --baseurl=https://download.fedoraproject.org/pub/fedo
 repo --name=mevya-danklinux --baseurl=https://download.copr.fedorainfracloud.org/results/avengemedia/danklinux/fedora-$releasever-$basearch/
 repo --name=mevya-dms --baseurl=https://download.copr.fedorainfracloud.org/results/avengemedia/dms/fedora-$releasever-$basearch/
 repo --name=mevya-nautilus-terminal --baseurl=https://download.copr.fedorainfracloud.org/results/monkeygold/nautilus-open-any-terminal/fedora-$releasever-$basearch/
-repo --name=mevya-ublue-packages --baseurl=https://download.copr.fedorainfracloud.org/results/ublue-os/packages/fedora-$releasever-$basearch/
 repo --name=rpmfusion-free --baseurl=https://download1.rpmfusion.org/free/fedora/releases/$releasever/Everything/$basearch/os/
 repo --name=rpmfusion-free-updates --baseurl=https://download1.rpmfusion.org/free/fedora/updates/$releasever/$basearch/
 repo --name=rpmfusion-nonfree --baseurl=https://download1.rpmfusion.org/nonfree/fedora/releases/$releasever/Everything/$basearch/os/
@@ -52,7 +51,6 @@ dracut --regenerate-all --force
 dnf5 -y copr enable avengemedia/danklinux
 dnf5 -y copr enable avengemedia/dms
 dnf5 -y copr enable monkeygold/nautilus-open-any-terminal
-dnf5 -y copr enable ublue-os/packages
 
 # Brand both the installed system and the generated boot-loader titles.
 os_release=/usr/lib/os-release

@@ -47,13 +47,13 @@ google-noto-sans-cjk-fonts
 jetbrains-mono-fonts
 cascadia-code-nf-fonts
 
-# Nautilus and the selected terminal.
+# Nautilus and the selected desktop terminal.
 nautilus
 nautilus-open-any-terminal
 gvfs
 gvfs-mtp
 gvfs-smb
-ghostty
+ptyxis
 flatpak-spawn
 
 # Audio, video, camera and hardware acceleration.

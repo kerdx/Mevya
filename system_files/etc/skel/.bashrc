@@ -38,6 +38,6 @@ __mevya_git_branch() {
     printf '  git:%s' "$branch"
 }
 
-# Keep Ghostty's prompt hooks intact; the branch segment is evaluated when
-# Bash expands PS1 instead of replacing PROMPT_COMMAND.
+# Keep the prompt independent of the terminal emulator; the branch segment is
+# evaluated when Bash expands PS1 instead of replacing PROMPT_COMMAND.
 PS1='\[\e[38;5;146m\]\u\[\e[38;5;103m\]@\[\e[38;5;110m\]\h \[\e[38;5;103m\]\w$(__mevya_git_branch)\[\e[0m\]\n\[\e[38;5;146m\]❯\[\e[0m\] '

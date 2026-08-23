@@ -9,7 +9,7 @@ aggiornamenti del sistema.
 | Area | Stato |
 | --- | --- |
 | Configurazione labwc + DMS | Preparata e copiata dalla variante principale |
-| Ghostty + Nautilus | Inclusi e configurati |
+| Ptyxis + Nautilus | Inclusi e configurati |
 | Multimedia e codec | Manifest preparato, da verificare nella prima compose |
 | Kickstart live ISO | Preparato e renderizzato staticamente |
 | Installer | Calamares incluso con launcher Mevya |
@@ -24,13 +24,13 @@ aggiornamenti del sistema.
 - labwc come compositor/window manager Wayland;
 - DankMaterialShell per pannello, launcher, notifiche, calendario e impostazioni;
 - greetd e `dms-greeter` per il login;
-- Ghostty come terminale predefinito;
+- Ptyxis come terminale predefinito, con integrazione GTK4/libadwaita;
 - Nautilus come file manager, con GVfs, SMB e MTP;
 - Kanshi, wlr-randr e wdisplays per monitor e docking;
 - portali XDG per labwc, screenshot e condivisione schermo;
 - font Material Symbols, Noto, JetBrains Mono e Cascadia Code NF;
 - preset labwc performance e power-saver;
-- temi Matugen per Ghostty e labwc;
+- temi Matugen per labwc e palette desktop coerente;
 - clipboard DMS, fallback DMS e log della sessione grafica;
 - Plymouth con splash screen Mevya.
 
@@ -64,7 +64,6 @@ per i pacchetti selezionati:
 
 - COPR DankLinux e DankMaterialShell;
 - COPR Nautilus Open Any Terminal;
-- COPR uBlue packages solo per i componenti scelti, principalmente Ghostty;
 - RPM Fusion free e nonfree per codec e driver multimediali.
 
 Non viene copiato il modello uBlue/bootc e non vengono inclusi `uupd`,
