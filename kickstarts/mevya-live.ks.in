@@ -10,6 +10,9 @@ network --bootproto=dhcp --device=link --activate
 rootpw --lock
 user --name=mevya --groups=wheel --plaintext --password=mevya
 services --enabled=NetworkManager,greetd
+bootloader --location=none
+reqpart
+part / --size=16384 --fstype=ext4
 
 # livemedia-creator requires an explicit install method when repo directives
 # are present. Fedora Everything supplies the base packages for the live ISO.
