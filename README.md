@@ -12,7 +12,7 @@ aggiornamenti del sistema.
 | Ptyxis + Nautilus | Inclusi e configurati |
 | Multimedia e codec | Risoluzione pacchetti verificata nella compose |
 | Kickstart live ISO | Preparato e renderizzato staticamente |
-| Installer | Calamares incluso con launcher Mevya |
+| Installer | Anaconda live di Fedora |
 | GRUB/Plymouth | Branding Mevya configurato |
 | Workflow GitHub | Preparato, build manuale con artifact ISO |
 | Prima ISO reale | Build completata, ISO e checksum pubblicati come artifact |
@@ -73,7 +73,8 @@ Non viene copiato il modello uBlue/bootc e non vengono inclusi `uupd`,
 
 ## Installer e branding
 
-- Calamares è installato e disponibile dal launcher “Install Mevya”;
+- Anaconda live è incluso tramite i pacchetti Fedora `anaconda`,
+  `anaconda-install-env-deps` e `anaconda-live`;
 - il Kickstart prepara una live session con labwc/DMS;
 - `/etc/os-release` viene brandizzato come Mevya Linux / Mevya Classic;
 - GRUB usa `GRUB_DISTRIBUTOR="Mevya"`;
@@ -92,7 +93,7 @@ pubblica.
 - `scripts/render-kickstart.sh`: genera il Kickstart completo;
 - `scripts/build-iso.sh`: prepara o compone localmente la ISO;
 - `lorax-custom/`: spazio per future personalizzazioni Lorax;
-- `.github/workflows/build-classic.yml`: workflow GitHub Actions della ISO.
+- `.github/workflows/build.yml`: workflow GitHub Actions della ISO.
 
 ## Controlli già eseguiti
 
@@ -115,16 +116,16 @@ Sul sistema locale non sono installati `livemedia-creator`, `mock` e
 Per generare solo il Kickstart:
 
 ```bash
-./mevya-clasic/scripts/render-kickstart.sh
+./scripts/render-kickstart.sh
 ```
 
 La compose locale richiede un ambiente Fedora con Lorax:
 
 ```bash
-BUILD=1 ./mevya-clasic/scripts/build-iso.sh
+BUILD=1 ./scripts/build-iso.sh
 ```
 
-Lo script salva la ISO in `mevya-clasic/release/`.
+Lo script salva la ISO in `release/`.
 
 ## Build GitHub Actions
 
@@ -147,9 +148,9 @@ avvia da `Actions > Build Mevya Classic ISO > Run workflow`.
 ## Prossimi passi
 
 1. Scaricare ISO e checksum dall’artifact della run riuscita.
-2. Testare boot live, labwc/DMS, Ptyxis, Nautilus e Calamares in VirtualBox.
+2. Testare boot live, labwc/DMS, Ptyxis, Nautilus e Anaconda in VirtualBox.
 3. Verificare codec, audio, video, monitor/dock e profili energetici.
-4. Solo dopo il test, rifinire OOBE, branding Calamares e profili hardware.
+4. Solo dopo il test, rifinire OOBE, branding Fedora/Mevya e profili hardware.
 
 Questa variante resta sperimentale finché la ISO non viene avviata e installata
 con successo in VirtualBox.

@@ -35,6 +35,7 @@ __MEVYA_PACKAGES__
 set -eux
 
 # Keep the live session in the same graphical path as the installed system.
+systemctl set-default graphical.target
 systemctl enable greetd.service
 systemctl enable power-profiles-daemon.service
 systemctl enable firewalld.service

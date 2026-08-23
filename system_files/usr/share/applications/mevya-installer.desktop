@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Install Mevya
-Comment=Install Mevya Classic on this computer
-Exec=pkexec calamares
-Icon=system-software-install
-Terminal=false
-Type=Application
-Categories=System;Settings;
-Keywords=install;installer;Mevya;

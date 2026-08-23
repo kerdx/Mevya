@@ -4,7 +4,6 @@
 anaconda
 anaconda-install-env-deps
 anaconda-live
-calamares
 dnf5-plugins
 dracut-config-generic
 kernel
