@@ -17,16 +17,18 @@ for command in livemedia-creator; do
 done
 
 "${SCRIPT_DIR}/render-kickstart.sh" "${WORK_DIR}/mevya-live.ks"
-mkdir -p "${OUTPUT_DIR}"
-
-printf '%s\n' \
-    'The Kickstart is ready.' \
-    'This script intentionally stops before invoking livemedia-creator.' \
-    'Run it with BUILD=1 only after the package and VirtualBox smoke checks pass.'
 
 if [[ "${BUILD:-0}" != 1 ]]; then
+    printf '%s\n' \
+        'The Kickstart is ready.' \
+        'This script intentionally stops before invoking livemedia-creator.' \
+        'Run it with BUILD=1 only after the package and VirtualBox smoke checks pass.'
     exit 0
 fi
+
+# livemedia-creator requires --resultdir to be absent at startup.
+# Create only its parent; Lorax creates and owns the result directory.
+mkdir -p "$(dirname -- "${OUTPUT_DIR}")"
 
 livemedia-creator \
     --ks "${WORK_DIR}/mevya-live.ks" \
