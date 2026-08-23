@@ -31,8 +31,13 @@ repo --name=rpmfusion-nonfree-updates --baseurl=https://download1.rpmfusion.org/
 __MEVYA_PACKAGES__
 %end
 
-%post
+%post --erroronfail --log=/root/mevya-ks-post.log
 set -eux
+
+# Install Mevya's runtime files before any optional post-install step can
+# abort the script.  In particular, dnf5 COPR setup may not have working DNS
+# yet during Anaconda's post-install phase.
+__MEVYA_CONFIG_POST__
 
 # Keep the live session in the same graphical path as the installed system.
 systemctl set-default graphical.target
@@ -49,9 +54,9 @@ dracut --regenerate-all --force
 
 # Keep the external repositories required by selected desktop packages
 # available for normal DNF updates after installation.
-dnf5 -y copr enable avengemedia/danklinux
-dnf5 -y copr enable avengemedia/dms
-dnf5 -y copr enable monkeygold/nautilus-open-any-terminal
+dnf5 -y copr enable avengemedia/danklinux || true
+dnf5 -y copr enable avengemedia/dms || true
+dnf5 -y copr enable monkeygold/nautilus-open-any-terminal || true
 
 # Brand both the installed system and the generated boot-loader titles.
 os_release=/usr/lib/os-release
@@ -65,7 +70,5 @@ if grep -q '^GRUB_DISTRIBUTOR=' "${grub_config}" 2>/dev/null; then
 else
     printf '%s\n' 'GRUB_DISTRIBUTOR="Mevya"' >> "${grub_config}"
 fi
-
-__MEVYA_CONFIG_POST__
 
 %end
