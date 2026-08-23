@@ -10,6 +10,10 @@ rootpw --lock
 user --name=mevya --groups=wheel --plaintext --password=mevya
 services --enabled=NetworkManager,greetd
 
+# livemedia-creator requires an explicit install method when repo directives
+# are present. Fedora Everything supplies the base packages for the live ISO.
+url --url=https://download.fedoraproject.org/pub/fedora/linux/releases/$releasever/Everything/$basearch/os/
+
 repo --name=mevya-danklinux --baseurl=https://download.copr.fedorainfracloud.org/results/avengemedia/danklinux/fedora-$releasever-$basearch/
 repo --name=mevya-dms --baseurl=https://download.copr.fedorainfracloud.org/results/avengemedia/dms/fedora-$releasever-$basearch/
 repo --name=mevya-nautilus-terminal --baseurl=https://download.copr.fedorainfracloud.org/results/monkeygold/nautilus-open-any-terminal/fedora-$releasever-$basearch/
