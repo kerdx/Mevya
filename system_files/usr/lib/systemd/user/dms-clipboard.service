@@ -1,0 +1,13 @@
+[Unit]
+Description=DMS clipboard history
+After=dms.service
+PartOf=dms.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/dms cl watch --store
+Restart=on-failure
+RestartSec=2s
+
+[Install]
+WantedBy=default.target

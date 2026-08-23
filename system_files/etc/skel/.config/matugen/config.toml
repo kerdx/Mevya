@@ -1,0 +1,14 @@
+# Custom DMS/Matugen integration for labwc.
+# DMS keeps its own Material templates and also executes this custom template.
+
+[config]
+
+[templates.labwc]
+input_path = '~/.config/matugen/templates/labwc-themerc'
+output_path = '~/.config/labwc/themerc-override'
+post_hook = 'labwc --reconfigure'
+
+[templates.ghostty]
+input_path = '~/.config/matugen/templates/ghostty'
+output_path = '~/.config/ghostty/config.ghostty'
+post_hook = 'pkill -USR2 -x ghostty >/dev/null 2>&1 || true'

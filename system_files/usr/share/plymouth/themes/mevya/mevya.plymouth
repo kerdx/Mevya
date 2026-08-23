@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Mevya
+Description=Mevya Linux boot splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/mevya
+ScriptFile=/usr/share/plymouth/themes/mevya/mevya.script

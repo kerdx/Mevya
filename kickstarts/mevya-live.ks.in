@@ -1,0 +1,63 @@
+# Mevya Classic live image. The renderer injects the package list and the
+# selected desktop configuration before livemedia-creator consumes this file.
+
+lang en_US.UTF-8
+keyboard us
+timezone Europe/Rome --utc
+selinux --enforcing
+firewall --enabled
+rootpw --lock
+user --name=mevya --groups=wheel --plaintext --password=mevya
+services --enabled=NetworkManager,greetd
+
+repo --name=mevya-danklinux --baseurl=https://download.copr.fedorainfracloud.org/results/avengemedia/danklinux/fedora-$releasever-$basearch/
+repo --name=mevya-dms --baseurl=https://download.copr.fedorainfracloud.org/results/avengemedia/dms/fedora-$releasever-$basearch/
+repo --name=mevya-nautilus-terminal --baseurl=https://download.copr.fedorainfracloud.org/results/monkeygold/nautilus-open-any-terminal/fedora-$releasever-$basearch/
+repo --name=mevya-ublue-packages --baseurl=https://download.copr.fedorainfracloud.org/results/ublue-os/packages/fedora-$releasever-$basearch/
+repo --name=rpmfusion-free --baseurl=https://download1.rpmfusion.org/free/fedora/releases/$releasever/Everything/$basearch/os/
+repo --name=rpmfusion-free-updates --baseurl=https://download1.rpmfusion.org/free/fedora/updates/$releasever/$basearch/
+repo --name=rpmfusion-nonfree --baseurl=https://download1.rpmfusion.org/nonfree/fedora/releases/$releasever/Everything/$basearch/os/
+repo --name=rpmfusion-nonfree-updates --baseurl=https://download1.rpmfusion.org/nonfree/fedora/updates/$releasever/$basearch/
+
+%packages
+__MEVYA_PACKAGES__
+%end
+
+%post
+set -eux
+
+# Keep the live session in the same graphical path as the installed system.
+systemctl enable greetd.service
+systemctl enable power-profiles-daemon.service
+systemctl enable firewalld.service
+systemctl enable chronyd.service
+systemctl enable cups.socket
+systemctl enable fwupd-refresh.timer || true
+
+# Register the Mevya Plymouth theme for the live system and its initramfs.
+plymouth-set-default-theme mevya
+dracut --regenerate-all --force
+
+# Keep the external repositories required by selected desktop packages
+# available for normal DNF updates after installation.
+dnf5 -y copr enable avengemedia/danklinux
+dnf5 -y copr enable avengemedia/dms
+dnf5 -y copr enable monkeygold/nautilus-open-any-terminal
+dnf5 -y copr enable ublue-os/packages
+
+# Brand both the installed system and the generated boot-loader titles.
+os_release=/usr/lib/os-release
+sed -i 's/^NAME=.*/NAME="Mevya"/' "${os_release}"
+sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME="Mevya Linux"/' "${os_release}"
+sed -i 's/^VARIANT=.*/VARIANT="Mevya Classic"/' "${os_release}" || true
+grub_config=/etc/default/grub
+mkdir -p "$(dirname "${grub_config}")"
+if grep -q '^GRUB_DISTRIBUTOR=' "${grub_config}" 2>/dev/null; then
+    sed -i 's|^GRUB_DISTRIBUTOR=.*|GRUB_DISTRIBUTOR="Mevya"|' "${grub_config}"
+else
+    printf '%s\n' 'GRUB_DISTRIBUTOR="Mevya"' >> "${grub_config}"
+fi
+
+__MEVYA_CONFIG_POST__
+
+%end

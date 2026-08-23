@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<labwc_config>
+  <core>
+    <!-- Reuse the monitor's current mode to minimize startup flicker. -->
+    <reuseOutputMode>yes</reuseOutputMode>
+    <!-- Keep XWayland available for legacy desktop applications. -->
+    <xwaylandPersistence>yes</xwaylandPersistence>
+  </core>
+
+  <desktops number="4" />
+
+  <theme>
+    <!-- Material-compatible geometry; colors come from themerc-override. -->
+    <cornerRadius>12</cornerRadius>
+    <keepBorder>yes</keepBorder>
+    <dropShadows>yes</dropShadows>
+    <dropShadowsOnTiled>no</dropShadowsOnTiled>
+    <font place="ActiveWindow">
+      <name>Noto Sans</name>
+      <size>10</size>
+      <slant>normal</slant>
+      <weight>normal</weight>
+    </font>
+    <font place="InactiveWindow">
+      <name>Noto Sans</name>
+      <size>10</size>
+      <slant>normal</slant>
+      <weight>normal</weight>
+    </font>
+  </theme>
+
+  <keyboard>
+    <default />
+
+    <keybind key="W-Return">
+      <action name="Execute">
+        <command>ghostty</command>
+      </action>
+    </keybind>
+
+    <keybind key="W-space">
+      <action name="Execute">
+        <command>dms ipc call spotlight toggle</command>
+      </action>
+    </keybind>
+
+    <keybind key="W-v">
+      <action name="Execute">
+        <command>dms ipc call clipboard toggle</command>
+      </action>
+    </keybind>
+
+    <keybind key="W-m">
+      <action name="Execute">
+        <command>dms ipc call processlist focusOrToggle</command>
+      </action>
+    </keybind>
+
+    <keybind key="W-comma">
+      <action name="Execute">
+        <command>dms ipc call settings focusOrToggle</command>
+      </action>
+    </keybind>
+
+    <keybind key="W-l">
+      <action name="Execute">
+        <command>dms ipc call lock lock</command>
+      </action>
+    </keybind>
+
+    <keybind key="W-p">
+      <action name="Execute">
+        <command>dms ipc call powerprofile toggle</command>
+      </action>
+    </keybind>
+
+    <keybind key="W-i">
+      <action name="Execute">
+        <command>dms ipc call inhibit toggle</command>
+      </action>
+    </keybind>
+
+    <keybind key="XF86MonBrightnessUp">
+      <action name="Execute">
+        <command>dms ipc call brightness increment 5</command>
+      </action>
+    </keybind>
+
+    <keybind key="XF86MonBrightnessDown">
+      <action name="Execute">
+        <command>dms ipc call brightness decrement 5</command>
+      </action>
+    </keybind>
+
+    <keybind key="XF86AudioMicMute">
+      <action name="Execute">
+        <command>dms ipc call mic mute</command>
+      </action>
+    </keybind>
+
+    <keybind key="XF86AudioRaiseVolume">
+      <action name="Execute">
+        <command>dms ipc call audio increment 5</command>
+      </action>
+    </keybind>
+
+    <keybind key="XF86AudioLowerVolume">
+      <action name="Execute">
+        <command>dms ipc call audio decrement 5</command>
+      </action>
+    </keybind>
+
+    <keybind key="XF86AudioMute">
+      <action name="Execute">
+        <command>dms ipc call audio mute</command>
+      </action>
+    </keybind>
+  </keyboard>
+</labwc_config>

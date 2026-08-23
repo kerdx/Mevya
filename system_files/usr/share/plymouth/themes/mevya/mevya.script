@@ -1,0 +1,27 @@
+# Minimal text-based splash so the boot screen is branded without depending on
+# a raster logo or a particular virtual/physical GPU.
+mevya.image = Image.Text("Mevya", 0.72, 0.84, 1.0);
+mevya.sprite = Sprite(mevya.image);
+
+fun position_mevya ()
+{
+    mevya.sprite.SetPosition(
+        Window.GetWidth() / 2 - mevya.image.GetWidth() / 2,
+        Window.GetHeight() / 2 - mevya.image.GetHeight() / 2,
+        100);
+}
+
+position_mevya ();
+Plymouth.SetRefreshFunction (position_mevya);
+
+fun message_callback (text)
+{
+    message.image = Image.Text(text, 0.72, 0.84, 1.0);
+    message.sprite = Sprite(message.image);
+    message.sprite.SetPosition(
+        Window.GetWidth() / 2 - message.image.GetWidth() / 2,
+        Window.GetHeight() * 0.75,
+        200);
+}
+
+Plymouth.SetMessageFunction (message_callback);

@@ -1,0 +1,13 @@
+[Unit]
+Description=Mevya DMS compatibility fallback
+PartOf=graphical-session.target
+After=graphical-session.target
+ConditionPathExists=/usr/bin/dms
+
+[Service]
+ExecStart=/usr/bin/dms run
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=graphical-session.target

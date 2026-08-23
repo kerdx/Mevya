@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Make the Wayland and desktop environment variables available to user services.
+if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+    dbus-update-activation-environment --systemd \
+        WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE \
+        QT_QPA_PLATFORM QT_QPA_PLATFORMTHEME
+fi
+
+# DMS is the desktop shell: bar, launcher, notifications and system UI.
+# Prefer the packaged user service so failures and restarts are visible in the
+# user journal; use a managed fallback for older or broken DMS packages.
+DMS_STARTED=0
+if systemctl --user cat dms.service >/dev/null 2>&1 \
+    && systemctl --user start dms.service; then
+    DMS_STARTED=1
+    systemctl --user start dms-clipboard.service || true
+fi
+
+if [ "${DMS_STARTED}" -eq 0 ]; then
+    printf '%s\n' 'DMS service non avviato; uso il fallback gestito.' \
+        | systemd-cat -t mevya-session
+    systemctl --user start mevya-dms-fallback.service
+fi
+
+# Apply personal monitor/dock profiles through a restartable user service only
+# when the user has configured Kanshi. Its output is kept in journald.
+if command -v kanshi >/dev/null 2>&1 \
+    && [ -f "$HOME/.config/kanshi/config" ]; then
+    systemctl --user start mevya-kanshi.service
+fi
