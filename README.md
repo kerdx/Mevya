@@ -10,12 +10,12 @@ aggiornamenti del sistema.
 | --- | --- |
 | Configurazione labwc + DMS | Preparata e copiata dalla variante principale |
 | Ptyxis + Nautilus | Inclusi e configurati |
-| Multimedia e codec | Manifest preparato, da verificare nella prima compose |
+| Multimedia e codec | Risoluzione pacchetti verificata nella compose |
 | Kickstart live ISO | Preparato e renderizzato staticamente |
 | Installer | Calamares incluso con launcher Mevya |
 | GRUB/Plymouth | Branding Mevya configurato |
 | Workflow GitHub | Preparato, build manuale con artifact ISO |
-| Prima ISO reale | Non ancora eseguita |
+| Prima ISO reale | Build completata, ISO e checksum pubblicati come artifact |
 
 ## Cosa include
 
@@ -26,6 +26,8 @@ aggiornamenti del sistema.
 - greetd e `dms-greeter` per il login;
 - Ptyxis come terminale predefinito, con integrazione GTK4/libadwaita;
 - Nautilus come file manager, con GVfs, SMB e MTP;
+- “Apri nel terminale” di Nautilus configurato tramite `nautilus-open-any-terminal`;
+- `xdg-terminal-exec`, scorciatoia labwc e variabile `TERMINAL` puntano a Ptyxis;
 - Kanshi, wlr-randr e wdisplays per monitor e docking;
 - portali XDG per labwc, screenshot e condivisione schermo;
 - font Material Symbols, Noto, JetBrains Mono e Cascadia Code NF;
@@ -101,11 +103,12 @@ pubblica.
 - payload delle configurazioni convertibile e installabile;
 - nessun browser o applicazione esclusa nel manifest;
 - codec aggiunti e verificati nel manifest;
+- compose Fedora 44 completata con risoluzione dipendenze verificata;
+- ISO, checksum e artifact GitHub generati correttamente;
 - `git diff --check` superato.
 
-La disponibilità effettiva dei pacchetti e la risoluzione delle dipendenze
-devono ancora essere verificate dalla prima compose Fedora. Sul sistema locale
-non sono installati `livemedia-creator`, `mock` e `ksvalidator`.
+Sul sistema locale non sono installati `livemedia-creator`, `mock` e
+`ksvalidator`; la compose riuscita è stata eseguita in GitHub Actions.
 
 ## Build locale
 
@@ -134,17 +137,19 @@ Fedora 44 privilegiato. All’interno del container:
 4. genera il checksum SHA256;
 5. pubblica ISO e checksum come artifact GitHub per 14 giorni.
 
+La run riuscita `32656329383` ha completato compose, checksum e upload. Il
+workflow corregge anche i permessi degli output creati dal container prima del
+checksum e usa `actions/upload-artifact` v7 con runtime Node 24.
+
 Il workflow è manuale e non modifica la pipeline uBlue. Dopo commit e push si
 avvia da `Actions > Build Mevya Classic ISO > Run workflow`.
 
 ## Prossimi passi
 
-1. Fare commit e push del workflow e della variante Classic.
-2. Avviare la prima build GitHub Actions.
-3. Correggere eventuali conflitti di pacchetti o repository.
-4. Scaricare ISO e checksum dall’artifact.
-5. Testare boot live, labwc/DMS, codec, Nautilus e Calamares in VirtualBox.
-6. Solo dopo il test, rifinire OOBE, branding Calamares e profili hardware.
+1. Scaricare ISO e checksum dall’artifact della run riuscita.
+2. Testare boot live, labwc/DMS, Ptyxis, Nautilus e Calamares in VirtualBox.
+3. Verificare codec, audio, video, monitor/dock e profili energetici.
+4. Solo dopo il test, rifinire OOBE, branding Calamares e profili hardware.
 
-Questa variante resta sperimentale finché la prima ISO non viene avviata e
-installata con successo in VirtualBox.
+Questa variante resta sperimentale finché la ISO non viene avviata e installata
+con successo in VirtualBox.
