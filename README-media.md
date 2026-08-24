@@ -1,6 +1,6 @@
 # Multimedia baseline
 
-Mevya 44 Classic includes the multimedia baseline from the existing Mevya image
+Mevya 44 includes the multimedia baseline from the existing Mevya image
 and extends it with the codec and GStreamer packages that Nobara documents for
 H.264, H.265, AV1, recording and playback workflows.
 
@@ -15,6 +15,6 @@ base ISO design.
 
 Some Nobara components are patched or maintained in Nobara repositories, such
 as `mesa-freeworld`, their OBS build and their codec fixup tooling. They are not
-copied blindly into Mevya: the first Mevya 44 Classic ISO uses Fedora/RPM Fusion
+copied blindly into Mevya: the first Mevya 44 ISO uses Fedora/RPM Fusion
 packages, and missing or conflicting packages will be validated before the
 first real compose.

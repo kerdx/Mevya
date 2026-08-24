@@ -3,11 +3,11 @@
 set -euo pipefail
 
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
-CLASSIC_ROOT=$(CDPATH= cd -- "${SCRIPT_DIR}/.." && pwd)
+MEVYA_ROOT=$(CDPATH= cd -- "${SCRIPT_DIR}/.." && pwd)
 RELEASEVER=${RELEASEVER:-44}
 ARCH=${ARCH:-x86_64}
-OUTPUT_DIR=${OUTPUT_DIR:-"${CLASSIC_ROOT}/release"}
-WORK_DIR=${WORK_DIR:-"${CLASSIC_ROOT}/.work"}
+OUTPUT_DIR=${OUTPUT_DIR:-"${MEVYA_ROOT}/release"}
+WORK_DIR=${WORK_DIR:-"${MEVYA_ROOT}/.work"}
 
 for command in livemedia-creator; do
     command -v "${command}" >/dev/null 2>&1 || {
@@ -36,8 +36,8 @@ livemedia-creator \
     --resultdir "${OUTPUT_DIR}" \
     --project "Mevya ${RELEASEVER}" \
     --make-iso \
-    --volid MEVYA_CLASSIC \
+    --volid MEVYA_44 \
     --iso-only \
-    --iso-name "mevya-${RELEASEVER}-classic-${ARCH}.iso" \
+    --iso-name "mevya-${RELEASEVER}-${ARCH}.iso" \
     --releasever "${RELEASEVER}" \
     --macboot

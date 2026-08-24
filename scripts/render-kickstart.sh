@@ -3,11 +3,11 @@
 set -euo pipefail
 
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
-CLASSIC_ROOT=$(CDPATH= cd -- "${SCRIPT_DIR}/.." && pwd)
-TEMPLATE="${CLASSIC_ROOT}/kickstarts/mevya-live.ks.in"
-PACKAGES="${CLASSIC_ROOT}/packages/mevya-live.packages"
-CONFIG_ROOT="${CLASSIC_ROOT}/system_files"
-OUTPUT="${1:-${CLASSIC_ROOT}/kickstarts/mevya-live.ks}"
+MEVYA_ROOT=$(CDPATH= cd -- "${SCRIPT_DIR}/.." && pwd)
+TEMPLATE="${MEVYA_ROOT}/kickstarts/mevya-live.ks.in"
+PACKAGES="${MEVYA_ROOT}/packages/mevya-live.packages"
+CONFIG_ROOT="${MEVYA_ROOT}/system_files"
+OUTPUT="${1:-${MEVYA_ROOT}/kickstarts/mevya-live.ks}"
 
 [[ -f "${TEMPLATE}" ]]
 [[ -f "${PACKAGES}" ]]
