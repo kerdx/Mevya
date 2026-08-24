@@ -1,7 +1,6 @@
 # Mevya 44
 
-Mevya 44 è una variante sperimentale Fedora mutable. È separata dalla variante
-immutabile uBlue/bootc nella radice del repository e usa DNF per gli
+Mevya 44 è una distribuzione Fedora sperimentale che usa DNF per gli
 aggiornamenti del sistema.
 
 ## Stato attuale
@@ -40,8 +39,7 @@ aggiornamenti del sistema.
   seconda barra del titolo e un secondo pulsante di chiusura;
 - titlebar Material con controlli espliciti, angoli arrotondati e ombre più
   leggere per le finestre normali;
-- l’updater di DMS usa il backend nativo per DNF/DNF5 e Flatpak, senza il
-  comando `ujust` della variante immutabile;
+- l’updater di DMS usa il backend nativo per DNF/DNF5 e Flatpak;
 - Flatpak usa il remote di sistema Flathub; l’eventuale remote Fedora viene
   rimosso durante la preparazione dell’immagine;
 - Nautilus come file manager, con GVfs, SMB e MTP;
@@ -106,9 +104,6 @@ compose fallisce invece di produrre una ISO incompleta.
 
 DNF5 usa un drop-in Mevya con 10 download paralleli, `fastestmirror`,
 `defaultyes` e cache dei pacchetti persistente (`keepcache`).
-
-Non viene copiato il modello uBlue/bootc e non vengono inclusi `uupd`,
-`rpm-ostree` o `bootc` nella variante immutabile separata.
 
 ## Installer e branding
 
@@ -202,8 +197,8 @@ La run riuscita `32656329383` ha completato compose, checksum e upload. Il
 workflow corregge anche i permessi degli output creati dal container prima del
 checksum e usa `actions/upload-artifact` v7 con runtime Node 24.
 
-Il workflow è manuale e non modifica la pipeline uBlue. Dopo commit e push si
-avvia da `Actions > Build Mevya 44 ISO > Run workflow`.
+Il workflow è manuale. Dopo commit e push si avvia da
+`Actions > Build Mevya 44 ISO > Run workflow`.
 
 ## Prossimi passi
 
