@@ -34,6 +34,7 @@ aggiornamenti del sistema.
 - Flatpak usa il remote di sistema Flathub; l’eventuale remote Fedora viene
   rimosso durante la preparazione dell’immagine;
 - Nautilus come file manager, con GVfs, SMB e MTP;
+- associazioni XDG per cartelle e URI `file:` impostate su Nautilus;
 - “Apri nel terminale” di Nautilus configurato tramite `nautilus-open-any-terminal`;
 - `xdg-terminal-exec`, scorciatoia labwc e variabile `TERMINAL` puntano a Ptyxis;
 - Kanshi, wlr-randr e wdisplays per monitor e docking;

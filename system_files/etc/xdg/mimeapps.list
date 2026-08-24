@@ -1,0 +1,3 @@
+[Default Applications]
+inode/directory=org.gnome.Nautilus.desktop
+x-scheme-handler/file=org.gnome.Nautilus.desktop

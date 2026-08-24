@@ -41,6 +41,14 @@ if [ ! -d "${matugen_config_dir}" ] \
     cp -R /etc/skel/.config/matugen "${matugen_config_dir}"
 fi
 
+# Seed XDG file-manager defaults for users created before the image defaults
+# were installed, without overwriting personal associations.
+user_mimeapps_file="$HOME/.config/mimeapps.list"
+if [ ! -f "${user_mimeapps_file}" ] && [ -f /etc/xdg/mimeapps.list ]; then
+    mkdir -p "$(dirname "${user_mimeapps_file}")"
+    cp /etc/xdg/mimeapps.list "${user_mimeapps_file}"
+fi
+
 # greetd's initial_session starts labwc directly, so activate the standard
 # user-session target before starting services that require it (including DMS).
 systemctl --user start graphical-session.target || true
