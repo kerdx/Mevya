@@ -6,13 +6,7 @@ ConditionPathExists=/usr/bin/dms
 
 [Service]
 ExecStart=/usr/bin/dms run --session
-Environment=DMS_DANKBAR_LAYER=top
-Environment=DMS_MODAL_LAYER=overlay
-Environment=DMS_POPOUT_LAYER=overlay
-Environment=DMS_OSD_LAYER=overlay
-Environment=DMS_NOTIFICATION_LAYER=overlay
-Environment=DMS_ENABLE_GTK4_REFRESH=1
-Environment=DMS_FORCE_EXTWS=1
+EnvironmentFile=/etc/dms/mevya-dms-environment
 Restart=on-failure
 RestartSec=2
 

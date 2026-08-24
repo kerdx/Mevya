@@ -150,6 +150,8 @@ pubblica.
 - `packages/mevya-live.packages`: manifest dei pacchetti della ISO;
 - `kickstarts/mevya-live.ks.in`: template Kickstart;
 - `system_files/`: configurazioni installate nella live e nel sistema finale;
+- `system_files/etc/dms/mevya-dms-environment`: ambiente DMS condiviso tra
+  servizio principale e fallback;
 - `scripts/render-kickstart.sh`: genera il Kickstart completo;
 - `scripts/validate-project.sh`: verifica script, configurazioni, manifest e
   Kickstart renderizzato prima della compose;

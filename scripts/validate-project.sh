@@ -17,6 +17,7 @@ required_files=(
     "packages/mevya-live.packages"
     "kickstarts/mevya-live.ks.in"
     "system_files/etc/xdg/labwc/rc.xml"
+    "system_files/etc/dms/mevya-dms-environment"
     "system_files/etc/skel/.config/DankMaterialShell/settings.json"
     "system_files/etc/skel/.config/DankMaterialShell/clsettings.json"
 )

@@ -5,6 +5,12 @@ if command -v dbus-update-activation-environment >/dev/null 2>&1; then
     dbus-update-activation-environment --systemd --all || true
 fi
 
+# Enable VirtualBox host/guest clipboard integration when the image is
+# running inside VirtualBox. The command is harmless on other hypervisors.
+if command -v VBoxClient >/dev/null 2>&1; then
+    VBoxClient --clipboard >/dev/null 2>&1 &
+fi
+
 # The live `mevya` user is created before /etc/skel is populated by the image
 # post-install step. Seed DMS' theme/Matugen profile without overwriting any
 # settings the user may already have changed. DMS then keeps GTK and Qt in

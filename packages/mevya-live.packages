@@ -140,6 +140,7 @@ distrobox
 podman
 flatpak
 ffmpegthumbnailer
+virtualbox-guest-additions
 
 # Mevya boot branding.
 dracut-live

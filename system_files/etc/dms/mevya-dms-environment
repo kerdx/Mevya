@@ -1,4 +1,4 @@
-# Keep DMS layer-shell surfaces ordered predictably with labwc.
+# Mevya DMS session environment.
 DMS_DANKBAR_LAYER=top
 DMS_MODAL_LAYER=overlay
 DMS_POPOUT_LAYER=overlay
