@@ -93,7 +93,7 @@ jobs:
 
               for endpoint in download.fedoraproject.org copr.fedorainfracloud.org dl.flathub.org; do
                 if ! getent ahosts "${endpoint}" >/dev/null; then
-                  printf 'DNS resolution failed for %s\n' "${endpoint}" >&2
+                  printf "DNS resolution failed for %s\n" "${endpoint}" >&2
                   exit 1
                 fi
               done
