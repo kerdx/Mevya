@@ -1,7 +1,12 @@
 # Mevya 44
 
-Mevya 44 è una distribuzione Fedora sperimentale che usa DNF per gli
-aggiornamenti del sistema.
+Mevya 44 è una distribuzione desktop basata su Fedora 44, progettata per offrire
+un’esperienza Wayland leggera, moderna e coerente. Usa labwc come compositor e
+DankMaterialShell come ambiente desktop, con integrazione Material tra GTK, Qt
+e applicazioni di sistema. Include Anaconda per l’installazione, DNF5 e
+Flatpak/Flathub per la gestione del software, oltre a Nautilus, Ptyxis,
+gestione energetica, supporto multimedia e una modalità tiling manuale
+reversibile.
 
 ## Stato attuale
 
