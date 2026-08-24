@@ -104,6 +104,9 @@ I tre COPR fondamentali vengono abilitati in modo bloccante durante il
 post-install: se uno non è raggiungibile o non è coerente con la release, la
 compose fallisce invece di produrre una ISO incompleta.
 
+DNF5 usa un drop-in Mevya con 10 download paralleli, `fastestmirror`,
+`defaultyes` e cache dei pacchetti persistente (`keepcache`).
+
 Non viene copiato il modello uBlue/bootc e non vengono inclusi `uupd`,
 `rpm-ostree` o `bootc` nella variante immutabile separata.
 
