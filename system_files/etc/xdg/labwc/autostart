@@ -5,6 +5,29 @@ if command -v dbus-update-activation-environment >/dev/null 2>&1; then
     dbus-update-activation-environment --systemd --all || true
 fi
 
+# The live `mevya` user is created before /etc/skel is populated by the image
+# post-install step. Seed DMS' theme/Matugen profile without overwriting any
+# settings the user may already have changed. DMS then keeps GTK and Qt in
+# sync with its light/dark mode through the desktop portal.
+dms_config_dir="$HOME/.config/DankMaterialShell"
+if [ ! -f "${dms_config_dir}/settings.json" ] \
+    && [ -f /etc/skel/.config/DankMaterialShell/settings.json ]; then
+    mkdir -p "${dms_config_dir}"
+    cp /etc/skel/.config/DankMaterialShell/settings.json "${dms_config_dir}/settings.json"
+fi
+if [ ! -f "${dms_config_dir}/clsettings.json" ] \
+    && [ -f /etc/skel/.config/DankMaterialShell/clsettings.json ]; then
+    mkdir -p "${dms_config_dir}"
+    cp /etc/skel/.config/DankMaterialShell/clsettings.json "${dms_config_dir}/clsettings.json"
+fi
+
+matugen_config_dir="$HOME/.config/matugen"
+if [ ! -d "${matugen_config_dir}" ] \
+    && [ -d /etc/skel/.config/matugen ]; then
+    mkdir -p "$(dirname "${matugen_config_dir}")"
+    cp -R /etc/skel/.config/matugen "${matugen_config_dir}"
+fi
+
 # greetd's initial_session starts labwc directly, so activate the standard
 # user-session target before starting services that require it (including DMS).
 systemctl --user start graphical-session.target || true
