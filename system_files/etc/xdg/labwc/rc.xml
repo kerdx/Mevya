@@ -19,8 +19,13 @@
 
   <theme>
     <!-- Material-compatible geometry; colors come from themerc-override. -->
+    <titlebar>
+      <layout>icon:iconify,max,close</layout>
+      <showTitle>yes</showTitle>
+    </titlebar>
     <cornerRadius>12</cornerRadius>
     <keepBorder>yes</keepBorder>
+    <maximizedDecoration>titlebar</maximizedDecoration>
     <dropShadows>yes</dropShadows>
     <dropShadowsOnTiled>no</dropShadowsOnTiled>
     <font place="ActiveWindow">

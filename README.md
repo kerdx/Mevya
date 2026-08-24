@@ -38,6 +38,8 @@ aggiornamenti del sistema.
   il desktop portal, in entrambe le direzioni;
 - decorazioni labwc disattivate sulle finestre frame di DMS per evitare una
   seconda barra del titolo e un secondo pulsante di chiusura;
+- titlebar Material con controlli espliciti, angoli arrotondati e ombre più
+  leggere per le finestre normali;
 - l’updater di DMS usa il backend nativo per DNF/DNF5 e Flatpak, senza il
   comando `ujust` della variante immutabile;
 - Flatpak usa il remote di sistema Flathub; l’eventuale remote Fedora viene

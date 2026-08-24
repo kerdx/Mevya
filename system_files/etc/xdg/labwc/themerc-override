@@ -11,8 +11,8 @@ window.inactive.label.text.color: #cac4d0
 window.button.hover.bg.color: #4f378b
 window.active.button.unpressed.image.color: #e6e0e9
 window.inactive.button.unpressed.image.color: #cac4d0
-window.active.shadow.size: 40
-window.inactive.shadow.size: 24
+window.active.shadow.size: 24
+window.inactive.shadow.size: 16
 window.active.shadow.color: #00000060
 window.inactive.shadow.color: #00000040
 menu.border.width: 1
