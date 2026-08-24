@@ -6,7 +6,7 @@ keyboard it
 timezone Europe/Rome --utc
 selinux --enforcing
 firewall --enabled
-network --bootproto=dhcp --device=link --activate --hostname=mevya
+network --bootproto=dhcp --device=link --activate --nameserver=1.1.1.1,8.8.8.8 --hostname=mevya
 rootpw --lock
 user --name=mevya --groups=wheel --plaintext --password=mevya
 services --enabled=NetworkManager,greetd
@@ -29,6 +29,19 @@ repo --name=rpmfusion-nonfree-updates --baseurl=https://download1.rpmfusion.org/
 
 %packages
 __MEVYA_PACKAGES__
+%end
+
+%post --nochroot --log=/root/mevya-ks-post-nochroot.log
+set -eux
+
+# Anaconda runs the regular %post inside the target chroot. Copy the
+# installer resolver there so network operations such as COPR registration
+# and Flathub setup can resolve external hosts during the compose.
+if [ -r /etc/resolv.conf ]; then
+    mkdir -p /mnt/sysroot/etc
+    rm -f /mnt/sysroot/etc/resolv.conf
+    cp -L /etc/resolv.conf /mnt/sysroot/etc/resolv.conf
+fi
 %end
 
 %post --erroronfail --log=/root/mevya-ks-post.log
