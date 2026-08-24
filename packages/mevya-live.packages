@@ -115,10 +115,7 @@ cups-filters
 sane-backends
 avahi
 bluez
-blueman
 accountsservice
-network-manager-applet
-pavucontrol
 switcheroo-control
 lm_sensors
 fwupd
@@ -127,7 +124,6 @@ linux-firmware
 # Display, portals, monitor layout and desktop utilities.
 kanshi
 wlr-randr
-wdisplays
 xorg-x11-server-Xwayland
 xdg-desktop-portal
 xdg-desktop-portal-wlr

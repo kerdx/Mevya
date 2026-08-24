@@ -48,7 +48,7 @@ aggiornamenti del sistema.
 - associazioni XDG per cartelle e URI `file:` impostate su Nautilus;
 - “Apri nel terminale” di Nautilus configurato tramite `nautilus-open-any-terminal`;
 - `xdg-terminal-exec`, scorciatoia labwc e variabile `TERMINAL` puntano a Ptyxis;
-- Kanshi, wlr-randr e wdisplays per monitor e docking;
+- Kanshi e wlr-randr per monitor e docking;
 - portali XDG per labwc, screenshot e condivisione schermo;
 - livelli DMS espliciti per labwc: barra in `top`, popup, modali, OSD e
   notifiche in `overlay`;
