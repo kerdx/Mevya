@@ -7,7 +7,7 @@ aggiornamenti del sistema.
 
 | Area | Stato |
 | --- | --- |
-| Configurazione labwc + DMS | Preparata e copiata dalla variante principale |
+| Configurazione labwc + DMS | Preparata e integrata per Mevya 44 |
 | Ptyxis + Nautilus | Inclusi e configurati |
 | Multimedia e codec | Risoluzione pacchetti verificata nella compose |
 | Kickstart live ISO | Preparato e renderizzato staticamente |
