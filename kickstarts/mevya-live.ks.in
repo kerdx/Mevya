@@ -71,12 +71,24 @@ dracut --regenerate-all --force
 
 # Keep the external repositories required by selected desktop packages
 # available for normal DNF updates after installation.
-# These COPRs provide packages listed in the live manifest.  Keep failures
+# These COPRs provide packages listed in the live manifest. Keep failures
 # fatal: silently skipping one would leave the installed system without DMS,
-# the DankLinux integration, or Nautilus' terminal integration.
-dnf5 -y copr enable avengemedia/danklinux
-dnf5 -y copr enable avengemedia/dms
-dnf5 -y copr enable monkeygold/nautilus-open-any-terminal
+# the DankLinux integration, or Nautilus' terminal integration. Retry transient
+# DNS/network failures before failing the compose.
+retry_copr_enable() {
+    local repo="$1"
+    local attempt
+    for attempt in 1 2 3; do
+        if dnf5 -y copr enable "${repo}"; then
+            return 0
+        fi
+        sleep 5
+    done
+    return 1
+}
+retry_copr_enable avengemedia/danklinux
+retry_copr_enable avengemedia/dms
+retry_copr_enable monkeygold/nautilus-open-any-terminal
 
 # Brand both the installed system and the generated boot-loader titles.
 os_release=/usr/lib/os-release

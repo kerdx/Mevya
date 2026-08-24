@@ -60,15 +60,28 @@ jobs:
         run: |
           set -euo pipefail
           sudo podman run --privileged --rm \
-            --network=host \
+            --network=bridge \
+            --dns=1.1.1.1 \
+            --dns=8.8.8.8 \
             --security-opt label=disable \
             --env RELEASEVER="${RELEASEVER}" \
             --volume "${GITHUB_WORKSPACE}:/workspace:Z" \
             --workdir /workspace \
             quay.io/fedora/fedora:44 \
             bash -euo pipefail -c '
-              dnf -y upgrade --refresh
-              dnf -y install \
+              retry() {
+                local attempt
+                for attempt in 1 2 3; do
+                  if "$@"; then
+                    return 0
+                  fi
+                  sleep 5
+                done
+                return 1
+              }
+
+              retry dnf -y upgrade --refresh
+              retry dnf -y install \
                 dnf5 \
                 dnf5-plugins \
                 lorax-lmc-novirt \
@@ -77,6 +90,13 @@ jobs:
                 policycoreutils \
                 util-linux \
                 which
+
+              for endpoint in download.fedoraproject.org copr.fedorainfracloud.org dl.flathub.org; do
+                if ! getent ahosts "${endpoint}" >/dev/null; then
+                  printf 'DNS resolution failed for %s\n' "${endpoint}" >&2
+                  exit 1
+                fi
+              done
 
               ksvalidator kickstarts/mevya-live.ks
               BUILD=1 RELEASEVER="${RELEASEVER}" \
