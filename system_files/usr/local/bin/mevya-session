@@ -11,4 +11,26 @@ if [ -r /etc/locale.conf ]; then
     set +a
 fi
 
+# Anaconda writes the selected keyboard to the installed XKB/vconsole
+# configuration. Prefer the XKB file because it can preserve layout options;
+# fall back to the vconsole keymap used by the live image.
+xkb_layout=''
+xkb_options=''
+if [ -r /etc/X11/xorg.conf.d/00-keyboard.conf ]; then
+    xkb_layout=$(sed -n 's/.*Option[[:space:]]*"XkbLayout"[[:space:]]*"\([^"]*\)".*/\1/p' \
+        /etc/X11/xorg.conf.d/00-keyboard.conf | head -n 1)
+    xkb_options=$(sed -n 's/.*Option[[:space:]]*"XkbOptions"[[:space:]]*"\([^"]*\)".*/\1/p' \
+        /etc/X11/xorg.conf.d/00-keyboard.conf | head -n 1)
+fi
+if [ -z "${xkb_layout}" ] && [ -r /etc/vconsole.conf ]; then
+    xkb_layout=$(sed -n 's/^KEYMAP[[:space:]]*=[[:space:]]*//p' /etc/vconsole.conf \
+        | head -n 1 | tr -d '"' | sed 's/[.]UTF-8$//')
+fi
+if [ -n "${xkb_layout}" ]; then
+    export XKB_DEFAULT_LAYOUT="${xkb_layout}"
+fi
+if [ -n "${xkb_options}" ]; then
+    export XKB_DEFAULT_OPTIONS="${xkb_options}"
+fi
+
 exec dbus-run-session -- /usr/bin/labwc

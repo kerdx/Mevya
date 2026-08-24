@@ -11,6 +11,8 @@ Environment=DMS_MODAL_LAYER=overlay
 Environment=DMS_POPOUT_LAYER=overlay
 Environment=DMS_OSD_LAYER=overlay
 Environment=DMS_NOTIFICATION_LAYER=overlay
+Environment=DMS_ENABLE_GTK4_REFRESH=1
+Environment=DMS_FORCE_EXTWS=1
 Restart=on-failure
 RestartSec=2
 

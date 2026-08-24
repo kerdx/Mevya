@@ -52,6 +52,12 @@ aggiornamenti del sistema.
 - portali XDG per labwc, screenshot e condivisione schermo;
 - livelli DMS espliciti per labwc: barra in `top`, popup, modali, OSD e
   notifiche in `overlay`;
+- DMS usa `ext-workspace-v1` e due workspace globali labwc, con scorciatoie
+  `Super+1/2` e `Super+Shift+1/2` coerenti tra shell e compositor;
+- dialoghi e utility vengono centrati automaticamente; Firefox Picture-in-
+  Picture resta sempre sopra le finestre normali;
+- lock-before-suspend, timeout idle e integrazione `loginctl` sono gestiti da
+  DMS, mentre GTK4 viene aggiornato subito dopo un cambio palette Matugen;
 - font Material Symbols, Noto, JetBrains Mono e Cascadia Code NF;
 - preset labwc performance e power-saver;
 - temi Matugen per labwc e palette desktop coerente;
@@ -103,6 +109,8 @@ Non viene copiato il modello uBlue/bootc e non vengono inclusi `uupd`,
 - Anaconda include tutti i locale disponibili tramite `glibc-all-langpacks`;
 - la lingua scelta in Anaconda viene esportata da `/etc/locale.conf` nella
   sessione, così DMS, GTK, Qt e le applicazioni usano lo stesso locale;
+- il layout tastiera e le opzioni XKB scelti in Anaconda vengono letti dalla
+  configurazione installata e passati dinamicamente a labwc;
 - il nome host predefinito dell’installazione è `mevya`, modificabile in
   Anaconda;
 - la live avvia automaticamente labwc tramite greetd dentro
