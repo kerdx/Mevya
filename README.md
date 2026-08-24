@@ -28,6 +28,8 @@ aggiornamenti del sistema.
 - Ptyxis come terminale predefinito, con integrazione GTK4/libadwaita;
 - profilo Ptyxis “Mevya Material” con JetBrains Mono, palette Material 3
   chiara/scura, bell disattivato e scrollback limitato;
+- Qt6ct è il backend Qt6 della sessione e DMS può aggiornarne i colori tramite
+  Matugen quando è attivo il theming delle applicazioni;
 - GTK/libadwaita configurato con preferenza scura per mantenere Nautilus
   coerente con il tema del desktop;
 - DMS configurato per sincronizzare modalità chiara/scura con GTK e Qt tramite
