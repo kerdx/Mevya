@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -u
+
+# Start Fedora's live installer, then explicitly focus its Firefox window.
+# This is needed because the installer is launched through pkexec while the
+# desktop session is running under labwc/Wayland.
+/usr/bin/liveinst "$@" &
+installer_pid=$!
+
+if command -v wlrctl >/dev/null 2>&1; then
+    installer_windows="app_id:firefox app_id:org.mozilla.firefox"
+
+    # Give Anaconda a short window to start without blocking the desktop if it
+    # exits early or if a future installer changes its app id.
+    if wlrctl toplevel waitfor ${installer_windows} 2>/dev/null; then
+        wlrctl toplevel maximize ${installer_windows} 2>/dev/null || true
+        wlrctl toplevel focus ${installer_windows} 2>/dev/null || true
+    fi
+fi
+
+wait "${installer_pid}"

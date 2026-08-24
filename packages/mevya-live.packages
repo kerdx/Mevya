@@ -4,6 +4,8 @@
 anaconda
 anaconda-install-env-deps
 anaconda-live
+glibc-all-langpacks
+wlrctl
 dnf5-plugins
 dracut-config-generic
 kernel
