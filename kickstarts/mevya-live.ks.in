@@ -1,8 +1,8 @@
 # Mevya 44 live image. The renderer injects the package list and the
 # selected desktop configuration before livemedia-creator consumes this file.
 
-lang it_IT.UTF-8
-keyboard it
+lang en_US.UTF-8
+keyboard us
 timezone Europe/Rome --utc
 selinux --enforcing
 firewall --enabled

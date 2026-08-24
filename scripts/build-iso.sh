@@ -40,4 +40,5 @@ livemedia-creator \
     --iso-only \
     --iso-name "mevya-${RELEASEVER}-${ARCH}.iso" \
     --releasever "${RELEASEVER}" \
-    --macboot
+    --macboot \
+    --extra-boot-args "inst.geoloc=provider_fedora_geoip inst.geoloc-use-with-ks"

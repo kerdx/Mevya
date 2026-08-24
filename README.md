@@ -85,8 +85,9 @@ rimosso durante la preparazione dell’immagine.
 
 ## Installer e sistema installato
 
-- Anaconda live usa italiano e tastiera italiana come predefiniti; sono
-  disponibili tutti i locale tramite `glibc-all-langpacks`;
+- Anaconda usa la geolocalizzazione Fedora per proporre lingua e fuso orario;
+  se non disponibile, usa inglese (en_US.UTF-8) e tastiera US, sempre modificabili;
+  sono disponibili tutti i locale tramite `glibc-all-langpacks`;
 - lingua, layout tastiera, opzioni XKB e hostname scelti in Anaconda vengono
   propagati al sistema installato, a DMS, GTK, Qt e labwc;
 - la live avvia automaticamente labwc/DMS tramite greetd e `dbus-run-session`;
