@@ -50,6 +50,8 @@ aggiornamenti del sistema.
 - `xdg-terminal-exec`, scorciatoia labwc e variabile `TERMINAL` puntano a Ptyxis;
 - Kanshi, wlr-randr e wdisplays per monitor e docking;
 - portali XDG per labwc, screenshot e condivisione schermo;
+- livelli DMS espliciti per labwc: barra in `top`, popup, modali, OSD e
+  notifiche in `overlay`;
 - font Material Symbols, Noto, JetBrains Mono e Cascadia Code NF;
 - preset labwc performance e power-saver;
 - temi Matugen per labwc e palette desktop coerente;

@@ -6,6 +6,11 @@ ConditionPathExists=/usr/bin/dms
 
 [Service]
 ExecStart=/usr/bin/dms run --session
+Environment=DMS_DANKBAR_LAYER=top
+Environment=DMS_MODAL_LAYER=overlay
+Environment=DMS_POPOUT_LAYER=overlay
+Environment=DMS_OSD_LAYER=overlay
+Environment=DMS_NOTIFICATION_LAYER=overlay
 Restart=on-failure
 RestartSec=2
 
