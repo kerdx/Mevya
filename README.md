@@ -77,8 +77,8 @@ DankLinux e Nautilus Open Any Terminal. I COPR fondamentali sono abilitati in
 modo bloccante: se non sono raggiungibili o coerenti con Fedora 44, la compose
 fallisce invece di generare una ISO incompleta.
 
-DNF5 è configurato con 10 download paralleli, `fastestmirror`, `defaultyes` e
-`keepcache`. Flatpak usa il remote di sistema Flathub; il remote Fedora viene
+DNF5 è configurato con 10 download paralleli e `fastestmirror`; mantiene
+le conferme esplicite e non conserva la cache RPM (`defaultyes=False`, `keepcache=False`). Flatpak usa il remote di sistema Flathub; il remote Fedora viene
 rimosso durante la preparazione dell’immagine.
 
 ## Installer e sistema installato
