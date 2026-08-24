@@ -101,8 +101,8 @@ rimosso durante la preparazione dell’immagine.
   autenticazione; il launcher riporta il focus alla finestra Anaconda;
 - hostname predefinito: `mevya`, modificabile durante l’installazione;
 - `/etc/os-release`, GRUB e Plymouth riportano il branding Mevya 44;
-- durante lo sviluppo l’utente live usa la password temporanea `mevya`: va
-  rimossa o modificata prima di una distribuzione pubblica.
+- l'account tecnico live `mevya` è bloccato e non ha una password predefinita;
+  viene usato solo per l'autologin della live.
 
 ## Struttura del progetto
 

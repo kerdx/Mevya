@@ -8,7 +8,7 @@ selinux --enforcing
 firewall --enabled
 network --bootproto=dhcp --device=link --activate --nameserver=1.1.1.1,8.8.8.8 --hostname=mevya
 rootpw --lock
-user --name=mevya --groups=wheel --plaintext --password=mevya
+user --name=mevya --lock
 services --enabled=NetworkManager,greetd
 bootloader --location=none
 reqpart
