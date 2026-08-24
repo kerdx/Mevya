@@ -77,6 +77,8 @@ Non viene copiato il modello uBlue/bootc e non vengono inclusi `uupd`,
   `anaconda-install-env-deps` e `anaconda-live`;
 - il Kickstart prepara una live session con labwc/DMS;
 - Anaconda include tutti i locale disponibili tramite `glibc-all-langpacks`;
+- il nome host predefinito dell’installazione è `mevya`, modificabile in
+  Anaconda;
 - la sessione Mevya avvia automaticamente labwc tramite greetd;
 - l’utente live può avviare `liveinst` senza una seconda richiesta di
   autenticazione, limitatamente al programma dell’installer;

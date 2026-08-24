@@ -6,7 +6,7 @@ keyboard us
 timezone Europe/Rome --utc
 selinux --enforcing
 firewall --enabled
-network --bootproto=dhcp --device=link --activate
+network --bootproto=dhcp --device=link --activate --hostname=mevya
 rootpw --lock
 user --name=mevya --groups=wheel --plaintext --password=mevya
 services --enabled=NetworkManager,greetd
