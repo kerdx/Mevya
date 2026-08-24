@@ -1,6 +1,12 @@
 [terminal]
 vt = 1
 
+# Start the live/installed desktop directly for the default Mevya user.
+# The greeter remains available as a fallback after the session exits.
+[initial_session]
+user = "mevya"
+command = "/usr/bin/labwc"
+
 [default_session]
 user = "greeter"
 command = "/usr/bin/dms-greeter --command labwc"

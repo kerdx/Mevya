@@ -76,6 +76,9 @@ Non viene copiato il modello uBlue/bootc e non vengono inclusi `uupd`,
 - Anaconda live è incluso tramite i pacchetti Fedora `anaconda`,
   `anaconda-install-env-deps` e `anaconda-live`;
 - il Kickstart prepara una live session con labwc/DMS;
+- la sessione Mevya avvia automaticamente labwc tramite greetd;
+- l’utente live può avviare `liveinst` senza una seconda richiesta di
+  autenticazione, limitatamente al programma dell’installer;
 - `/etc/os-release` viene brandizzato come Mevya Linux / Mevya Classic;
 - GRUB usa `GRUB_DISTRIBUTOR="Mevya"`;
 - Plymouth usa il tema Mevya;

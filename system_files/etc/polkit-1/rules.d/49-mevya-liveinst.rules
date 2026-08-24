@@ -1,0 +1,10 @@
+// The live session is already running as the dedicated Mevya user. Allow it
+// to launch only the graphical installer without a second authentication
+// prompt. Do not broaden this to arbitrary pkexec commands.
+polkit.addRule(function(action, subject) {
+    if (action.id === "org.freedesktop.policykit.exec"
+        && subject.user === "mevya"
+        && action.lookup("program") === "/usr/bin/liveinst") {
+        return polkit.Result.YES;
+    }
+});
