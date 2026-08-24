@@ -5,6 +5,7 @@ anaconda
 anaconda-install-env-deps
 anaconda-live
 glibc-all-langpacks
+policycoreutils
 wlrctl
 dnf5-plugins
 dracut-config-generic
@@ -134,7 +135,7 @@ grim
 slurp
 swaybg
 
-# Selected system tools already used in the uBlue image.
+# Selected system tools for containers and application distribution.
 distrobox
 podman
 flatpak

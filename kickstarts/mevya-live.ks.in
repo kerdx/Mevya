@@ -48,15 +48,21 @@ systemctl set-default graphical.target
 systemctl enable greetd.service
 systemctl enable mevya-firstboot.service
 systemctl enable power-profiles-daemon.service
+systemctl enable systemd-oomd.service
 systemctl enable firewalld.service
 systemctl enable chronyd.service
 systemctl enable cups.socket
 systemctl enable fwupd-refresh.timer || true
 
-# Use the unrestricted Flathub remote for Flatpak applications. The Fedora
-# remote is not part of the intended Mevya application source.
-flatpak remote-add --system --if-not-exists flathub \
-    https://dl.flathub.org/repo/flathub.flatpakrepo
+# Use the unrestricted Flathub remote for Flatpak applications. Network/DNS
+# is not guaranteed during Anaconda's chrooted %post, so this is best effort;
+# mevya-firstboot retries it once the installed system has networking.
+if timeout 30s flatpak remote-add --system --if-not-exists flathub \
+    https://dl.flathub.org/repo/flathub.flatpakrepo; then
+    printf '%s\n' 'Flathub system remote configured during image build.'
+else
+    printf '%s\n' 'WARNING: Flathub unavailable during image build; first boot will retry.' >&2
+fi
 flatpak remote-delete --system fedora || true
 
 # Register the Mevya Plymouth theme for the live system and its initramfs.

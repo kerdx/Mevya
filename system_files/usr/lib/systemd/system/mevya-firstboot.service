@@ -1,6 +1,7 @@
 [Unit]
 Description=Remove the Mevya live account after installation
-After=local-fs.target
+Wants=network-online.target
+After=local-fs.target network-online.target
 Before=greetd.service
 
 [Service]

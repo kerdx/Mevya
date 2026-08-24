@@ -7,6 +7,13 @@
     <xwaylandPersistence>yes</xwaylandPersistence>
   </core>
 
+  <!-- Avoid stacking ordinary windows directly on top of each other while
+       keeping dialogs and utilities centered by their dedicated rules. -->
+  <placement>
+    <policy>automatic</policy>
+    <cascadeOffset x="32" y="24" />
+  </placement>
+
   <desktops number="2" />
 
   <!-- Lightweight manual tiling. Regions are calculated per output's usable
@@ -35,6 +42,25 @@
     </overlay>
   </snapping>
 
+  <!-- Keep the window switcher visible and focused on the active monitor so
+       Super+Tab remains readable on multi-monitor setups. -->
+  <windowSwitcher preview="yes" outlines="yes" order="focus">
+    <osd show="yes" style="classic" output="focused" thumbnailLabelFormat="%T" />
+    <fields>
+      <field content="icon" width="10%" />
+      <field content="desktop_entry_name" width="35%" />
+      <field content="title" width="55%" />
+    </fields>
+  </windowSwitcher>
+
+  <!-- Keep keyboard focus stable; labwc already defaults to these values, but
+       declaring them makes the Mevya interaction model explicit. -->
+  <focus>
+    <followMouse>no</followMouse>
+    <followMouseRequiresMovement>yes</followMouseRequiresMovement>
+    <raiseOnFocus>no</raiseOnFocus>
+  </focus>
+
   <!-- DMS draws its own frame and close button. Avoid a second labwc titlebar
        around DMS settings and other framed shell windows. Keep compatibility
        with the app-id used by older DMS releases. -->
@@ -51,6 +77,11 @@
     <windowRule type="utility">
       <action name="AutoPlace" policy="center" />
     </windowRule>
+    <windowRule type="splash">
+      <action name="AutoPlace" policy="center" />
+    </windowRule>
+    <windowRule type="notification" skipTaskbar="yes" skipWindowSwitcher="yes" />
+    <windowRule type="tooltip" skipTaskbar="yes" skipWindowSwitcher="yes" />
 
     <!-- Firefox Picture-in-Picture is a utility window: keep it visible over
          normal applications while still allowing the user to move it. -->
@@ -122,6 +153,15 @@
       <action name="Execute">
         <command>dms ipc call lock lock</command>
       </action>
+    </keybind>
+
+    <!-- Keep a Super-based window switcher shortcut alongside the traditional
+         Alt+Tab binding provided by labwc. -->
+    <keybind key="W-Tab">
+      <action name="NextWindow" workspace="current" output="all" identifier="all" />
+    </keybind>
+    <keybind key="W-S-Tab">
+      <action name="PreviousWindow" workspace="current" output="all" identifier="all" />
     </keybind>
 
     <!-- Manual 50/50 tiling. Repeating the same shortcut restores the

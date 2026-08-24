@@ -56,12 +56,17 @@ aggiornamenti del sistema.
   `Super+Shift+frecce` per spostare la finestra, `Super+U` per tornare
   flottante, `Super+Ctrl+1/2/3` per i thirds e `Super+Ctrl+4..7` per i
   quadranti;
+- `Super+Tab` e `Super+Shift+Tab` cambiano finestra con un OSD labwc coerente
+  con il monitor attivo;
+- labwc posiziona automaticamente le finestre normali evitando sovrapposizioni;
 - dialoghi e utility vengono centrati automaticamente; Firefox Picture-in-
   Picture resta sempre sopra le finestre normali;
 - lock-before-suspend, timeout idle e integrazione `loginctl` sono gestiti da
   DMS, mentre GTK4 viene aggiornato subito dopo un cambio palette Matugen;
 - font Material Symbols, Noto, JetBrains Mono e Cascadia Code NF;
 - preset labwc performance e power-saver;
+- zram tramite `zram-generator-defaults`, gestione della pressione memoria con
+  `systemd-oomd` e profili energetici tramite `power-profiles-daemon`;
 - temi Matugen per labwc e palette desktop coerente;
 - clipboard DMS, fallback DMS e log della sessione grafica;
 - Plymouth con splash screen Mevya.
@@ -146,6 +151,8 @@ pubblica.
 - `kickstarts/mevya-live.ks.in`: template Kickstart;
 - `system_files/`: configurazioni installate nella live e nel sistema finale;
 - `scripts/render-kickstart.sh`: genera il Kickstart completo;
+- `scripts/validate-project.sh`: verifica script, configurazioni, manifest e
+  Kickstart renderizzato prima della compose;
 - `scripts/build-iso.sh`: prepara o compone localmente la ISO;
 - `lorax-custom/`: spazio per future personalizzazioni Lorax;
 - `.github/workflows/build.yml`: workflow GitHub Actions della ISO.
@@ -187,11 +194,12 @@ Lo script salva la ISO in `release/`.
 Il workflow `Build Mevya 44 ISO` usa un runner Ubuntu con un container
 Fedora 44 privilegiato come base tecnica. All’interno del container:
 
-1. installa Lorax, `lorax-lmc-novirt` e Pykickstart;
-2. valida il Kickstart con `ksvalidator`;
-3. esegue `livemedia-creator --no-virt`;
-4. genera il checksum SHA256;
-5. pubblica ISO e checksum come artifact GitHub per 14 giorni.
+1. esegue i controlli statici del progetto e verifica lo spazio disponibile;
+2. installa Lorax, `lorax-lmc-novirt` e Pykickstart;
+3. valida il Kickstart con `ksvalidator`;
+4. esegue `livemedia-creator --no-virt`;
+5. genera il checksum SHA256;
+6. pubblica ISO e checksum come artifact GitHub per 14 giorni.
 
 La run riuscita `32656329383` ha completato compose, checksum e upload. Il
 workflow corregge anche i permessi degli output creati dal container prima del

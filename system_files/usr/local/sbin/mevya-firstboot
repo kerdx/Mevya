@@ -2,6 +2,18 @@
 
 set -eu
 
+# The build environment may not have DNS while the image is assembled. Make
+# the installed system converge on the intended Flatpak source once networking
+# is available, without making first boot fail when the network is still down.
+if command -v flatpak >/dev/null 2>&1; then
+    if timeout 30s flatpak remote-add --system --if-not-exists flathub \
+        https://dl.flathub.org/repo/flathub.flatpakrepo; then
+        logger -t mevya-firstboot 'Flathub system remote configured'
+    else
+        logger -t mevya-firstboot 'Flathub unavailable; it can be added later with flatpak remote-add'
+    fi
+    flatpak remote-delete --system fedora || true
+fi
 # The live image needs the technical `mevya` account for autologin. Anaconda
 # creates the real account in the installed system. On an installed system,
 # remove the live-only account and leave greetd on its normal login screen.
