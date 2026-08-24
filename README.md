@@ -97,6 +97,8 @@ Non viene copiato il modello uBlue/bootc e non vengono inclusi `uupd`,
   Anaconda;
 - la live avvia automaticamente labwc tramite greetd dentro
   `dbus-run-session`, attivando anche `graphical-session.target` per DMS;
+- l’autologin è limitato alla live; il sistema installato usa normalmente il
+  greeter, senza ereditare l’account tecnico o l’autologin della live;
 - il primo avvio del sistema installato rimuove l’utente tecnico live `mevya`
   e lascia il login normale tramite greeter;
 - la voce grafica “Installa Mevya” viene rimossa dal sistema installato e
