@@ -1,226 +1,142 @@
 # Mevya 44
 
-Mevya 44 è una distribuzione desktop basata su Fedora 44, progettata per offrire
-un’esperienza Wayland leggera, moderna e coerente. Usa labwc come compositor e
-DankMaterialShell come ambiente desktop, con integrazione Material tra GTK, Qt
-e applicazioni di sistema. Include Anaconda per l’installazione, DNF5 e
-Flatpak/Flathub per la gestione del software, oltre a Nautilus, Ptyxis,
-gestione energetica, supporto multimedia e una modalità tiling manuale
+Mevya 44 è una distribuzione desktop mutabile basata su Fedora 44, con una
+sessione Wayland leggera e coerente costruita su labwc e DankMaterialShell
+(DMS). Include Anaconda per l’installazione, DNF5 e Flatpak con Flathub, oltre a
+Nautilus, Ptyxis, gestione energetica, supporto multimedia e tiling manuale
 reversibile.
 
-## Stato attuale
+## Stato
 
 | Area | Stato |
 | --- | --- |
-| Configurazione labwc + DMS | Preparata e integrata per Mevya 44 |
-| Ptyxis + Nautilus | Inclusi e configurati |
-| Multimedia e codec | Risoluzione pacchetti verificata nella compose |
-| Kickstart live ISO | Preparato e renderizzato staticamente |
-| Installer | Anaconda live di Fedora |
-| GRUB/Plymouth | Branding Mevya configurato |
-| Workflow GitHub | Preparato, build manuale con artifact ISO Mevya 44 |
-| Prima ISO reale | Build completata, ISO e checksum pubblicati come artifact |
+| Desktop | labwc + DMS integrati, con tema Material per GTK e Qt |
+| Installer | Anaconda live con lingua, tastiera e hostname configurabili |
+| Branding | Mevya 44 su sistema, GRUB e Plymouth |
+| Multimedia | Codec, GStreamer, PipeWire e accelerazione hardware inclusi |
+| Build | Kickstart e workflow GitHub Actions pronti per la compose |
 
-## Cosa include
+## Desktop
 
-### Desktop
+- labwc come compositor/window manager Wayland e DMS per pannello, launcher,
+  notifiche, calendario e impostazioni;
+- due spazi di lavoro globali, gestiti da DMS e labwc;
+- greetd con `dms-greeter` per il login;
+- Ptyxis come terminale predefinito, con profilo “Mevya Material”, JetBrains
+  Mono, palette Material 3 chiara/scura, bell disattivato e scrollback limitato;
+- Nautilus come file manager, con GVfs, SMB, MTP, associazioni XDG e “Apri nel
+  terminale” configurato per Ptyxis;
+- Qt6ct, GTK/libadwaita e `adw-gtk3-theme` configurati per seguire la palette
+  DMS/Matugen e mantenere coerenti modalità chiara e scura;
+- decorazioni labwc disattivate sulle finestre frame di DMS, titlebar Material
+  per le finestre normali, popup e dialoghi centrati, e PiP di Firefox sempre
+  sopra le finestre normali;
+- Kanshi e wlr-randr per monitor e docking, portali XDG per screenshot e
+  condivisione schermo, e livelli labwc dedicati a barra, popup, OSD e
+  notifiche;
+- aggiornamenti DMS tramite backend nativo DNF5 e Flatpak; remote di sistema
+  Flatpak impostato su Flathub;
+- gestione di lock, idle e sospensione tramite DMS/loginctl, con aggiornamento
+  immediato del tema GTK dopo i cambi Matugen;
+- font Noto, JetBrains Mono, Cascadia Code NF e Material Symbols; zram,
+  `systemd-oomd`, `power-profiles-daemon` e preset labwc performance/power-saver;
+- clipboard, fallback e log DMS, splash screen Plymouth e integrazione per
+  l’uso in VirtualBox.
 
-- labwc come compositor/window manager Wayland;
-- due spazi di lavoro predefiniti;
-- DankMaterialShell per pannello, launcher, notifiche, calendario e impostazioni;
-- greetd e `dms-greeter` per il login;
-- Ptyxis come terminale predefinito, con integrazione GTK4/libadwaita;
-- profilo Ptyxis “Mevya Material” con JetBrains Mono, palette Material 3
-  chiara/scura, bell disattivato e scrollback limitato;
-- Qt6ct è il backend Qt6 della sessione e DMS può aggiornarne i colori tramite
-  Matugen quando è attivo il theming delle applicazioni;
-- GTK/libadwaita configurato con preferenza scura per mantenere Nautilus
-  coerente con il tema del desktop;
-- tema base `adw-gtk3-theme` incluso per permettere a DMS/Matugen di applicare
-  la palette anche alle applicazioni GTK3;
-- DMS configurato per sincronizzare modalità chiara/scura con GTK e Qt tramite
-  il desktop portal, in entrambe le direzioni;
-- decorazioni labwc disattivate sulle finestre frame di DMS per evitare una
-  seconda barra del titolo e un secondo pulsante di chiusura;
-- titlebar Material con controlli espliciti, angoli arrotondati e ombre più
-  leggere per le finestre normali;
-- l’updater di DMS usa il backend nativo per DNF/DNF5 e Flatpak;
-- Flatpak usa il remote di sistema Flathub; l’eventuale remote Fedora viene
-  rimosso durante la preparazione dell’immagine;
-- Nautilus come file manager, con GVfs, SMB e MTP;
-- associazioni XDG per cartelle e URI `file:` impostate su Nautilus;
-- “Apri nel terminale” di Nautilus configurato tramite `nautilus-open-any-terminal`;
-- `xdg-terminal-exec`, scorciatoia labwc e variabile `TERMINAL` puntano a Ptyxis;
-- Kanshi e wlr-randr per monitor e docking;
-- portali XDG per labwc, screenshot e condivisione schermo;
-- livelli DMS espliciti per labwc: barra in `top`, popup, modali, OSD e
-  notifiche in `overlay`;
-- DMS usa `ext-workspace-v1` e due workspace globali labwc, con scorciatoie
-  `Super+1/2` e `Super+Shift+1/2` coerenti tra shell e compositor;
-- modalità tiling manuale e reversibile: `Super+frecce` per il 50/50,
-  `Super+Shift+frecce` per spostare la finestra, `Super+U` per tornare
-  flottante, `Super+Ctrl+1/2/3` per i thirds e `Super+Ctrl+4..7` per i
-  quadranti;
-- `Super+Tab` e `Super+Shift+Tab` cambiano finestra con un OSD labwc coerente
-  con il monitor attivo;
-- labwc posiziona automaticamente le finestre normali evitando sovrapposizioni;
-- dialoghi e utility vengono centrati automaticamente; Firefox Picture-in-
-  Picture resta sempre sopra le finestre normali;
-- lock-before-suspend, timeout idle e integrazione `loginctl` sono gestiti da
-  DMS, mentre GTK4 viene aggiornato subito dopo un cambio palette Matugen;
-- font Material Symbols, Noto, JetBrains Mono e Cascadia Code NF;
-- preset labwc performance e power-saver;
-- zram tramite `zram-generator-defaults`, gestione della pressione memoria con
-  `systemd-oomd` e profili energetici tramite `power-profiles-daemon`;
-- temi Matugen per labwc e palette desktop coerente;
-- clipboard DMS, fallback DMS e log della sessione grafica;
-- Plymouth con splash screen Mevya.
+### Scorciatoie
 
-### Multimedia
+- `Super+1/2`: passa al workspace;
+- `Super+Shift+1/2`: sposta la finestra nel workspace;
+- `Super+frecce`: affianca la finestra in modalità 50/50;
+- `Super+Shift+frecce`: sposta la finestra tra le regioni;
+- `Super+Ctrl+1/2/3`: regioni thirds;
+- `Super+Ctrl+4..7`: quattro quadranti;
+- `Super+U`: torna al comportamento flottante;
+- `Super+Tab` / `Super+Shift+Tab`: cambia finestra con OSD labwc.
 
-La baseline contiene 127 pacchetti tra desktop, librerie, plugin, boot e
-supporto hardware:
+La modalità tiling è manuale e reversibile: labwc resta un ambiente flottante,
+senza diventare un window manager tiling automatico.
 
-- FFmpeg Fedora, `libavcodec-freeworld` e codec RPM Fusion compatibili con Anaconda;
-- GStreamer base, good, bad, ugly, libav, OpenH264 e PipeWire;
-- H.264, H.265, x265, AV1, VP8/VP9 e Opus;
-- LAME e `fdk-aac-free` per l’audio;
-- PipeWire, WirePlumber e Bluetooth aptX;
-- libcamera e integrazione GStreamer per videocamere;
-- VA-API, Mesa VA-API/VDPAU e driver Intel;
-- header NVIDIA NVENC per l’accelerazione video;
-- `ffmpegthumbnailer` per le anteprime video in Nautilus;
-- PackageKit GStreamer per il rilevamento dei codec.
+## Multimedia
 
-Non sono inclusi browser, VLC, MPV, OBS, Steam, Blender, Kdenlive o altre
-applicazioni multimediali: l’immagine fornisce la base di librerie, codec e
-accelerazione, lasciando le applicazioni all’utente.
+La ISO include la base di librerie e codec per riproduzione, registrazione e
+accelerazione hardware: FFmpeg Fedora, `libavcodec-freeworld`, codec RPM
+Fusion, GStreamer base/good/bad/ugly/libav, OpenH264, PipeWire, H.264, H.265,
+x265, AV1, VP8/VP9, Opus, LAME, `fdk-aac-free`, libcamera, VA-API, Mesa,
+driver Intel, header NVIDIA NVENC e `ffmpegthumbnailer`.
 
-`libdvdcss` è escluso dalla base perché la sua situazione legale varia in base
-al Paese.
+Sono inclusi anche WirePlumber, Bluetooth aptX e PackageKit GStreamer. Browser,
+VLC, MPV, OBS, Steam, Blender e Kdenlive restano installabili dall’utente e
+non fanno parte della base. `libdvdcss` è escluso per le diverse normative
+nazionali.
 
-## Repository utilizzati
+## Repository e aggiornamenti
 
-Il Kickstart abilita Fedora, RPM Fusion free/nonfree e i repository necessari
-per i pacchetti selezionati:
+Il Kickstart usa Fedora, RPM Fusion free/nonfree e i COPR necessari per DMS,
+DankLinux e Nautilus Open Any Terminal. I COPR fondamentali sono abilitati in
+modo bloccante: se non sono raggiungibili o coerenti con Fedora 44, la compose
+fallisce invece di generare una ISO incompleta.
 
-- COPR DankLinux e DankMaterialShell;
-- COPR Nautilus Open Any Terminal;
-- RPM Fusion free e nonfree per codec e driver multimediali.
+DNF5 è configurato con 10 download paralleli, `fastestmirror`, `defaultyes` e
+`keepcache`. Flatpak usa il remote di sistema Flathub; il remote Fedora viene
+rimosso durante la preparazione dell’immagine.
 
-I tre COPR fondamentali vengono abilitati in modo bloccante durante il
-post-install: se uno non è raggiungibile o non è coerente con la release, la
-compose fallisce invece di produrre una ISO incompleta.
+## Installer e sistema installato
 
-DNF5 usa un drop-in Mevya con 10 download paralleli, `fastestmirror`,
-`defaultyes` e cache dei pacchetti persistente (`keepcache`).
+- Anaconda live usa italiano e tastiera italiana come predefiniti; sono
+  disponibili tutti i locale tramite `glibc-all-langpacks`;
+- lingua, layout tastiera, opzioni XKB e hostname scelti in Anaconda vengono
+  propagati al sistema installato, a DMS, GTK, Qt e labwc;
+- la live avvia automaticamente labwc/DMS tramite greetd e `dbus-run-session`;
+- l’autologin è attivo solo nella live. Nel sistema installato viene applicato
+  solo se selezionato dall’utente in Anaconda;
+- l’utente tecnico live `mevya` viene rimosso al primo avvio del sistema
+  installato; l’accesso normale passa dal greeter;
+- l’opzione “Installa Mevya” resta nella live e viene rimossa dal sistema
+  installato;
+- dalla live `liveinst` può essere avviato senza una seconda richiesta di
+  autenticazione; il launcher riporta il focus alla finestra Anaconda;
+- hostname predefinito: `mevya`, modificabile durante l’installazione;
+- `/etc/os-release`, GRUB e Plymouth riportano il branding Mevya 44;
+- durante lo sviluppo l’utente live usa la password temporanea `mevya`: va
+  rimossa o modificata prima di una distribuzione pubblica.
 
-## Installer e branding
+## Struttura del progetto
 
-- Anaconda live è incluso tramite i pacchetti Fedora `anaconda`,
-  `anaconda-install-env-deps` e `anaconda-live`;
-- il Kickstart prepara una live session con labwc/DMS;
-- la live usa italiano (`it_IT.UTF-8`) e tastiera italiana come impostazioni
-  predefinite;
-- Anaconda include tutti i locale disponibili tramite `glibc-all-langpacks`;
-- la lingua scelta in Anaconda viene esportata da `/etc/locale.conf` nella
-  sessione, così DMS, GTK, Qt e le applicazioni usano lo stesso locale;
-- il layout tastiera e le opzioni XKB scelti in Anaconda vengono letti dalla
-  configurazione installata e passati dinamicamente a labwc;
-- il nome host predefinito dell’installazione è `mevya`, modificabile in
-  Anaconda;
-- la live avvia automaticamente labwc tramite greetd dentro
-  `dbus-run-session`, attivando anche `graphical-session.target` per DMS;
-- l’autologin è limitato alla live; il sistema installato usa normalmente il
-  greeter, senza ereditare l’account tecnico o l’autologin della live;
-- il primo avvio del sistema installato rimuove l’utente tecnico live `mevya`
-  e lascia il login normale tramite greeter;
-- la voce grafica “Installa Mevya” viene rimossa dal sistema installato e
-  resta disponibile solo nella live;
-- l’utente live può avviare `liveinst` senza una seconda richiesta di
-  autenticazione, limitatamente al programma dell’installer;
-- il launcher dell’installer riporta automaticamente il focus alla finestra
-  Anaconda su Wayland;
-- `/etc/os-release` viene brandizzato come Mevya 44;
-- GRUB usa `GRUB_DISTRIBUTOR="Mevya 44"`;
-- Plymouth mostra il branding Mevya 44;
-- i servizi principali vengono abilitati nel sistema live e installato.
-
-Durante lo sviluppo l’utente live è `mevya` con password temporanea `mevya`.
-Questo valore deve essere rimosso o modificato prima di una distribuzione
-pubblica.
-
-## Struttura
-
-- `packages/mevya-live.packages`: manifest dei pacchetti della ISO;
+- `packages/mevya-live.packages`: manifest dei pacchetti;
 - `kickstarts/mevya-live.ks.in`: template Kickstart;
-- `system_files/`: configurazioni installate nella live e nel sistema finale;
-- `system_files/etc/dms/mevya-dms-environment`: ambiente DMS condiviso tra
-  servizio principale e fallback;
+- `system_files/`: configurazioni della live e del sistema installato;
+- `system_files/etc/dms/mevya-dms-environment`: ambiente DMS condiviso;
 - `scripts/render-kickstart.sh`: genera il Kickstart completo;
 - `scripts/validate-project.sh`: verifica script, configurazioni, manifest e
-  Kickstart renderizzato prima della compose;
+  Kickstart renderizzato;
 - `scripts/build-iso.sh`: prepara o compone localmente la ISO;
 - `lorax-custom/`: spazio per future personalizzazioni Lorax;
 - `.github/workflows/build.yml`: workflow GitHub Actions della ISO.
 
-## Controlli già eseguiti
+## Controlli e build
 
-- sintassi Bash degli script verificata;
-- sintassi YAML del workflow verificata;
-- Kickstart renderizzato correttamente;
-- sezioni `%packages` e `%post` presenti;
-- payload delle configurazioni convertibile e installabile;
-- nessun browser o applicazione esclusa nel manifest;
-- codec aggiunti e verificati nel manifest;
-- compose Mevya 44 completata su base Fedora 44 con risoluzione dipendenze verificata;
-- ISO, checksum e artifact GitHub generati correttamente;
-- `git diff --check` superato.
+La validazione controlla sintassi Bash, YAML, JSON e XML, Kickstart renderizzato,
+sezioni `%packages`/`%post`, manifest, configurazioni e pacchetti esclusi. La
+compose usa Fedora 44 e viene eseguita in un container Fedora privilegiato su
+GitHub Actions; genera ISO e checksum come artifact.
 
-Sul sistema locale non sono installati `livemedia-creator`, `mock` e
-`ksvalidator`; la compose riuscita è stata eseguita in GitHub Actions.
-
-## Build locale
-
-Per generare solo il Kickstart:
+Per generare e controllare il Kickstart:
 
 ```bash
 ./scripts/render-kickstart.sh
+./scripts/validate-project.sh
 ```
 
-La compose locale richiede un ambiente Fedora con Lorax:
+La build locale richiede Fedora con Lorax:
 
 ```bash
 BUILD=1 ./scripts/build-iso.sh
 ```
 
-Lo script salva la ISO in `release/`.
-
-## Build GitHub Actions
-
-Il workflow `Build Mevya 44 ISO` usa un runner Ubuntu con un container
-Fedora 44 privilegiato come base tecnica. All’interno del container:
-
-1. esegue i controlli statici del progetto e verifica lo spazio disponibile;
-2. installa Lorax, `lorax-lmc-novirt` e Pykickstart;
-3. valida il Kickstart con `ksvalidator`;
-4. esegue `livemedia-creator --no-virt`;
-5. genera il checksum SHA256;
-6. pubblica ISO e checksum come artifact GitHub per 14 giorni.
-
-La run riuscita `32656329383` ha completato compose, checksum e upload. Il
-workflow corregge anche i permessi degli output creati dal container prima del
-checksum e usa `actions/upload-artifact` v7 con runtime Node 24.
-
-Il workflow è manuale. Dopo commit e push si avvia da
+La ISO viene salvata in `release/`. Compose precedenti hanno già generato ISO, checksum e artifact; ogni modifica successiva va comunque ricostruita e verificata. La build GitHub Actions è manuale:
 `Actions > Build Mevya 44 ISO > Run workflow`.
 
-## Prossimi passi
-
-1. Scaricare ISO e checksum dall’artifact della run riuscita.
-2. Testare boot live, labwc/DMS, Ptyxis, Nautilus e Anaconda in VirtualBox.
-3. Verificare codec, audio, video, monitor/dock e profili energetici.
-4. Solo dopo il test, rifinire OOBE, branding Mevya 44 e profili hardware.
-
-Questa variante resta sperimentale finché la ISO non viene avviata e installata
-con successo in VirtualBox.
+Mevya 44 resta sperimentale finché la ISO non viene verificata con boot live,
+installazione, labwc/DMS, Anaconda, Nautilus, Ptyxis, audio/video, monitor e
+VirtualBox.
