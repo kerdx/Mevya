@@ -96,6 +96,10 @@ per i pacchetti selezionati:
 - COPR Nautilus Open Any Terminal;
 - RPM Fusion free e nonfree per codec e driver multimediali.
 
+I tre COPR fondamentali vengono abilitati in modo bloccante durante il
+post-install: se uno non è raggiungibile o non è coerente con la release, la
+compose fallisce invece di produrre una ISO incompleta.
+
 Non viene copiato il modello uBlue/bootc e non vengono inclusi `uupd`,
 `rpm-ostree` o `bootc` nella variante Classic.
 

@@ -38,6 +38,6 @@ livemedia-creator \
     --make-iso \
     --volid MEVYA_CLASSIC \
     --iso-only \
-    --iso-name "mevya-clasic-${RELEASEVER}-${ARCH}.iso" \
+    --iso-name "mevya-classic-${RELEASEVER}-${ARCH}.iso" \
     --releasever "${RELEASEVER}" \
     --macboot
