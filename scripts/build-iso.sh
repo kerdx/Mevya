@@ -34,10 +34,10 @@ livemedia-creator \
     --ks "${WORK_DIR}/mevya-live.ks" \
     --no-virt \
     --resultdir "${OUTPUT_DIR}" \
-    --project Mevya \
+    --project "Mevya ${RELEASEVER}" \
     --make-iso \
     --volid MEVYA_CLASSIC \
     --iso-only \
-    --iso-name "mevya-classic-${RELEASEVER}-${ARCH}.iso" \
+    --iso-name "mevya-${RELEASEVER}-classic-${ARCH}.iso" \
     --releasever "${RELEASEVER}" \
     --macboot

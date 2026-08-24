@@ -1,11 +1,11 @@
 ---
-name: Build Mevya Classic ISO
+name: Build Mevya 44 Classic ISO
 
 on:
   workflow_dispatch:
     inputs:
       releasever:
-        description: Fedora release used for the Classic ISO
+        description: Mevya release number (Fedora base release) used for the ISO
         required: true
         type: choice
         default: "44"
@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   build:
-    name: Compose Fedora ${{ inputs.releasever }} ISO
+    name: Compose Mevya ${{ inputs.releasever }} ISO
     runs-on: ubuntu-24.04
     timeout-minutes: 180
 
@@ -93,7 +93,7 @@ jobs:
       - name: Upload ISO artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1 (Node 24)
         with:
-          name: mevya-classic-iso-${{ github.run_number }}
+          name: mevya-${{ inputs.releasever }}-classic-iso-${{ github.run_number }}
           path: release/
           if-no-files-found: error
           compression-level: 0

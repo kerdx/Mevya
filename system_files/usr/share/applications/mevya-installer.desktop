@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=Install Mevya Linux
-Name[it]=Installa Mevya Linux
+Name=Install Mevya 44
+Name[it]=Installa Mevya 44
 Comment=Install the live system to the hard drive
 Comment[it]=Installa il sistema live sul disco rigido
 Exec=/usr/local/bin/mevya-installer

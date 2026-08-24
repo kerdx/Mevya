@@ -1,6 +1,6 @@
 # Minimal text-based splash so the boot screen is branded without depending on
 # a raster logo or a particular virtual/physical GPU.
-mevya.image = Image.Text("Mevya", 0.72, 0.84, 1.0);
+mevya.image = Image.Text("Mevya 44", 0.72, 0.84, 1.0);
 mevya.sprite = Sprite(mevya.image);
 
 fun position_mevya ()

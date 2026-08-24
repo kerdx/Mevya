@@ -1,6 +1,6 @@
-# Mevya Classic
+# Mevya 44 Classic
 
-Variante sperimentale Fedora mutable di Mevya. È separata dalla variante
+Mevya 44 è una variante sperimentale Fedora mutable. È separata dalla variante
 immutabile uBlue/bootc nella radice del repository e usa DNF per gli
 aggiornamenti del sistema.
 
@@ -14,7 +14,7 @@ aggiornamenti del sistema.
 | Kickstart live ISO | Preparato e renderizzato staticamente |
 | Installer | Anaconda live di Fedora |
 | GRUB/Plymouth | Branding Mevya configurato |
-| Workflow GitHub | Preparato, build manuale con artifact ISO |
+| Workflow GitHub | Preparato, build manuale con artifact ISO Mevya 44 |
 | Prima ISO reale | Build completata, ISO e checksum pubblicati come artifact |
 
 ## Cosa include
@@ -133,9 +133,9 @@ Non viene copiato il modello uBlue/bootc e non vengono inclusi `uupd`,
   autenticazione, limitatamente al programma dell’installer;
 - il launcher dell’installer riporta automaticamente il focus alla finestra
   Anaconda su Wayland;
-- `/etc/os-release` viene brandizzato come Mevya Linux / Mevya Classic;
-- GRUB usa `GRUB_DISTRIBUTOR="Mevya"`;
-- Plymouth usa il tema Mevya;
+- `/etc/os-release` viene brandizzato come Mevya 44 / variante Classic;
+- GRUB usa `GRUB_DISTRIBUTOR="Mevya 44"`;
+- Plymouth mostra il branding Mevya 44;
 - i servizi principali vengono abilitati nel sistema live e installato.
 
 Durante lo sviluppo l’utente live è `mevya` con password temporanea `mevya`.
@@ -161,7 +161,7 @@ pubblica.
 - payload delle configurazioni convertibile e installabile;
 - nessun browser o applicazione esclusa nel manifest;
 - codec aggiunti e verificati nel manifest;
-- compose Fedora 44 completata con risoluzione dipendenze verificata;
+- compose Mevya 44 completata su base Fedora 44 con risoluzione dipendenze verificata;
 - ISO, checksum e artifact GitHub generati correttamente;
 - `git diff --check` superato.
 
@@ -186,8 +186,8 @@ Lo script salva la ISO in `release/`.
 
 ## Build GitHub Actions
 
-Il workflow `Build Mevya Classic ISO` usa un runner Ubuntu con un container
-Fedora 44 privilegiato. All’interno del container:
+Il workflow `Build Mevya 44 Classic ISO` usa un runner Ubuntu con un container
+Fedora 44 privilegiato come base tecnica. All’interno del container:
 
 1. installa Lorax, `lorax-lmc-novirt` e Pykickstart;
 2. valida il Kickstart con `ksvalidator`;
@@ -200,14 +200,14 @@ workflow corregge anche i permessi degli output creati dal container prima del
 checksum e usa `actions/upload-artifact` v7 con runtime Node 24.
 
 Il workflow è manuale e non modifica la pipeline uBlue. Dopo commit e push si
-avvia da `Actions > Build Mevya Classic ISO > Run workflow`.
+avvia da `Actions > Build Mevya 44 Classic ISO > Run workflow`.
 
 ## Prossimi passi
 
 1. Scaricare ISO e checksum dall’artifact della run riuscita.
 2. Testare boot live, labwc/DMS, Ptyxis, Nautilus e Anaconda in VirtualBox.
 3. Verificare codec, audio, video, monitor/dock e profili energetici.
-4. Solo dopo il test, rifinire OOBE, branding Fedora/Mevya e profili hardware.
+4. Solo dopo il test, rifinire OOBE, branding Mevya 44 e profili hardware.
 
 Questa variante resta sperimentale finché la ISO non viene avviata e installata
 con successo in VirtualBox.

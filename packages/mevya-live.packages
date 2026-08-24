@@ -1,5 +1,5 @@
 # Base live desktop and graphical installer.
-# Keep the live package set explicit: Fedora 44 does not expose the
+# Keep the live package set explicit: the Fedora 44 base does not expose the
 # `minimal-environment` group to livemedia-creator in this repository mix.
 anaconda
 anaconda-install-env-deps

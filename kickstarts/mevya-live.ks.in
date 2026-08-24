@@ -1,4 +1,4 @@
-# Mevya Classic live image. The renderer injects the package list and the
+# Mevya 44 Classic live image. The renderer injects the package list and the
 # selected desktop configuration before livemedia-creator consumes this file.
 
 lang it_IT.UTF-8
@@ -74,15 +74,30 @@ dnf5 -y copr enable monkeygold/nautilus-open-any-terminal
 
 # Brand both the installed system and the generated boot-loader titles.
 os_release=/usr/lib/os-release
+mevya_version=$(sed -n 's/^VERSION_ID=//p' "${os_release}" | tr -d '"')
+: "${mevya_version:=44}"
 sed -i 's/^NAME=.*/NAME="Mevya"/' "${os_release}"
-sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME="Mevya Linux"/' "${os_release}"
-sed -i 's/^VARIANT=.*/VARIANT="Mevya Classic"/' "${os_release}" || true
+sed -i 's/^ID=.*/ID=mevya/' "${os_release}"
+if grep -q '^ID_LIKE=' "${os_release}"; then
+    sed -i 's/^ID_LIKE=.*/ID_LIKE=fedora/' "${os_release}"
+else
+    printf '%s\n' 'ID_LIKE=fedora' >> "${os_release}"
+fi
+sed -i "s/^PRETTY_NAME=.*/PRETTY_NAME=\"Mevya ${mevya_version}\"/" "${os_release}"
+sed -i "s/^VERSION_ID=.*/VERSION_ID=\"${mevya_version}\"/" "${os_release}"
+sed -i "s/^VERSION=.*/VERSION=\"Mevya ${mevya_version}\"/" "${os_release}"
+sed -i 's/^VARIANT=.*/VARIANT="Classic"/' "${os_release}"
+if grep -q '^VARIANT_ID=' "${os_release}"; then
+    sed -i 's/^VARIANT_ID=.*/VARIANT_ID=classic/' "${os_release}"
+else
+    printf '%s\n' 'VARIANT_ID=classic' >> "${os_release}"
+fi
 grub_config=/etc/default/grub
 mkdir -p "$(dirname "${grub_config}")"
 if grep -q '^GRUB_DISTRIBUTOR=' "${grub_config}" 2>/dev/null; then
-    sed -i 's|^GRUB_DISTRIBUTOR=.*|GRUB_DISTRIBUTOR="Mevya"|' "${grub_config}"
+    sed -i "s|^GRUB_DISTRIBUTOR=.*|GRUB_DISTRIBUTOR=\"Mevya ${mevya_version}\"|" "${grub_config}"
 else
-    printf '%s\n' 'GRUB_DISTRIBUTOR="Mevya"' >> "${grub_config}"
+    printf 'GRUB_DISTRIBUTOR="Mevya %s"\n' "${mevya_version}" >> "${grub_config}"
 fi
 
 %end
