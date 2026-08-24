@@ -141,7 +141,6 @@ swaybg
 # Selected system tools already used in the uBlue image.
 distrobox
 podman
-just
 flatpak
 ffmpegthumbnailer
 
