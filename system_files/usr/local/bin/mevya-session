@@ -11,6 +11,14 @@ if [ -r /etc/locale.conf ]; then
     set +a
 fi
 
+# Create the standard user directories (Documents, Downloads, and others)
+# using the locale selected by Anaconda before starting the desktop session.
+if command -v xdg-user-dirs-update >/dev/null 2>&1; then
+    if ! xdg-user-dirs-update; then
+        printf '%s\n' 'Warning: unable to create standard user directories.' >&2
+    fi
+fi
+
 # Anaconda writes the selected keyboard to the installed XKB/vconsole
 # configuration. Prefer the XKB file because it can preserve layout options;
 # fall back to the vconsole keymap used by the live image.

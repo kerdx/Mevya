@@ -53,6 +53,7 @@ cascadia-code-nf-fonts
 
 # Nautilus and the selected desktop terminal.
 nautilus
+xdg-user-dirs
 nautilus-open-any-terminal
 gvfs
 gvfs-mtp
@@ -62,6 +63,7 @@ flatpak-spawn
 
 # Audio, video, camera and hardware acceleration.
 pipewire
+rtkit
 pipewire-alsa
 pipewire-pulseaudio
 pipewire-utils

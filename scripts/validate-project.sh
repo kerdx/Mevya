@@ -70,14 +70,16 @@ mapfile -t packages < <(
         packages/mevya-live.packages
 )
 
-required_runtime_packages=(
+required_packages=(
     power-profiles-daemon
     zram-generator-defaults
     systemd-oomd-defaults
+    xdg-user-dirs
+    rtkit
 )
-for required_package in "${required_runtime_packages[@]}"; do
+for required_package in "${required_packages[@]}"; do
     if ! printf '%s\n' "${packages[@]}" | grep -Fxq "${required_package}"; then
-        error "missing resource-management package: ${required_package}"
+        error "missing required package: ${required_package}"
     fi
 done
 
@@ -100,6 +102,14 @@ scripts/render-kickstart.sh "${render_dir}/mevya-live.ks" >/dev/null
 
 if grep -qE '^(__MEVYA_PACKAGES__|__MEVYA_CONFIG_POST__)$' "${render_dir}/mevya-live.ks"; then
     error "rendered Kickstart still contains an unresolved template marker"
+fi
+
+if command -v ksvalidator >/dev/null 2>&1; then
+    if ! ksvalidator "${render_dir}/mevya-live.ks"; then
+        error "rendered Kickstart failed ksvalidator"
+    fi
+else
+    printf '%s\n' 'Validation warning: ksvalidator not available; install pykickstart for local Kickstart syntax checks.' >&2
 fi
 
 for service in power-profiles-daemon.service systemd-oomd.service; do

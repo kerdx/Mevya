@@ -26,6 +26,8 @@ reversibile.
   Mono, palette Material 3 chiara/scura, bell disattivato e scrollback limitato;
 - Nautilus come file manager, con GVfs, SMB, MTP, associazioni XDG e “Apri nel
   terminale” configurato per Ptyxis;
+- xdg-user-dirs crea le cartelle standard (Documenti, Scaricati e Immagini)
+  usando la lingua selezionata;
 - Qt6ct, GTK/libadwaita e `adw-gtk3-theme` configurati per seguire la palette
   DMS/Matugen e mantenere coerenti modalità chiara e scura;
 - decorazioni labwc disattivate sulle finestre frame di DMS, titlebar Material
@@ -117,7 +119,8 @@ rimosso durante la preparazione dell’immagine.
 ## Controlli e build
 
 La validazione controlla sintassi Bash, YAML, JSON e XML, Kickstart renderizzato,
-sezioni `%packages`/`%post`, manifest, configurazioni e pacchetti esclusi. La
+sezioni `%packages`/`%post`, manifest, configurazioni e pacchetti esclusi. Esegue
+`ksvalidator` quando disponibile; la CI mantiene il controllo Kickstart bloccante.
 compose usa Fedora 44 e viene eseguita in un container Fedora privilegiato su
 GitHub Actions; genera ISO e checksum come artifact.
 
