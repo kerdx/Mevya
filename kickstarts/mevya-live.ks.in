@@ -39,6 +39,10 @@ set -eux
 # yet during Anaconda's post-install phase.
 __MEVYA_CONFIG_POST__
 
+# Compile the system dconf defaults so GTK/libadwaita applications, including
+# Nautilus, follow the dark desktop preference in the live and installed image.
+dconf update
+
 # Keep the live session in the same graphical path as the installed system.
 systemctl set-default graphical.target
 systemctl enable greetd.service
