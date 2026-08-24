@@ -79,10 +79,10 @@ Non viene copiato il modello uBlue/bootc e non vengono inclusi `uupd`,
 - Anaconda include tutti i locale disponibili tramite `glibc-all-langpacks`;
 - il nome host predefinito dell’installazione è `mevya`, modificabile in
   Anaconda;
-- la sessione Mevya avvia automaticamente labwc tramite greetd dentro
+- la live avvia automaticamente labwc tramite greetd dentro
   `dbus-run-session`, attivando anche `graphical-session.target` per DMS;
 - il primo avvio del sistema installato rimuove l’utente tecnico live `mevya`
-  e trasferisce l’autologin all’utente creato in Anaconda;
+  e lascia il login normale tramite greeter;
 - la voce grafica “Installa Mevya” viene rimossa dal sistema installato e
   resta disponibile solo nella live;
 - l’utente live può avviare `liveinst` senza una seconda richiesta di

@@ -3,8 +3,8 @@
 set -eu
 
 # The live image needs the technical `mevya` account for autologin. Anaconda
-# creates the real account in the installed system, so switch greetd to that
-# account and remove the live-only one on the first installed boot.
+# creates the real account in the installed system. On an installed system,
+# remove the live-only account and leave greetd on its normal login screen.
 if ! id mevya >/dev/null 2>&1; then
     exit 0
 fi
@@ -19,8 +19,11 @@ fi
 greetd_config=/etc/greetd/config.toml
 if [ -f "${greetd_config}" ]; then
     config_tmp="$(mktemp)"
-    sed "s/^user = \"mevya\"$/user = \"${installed_user}\"/" \
-        "${greetd_config}" > "${config_tmp}"
+    awk '
+        /^\[initial_session\]$/ { skip = 1; next }
+        /^\[default_session\]$/ { skip = 0 }
+        !skip { print }
+    ' "${greetd_config}" > "${config_tmp}"
     install -o root -g root -m 0644 "${config_tmp}" "${greetd_config}"
     rm -f "${config_tmp}"
 fi

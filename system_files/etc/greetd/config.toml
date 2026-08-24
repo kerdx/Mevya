@@ -1,8 +1,9 @@
 [terminal]
 vt = 1
 
-# Start the live/installed desktop directly for the default Mevya user.
-# The greeter remains available as a fallback after the session exits.
+# The live image starts the desktop directly for the technical Mevya user.
+# The first-boot cleanup removes this block from installed systems unless a
+# future installer option explicitly enables autologin.
 [initial_session]
 user = "mevya"
 command = "dbus-run-session -- /usr/bin/labwc"
