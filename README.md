@@ -54,6 +54,10 @@ aggiornamenti del sistema.
   notifiche in `overlay`;
 - DMS usa `ext-workspace-v1` e due workspace globali labwc, con scorciatoie
   `Super+1/2` e `Super+Shift+1/2` coerenti tra shell e compositor;
+- modalità tiling manuale e reversibile: `Super+frecce` per il 50/50,
+  `Super+Shift+frecce` per spostare la finestra, `Super+U` per tornare
+  flottante, `Super+Ctrl+1/2/3` per i thirds e `Super+Ctrl+4..7` per i
+  quadranti;
 - dialoghi e utility vengono centrati automaticamente; Firefox Picture-in-
   Picture resta sempre sopra le finestre normali;
 - lock-before-suspend, timeout idle e integrazione `loginctl` sono gestiti da

@@ -9,6 +9,32 @@
 
   <desktops number="2" />
 
+  <!-- Lightweight manual tiling. Regions are calculated per output's usable
+       area, so the same shortcuts work on a laptop, an external monitor, or
+       a future dock without hard-coded monitor names. -->
+  <regions>
+    <region name="mevya-half-left" x="0%" y="0%" width="50%" height="100%" />
+    <region name="mevya-half-right" x="50%" y="0%" width="50%" height="100%" />
+
+    <region name="mevya-third-left" x="0%" y="0%" width="33.333%" height="100%" />
+    <region name="mevya-third-center" x="33.333%" y="0%" width="33.334%" height="100%" />
+    <region name="mevya-third-right" x="66.667%" y="0%" width="33.333%" height="100%" />
+
+    <region name="mevya-quarter-top-left" x="0%" y="0%" width="50%" height="50%" />
+    <region name="mevya-quarter-top-right" x="50%" y="0%" width="50%" height="50%" />
+    <region name="mevya-quarter-bottom-left" x="0%" y="50%" width="50%" height="50%" />
+    <region name="mevya-quarter-bottom-right" x="50%" y="50%" width="50%" height="50%" />
+  </regions>
+
+  <!-- Super+Up should produce a top half instead of maximizing the window. -->
+  <snapping>
+    <topMaximize>no</topMaximize>
+    <notifyClient>region</notifyClient>
+    <overlay>
+      <enabled>yes</enabled>
+    </overlay>
+  </snapping>
+
   <!-- DMS draws its own frame and close button. Avoid a second labwc titlebar
        around DMS settings and other framed shell windows. Keep compatibility
        with the app-id used by older DMS releases. -->
@@ -96,6 +122,67 @@
       <action name="Execute">
         <command>dms ipc call lock lock</command>
       </action>
+    </keybind>
+
+    <!-- Manual 50/50 tiling. Repeating the same shortcut restores the
+         previous floating geometry through ToggleSnapToEdge. -->
+    <keybind key="W-Left">
+      <action name="ToggleSnapToEdge" direction="left" />
+    </keybind>
+    <keybind key="W-Right">
+      <action name="ToggleSnapToEdge" direction="right" />
+    </keybind>
+    <keybind key="W-Up">
+      <action name="ToggleSnapToEdge" direction="up" />
+    </keybind>
+    <keybind key="W-Down">
+      <action name="ToggleSnapToEdge" direction="down" />
+    </keybind>
+
+    <!-- Move a window as a floating client to the corresponding screen edge. -->
+    <keybind key="W-S-Left">
+      <action name="UnSnap" />
+      <action name="MoveToEdge" direction="left" snapWindows="no" />
+    </keybind>
+    <keybind key="W-S-Right">
+      <action name="UnSnap" />
+      <action name="MoveToEdge" direction="right" snapWindows="no" />
+    </keybind>
+    <keybind key="W-S-Up">
+      <action name="UnSnap" />
+      <action name="MoveToEdge" direction="up" snapWindows="no" />
+    </keybind>
+    <keybind key="W-S-Down">
+      <action name="UnSnap" />
+      <action name="MoveToEdge" direction="down" snapWindows="no" />
+    </keybind>
+
+    <!-- Super+U is the explicit escape hatch back to floating mode. -->
+    <keybind key="W-u">
+      <action name="UnSnap" />
+    </keybind>
+
+    <!-- Super+Ctrl+1..3: thirds; Super+Ctrl+4..7: quadrants. -->
+    <keybind key="W-C-1">
+      <action name="ToggleSnapToRegion" region="mevya-third-left" />
+    </keybind>
+    <keybind key="W-C-2">
+      <action name="ToggleSnapToRegion" region="mevya-third-center" />
+    </keybind>
+    <keybind key="W-C-3">
+      <action name="ToggleSnapToRegion" region="mevya-third-right" />
+    </keybind>
+    <keybind key="W-C-4">
+      <action name="ToggleSnapToRegion" region="mevya-quarter-top-left" />
+    </keybind>
+    <keybind key="W-C-5">
+      <action name="ToggleSnapToRegion" region="mevya-quarter-top-right" />
+    </keybind>
+    <keybind key="W-C-6">
+      <action name="ToggleSnapToRegion" region="mevya-quarter-bottom-left" />
+    </keybind>
+    <keybind key="W-C-7">
+      <action name="ToggleSnapToRegion" region="mevya-quarter-bottom-right" />
     </keybind>
 
     <!-- Keep labwc's two global workspaces aligned with DMS/ext-workspace. -->
