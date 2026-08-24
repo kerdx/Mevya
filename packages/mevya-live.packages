@@ -42,6 +42,7 @@ dconf
 polkit
 
 # Fonts and input/UI support.
+adw-gtk3-theme
 material-symbols-fonts
 google-noto-emoji-fonts
 google-noto-sans-fonts

@@ -32,6 +32,8 @@ aggiornamenti del sistema.
   Matugen quando è attivo il theming delle applicazioni;
 - GTK/libadwaita configurato con preferenza scura per mantenere Nautilus
   coerente con il tema del desktop;
+- tema base `adw-gtk3-theme` incluso per permettere a DMS/Matugen di applicare
+  la palette anche alle applicazioni GTK3;
 - DMS configurato per sincronizzare modalità chiara/scura con GTK e Qt tramite
   il desktop portal, in entrambe le direzioni;
 - decorazioni labwc disattivate sulle finestre frame di DMS per evitare una
