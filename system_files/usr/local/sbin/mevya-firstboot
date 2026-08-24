@@ -14,6 +14,16 @@ fi
 # The build environment may not have DNS while the image is assembled. Make
 # the installed system converge on the intended Flatpak source once networking
 # is available, without making first boot fail when the network is still down.
+# Install the pinned community DMS plugin for the skeleton and users already
+# created by Anaconda. This is best effort: an offline first boot must still
+# reach the login screen, and the service can be run again later if needed.
+if [ -x /usr/local/sbin/mevya-install-dank-software-depot ]; then
+    if timeout 120s /usr/local/sbin/mevya-install-dank-software-depot; then
+        logger -t mevya-firstboot 'Dank Software Depot plugin installed'
+    else
+        logger -t mevya-firstboot 'Dank Software Depot unavailable; retry with /usr/local/sbin/mevya-install-dank-software-depot'
+    fi
+fi
 if command -v flatpak >/dev/null 2>&1; then
     if timeout 30s flatpak remote-add --system --if-not-exists flathub \
         https://dl.flathub.org/repo/flathub.flatpakrepo; then

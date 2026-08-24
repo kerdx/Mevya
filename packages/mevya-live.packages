@@ -141,6 +141,12 @@ swaybg
 distrobox
 podman
 flatpak
+curl
+ca-certificates
+# Dank Software Depot plugin runtime (installed from its upstream Git commit).
+python3-libdnf5
+python3-gobject-base
+appstream-data
 ffmpegthumbnailer
 virtualbox-guest-additions
 

@@ -3,6 +3,7 @@ Description=Remove the Mevya live account after installation
 Wants=network-online.target
 After=local-fs.target network-online.target
 Before=greetd.service
+TimeoutStartSec=180s
 
 [Service]
 Type=oneshot

@@ -20,6 +20,7 @@ required_files=(
     "system_files/etc/dms/mevya-dms-environment"
     "system_files/etc/skel/.config/DankMaterialShell/settings.json"
     "system_files/etc/skel/.config/DankMaterialShell/clsettings.json"
+    "system_files/usr/local/sbin/mevya-install-dank-software-depot"
 )
 
 for file in "${required_files[@]}"; do
