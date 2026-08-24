@@ -53,6 +53,12 @@ systemctl enable chronyd.service
 systemctl enable cups.socket
 systemctl enable fwupd-refresh.timer || true
 
+# Use the unrestricted Flathub remote for Flatpak applications. The Fedora
+# remote is not part of the intended Classic application source.
+flatpak remote-add --system --if-not-exists flathub \
+    https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-delete --system fedora || true
+
 # Register the Mevya Plymouth theme for the live system and its initramfs.
 plymouth-set-default-theme mevya
 dracut --regenerate-all --force

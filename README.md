@@ -31,6 +31,8 @@ aggiornamenti del sistema.
   il desktop portal, in entrambe le direzioni;
 - l’updater di DMS usa il backend nativo per DNF/DNF5 e Flatpak, senza il
   comando `ujust` della variante immutabile;
+- Flatpak usa il remote di sistema Flathub; l’eventuale remote Fedora viene
+  rimosso durante la preparazione dell’immagine;
 - Nautilus come file manager, con GVfs, SMB e MTP;
 - “Apri nel terminale” di Nautilus configurato tramite `nautilus-open-any-terminal`;
 - `xdg-terminal-exec`, scorciatoia labwc e variabile `TERMINAL` puntano a Ptyxis;
