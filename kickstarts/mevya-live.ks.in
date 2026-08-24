@@ -42,6 +42,7 @@ __MEVYA_CONFIG_POST__
 # Keep the live session in the same graphical path as the installed system.
 systemctl set-default graphical.target
 systemctl enable greetd.service
+systemctl enable mevya-firstboot.service
 systemctl enable power-profiles-daemon.service
 systemctl enable firewalld.service
 systemctl enable chronyd.service

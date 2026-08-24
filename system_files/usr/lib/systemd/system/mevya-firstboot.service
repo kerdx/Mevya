@@ -1,0 +1,12 @@
+[Unit]
+Description=Remove the Mevya live account after installation
+After=local-fs.target
+Before=greetd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/mevya-firstboot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
