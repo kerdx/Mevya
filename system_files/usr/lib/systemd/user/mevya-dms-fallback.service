@@ -5,7 +5,7 @@ After=graphical-session.target
 ConditionPathExists=/usr/bin/dms
 
 [Service]
-ExecStart=/usr/bin/dms run
+ExecStart=/usr/bin/dms run --session
 Restart=on-failure
 RestartSec=2
 

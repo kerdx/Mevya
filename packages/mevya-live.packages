@@ -19,6 +19,7 @@ grub2-efi-x64-cdboot
 grub2-tools
 shim-x64
 greetd
+dbus-daemon
 labwc
 labwc-session
 

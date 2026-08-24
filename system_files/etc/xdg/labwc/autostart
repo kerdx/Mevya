@@ -1,11 +1,13 @@
 #!/bin/sh
 
-# Make the Wayland and desktop environment variables available to user services.
+# Make the complete Wayland/D-Bus session environment available to user services.
 if command -v dbus-update-activation-environment >/dev/null 2>&1; then
-    dbus-update-activation-environment --systemd \
-        WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE \
-        QT_QPA_PLATFORM QT_QPA_PLATFORMTHEME
+    dbus-update-activation-environment --systemd --all || true
 fi
+
+# greetd's initial_session starts labwc directly, so activate the standard
+# user-session target before starting services that require it (including DMS).
+systemctl --user start graphical-session.target || true
 
 # DMS is the desktop shell: bar, launcher, notifications and system UI.
 # Prefer the packaged user service so failures and restarts are visible in the
