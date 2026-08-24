@@ -22,6 +22,7 @@ aggiornamenti del sistema.
 ### Desktop
 
 - labwc come compositor/window manager Wayland;
+- due spazi di lavoro predefiniti;
 - DankMaterialShell per pannello, launcher, notifiche, calendario e impostazioni;
 - greetd e `dms-greeter` per il login;
 - Ptyxis come terminale predefinito, con integrazione GTK4/libadwaita;

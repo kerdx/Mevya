@@ -7,7 +7,7 @@
     <xwaylandPersistence>yes</xwaylandPersistence>
   </core>
 
-  <desktops number="4" />
+  <desktops number="2" />
 
   <!-- DMS draws its own frame and close button. Avoid a second labwc titlebar
        around DMS settings and other framed shell windows. Keep compatibility
