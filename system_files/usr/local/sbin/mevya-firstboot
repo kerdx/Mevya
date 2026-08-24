@@ -25,4 +25,7 @@ if [ -f "${greetd_config}" ]; then
     rm -f "${config_tmp}"
 fi
 
+# The graphical installer belongs only to the live environment.
+rm -f /usr/share/applications/mevya-installer.desktop
+
 userdel --remove mevya

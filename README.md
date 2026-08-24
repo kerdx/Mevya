@@ -83,6 +83,8 @@ Non viene copiato il modello uBlue/bootc e non vengono inclusi `uupd`,
   `dbus-run-session`, attivando anche `graphical-session.target` per DMS;
 - il primo avvio del sistema installato rimuove l’utente tecnico live `mevya`
   e trasferisce l’autologin all’utente creato in Anaconda;
+- la voce grafica “Installa Mevya” viene rimossa dal sistema installato e
+  resta disponibile solo nella live;
 - l’utente live può avviare `liveinst` senza una seconda richiesta di
   autenticazione, limitatamente al programma dell’installer;
 - il launcher dell’installer riporta automaticamente il focus alla finestra
