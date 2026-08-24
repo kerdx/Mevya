@@ -9,6 +9,14 @@
 
   <desktops number="4" />
 
+  <!-- DMS draws its own frame and close button. Avoid a second labwc titlebar
+       around DMS settings and other framed shell windows. Keep compatibility
+       with the app-id used by older DMS releases. -->
+  <windowRules>
+    <windowRule identifier="com.danklinux.dms" serverDecoration="no" />
+    <windowRule identifier="org.danklinux.dms" serverDecoration="no" />
+  </windowRules>
+
   <theme>
     <!-- Material-compatible geometry; colors come from themerc-override. -->
     <cornerRadius>12</cornerRadius>

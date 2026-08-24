@@ -29,6 +29,8 @@ aggiornamenti del sistema.
   coerente con il tema del desktop;
 - DMS configurato per sincronizzare modalità chiara/scura con GTK e Qt tramite
   il desktop portal, in entrambe le direzioni;
+- decorazioni labwc disattivate sulle finestre frame di DMS per evitare una
+  seconda barra del titolo e un secondo pulsante di chiusura;
 - l’updater di DMS usa il backend nativo per DNF/DNF5 e Flatpak, senza il
   comando `ujust` della variante immutabile;
 - Flatpak usa il remote di sistema Flathub; l’eventuale remote Fedora viene
