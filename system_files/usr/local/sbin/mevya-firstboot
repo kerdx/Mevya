@@ -2,6 +2,15 @@
 
 set -eu
 
+# This service is enabled in both the live image and the installed system.
+# Keep the live-only account for greetd autologin, but always clean it up on
+# the first boot of the installed system regardless of the chosen user UID.
+root_fstype="$(findmnt -n -o FSTYPE / 2>/dev/null || true)"
+if [ -e /run/initramfs/live ] || [ -e /run/live/medium ] || [ "${root_fstype}" = "overlay" ]; then
+    logger -t mevya-firstboot 'Live system detected; keeping the live account'
+    exit 0
+fi
+
 # The build environment may not have DNS while the image is assembled. Make
 # the installed system converge on the intended Flatpak source once networking
 # is available, without making first boot fail when the network is still down.
@@ -14,17 +23,9 @@ if command -v flatpak >/dev/null 2>&1; then
     fi
     flatpak remote-delete --system fedora || true
 fi
-# The live image needs the technical `mevya` account for autologin. Anaconda
-# creates the real account in the installed system. On an installed system,
-# remove the live-only account and leave greetd on its normal login screen.
+# The live image needs the technical `mevya` account for autologin. On an
+# installed system, remove it and leave greetd on its normal login screen.
 if ! id mevya >/dev/null 2>&1; then
-    exit 0
-fi
-
-installed_user="$(getent passwd \
-    | awk -F: '$3 >= 1000 && $3 < 60000 && $1 != "mevya" && $6 ~ /^\/home\// { print $1; exit }')"
-
-if [ -z "${installed_user}" ] || [ "${installed_user}" = "mevya" ]; then
     exit 0
 fi
 
