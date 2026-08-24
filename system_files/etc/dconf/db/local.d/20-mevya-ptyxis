@@ -1,0 +1,17 @@
+[org/gnome/Ptyxis]
+interface-style='system'
+default-profile-uuid='mevya-material'
+profile-uuids=['mevya-material']
+restore-session=false
+audible-bell=false
+default-columns=120
+default-rows=36
+
+[org/gnome/Ptyxis/Profiles/mevya-material]
+label='Mevya Material'
+palette='Mevya Material'
+font='JetBrains Mono 11'
+use-system-font=false
+bold-is-bright=true
+limit-scrollback=true
+scrollback-lines=10000

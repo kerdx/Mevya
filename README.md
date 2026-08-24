@@ -26,6 +26,8 @@ aggiornamenti del sistema.
 - DankMaterialShell per pannello, launcher, notifiche, calendario e impostazioni;
 - greetd e `dms-greeter` per il login;
 - Ptyxis come terminale predefinito, con integrazione GTK4/libadwaita;
+- profilo Ptyxis “Mevya Material” con JetBrains Mono, palette Material 3
+  chiara/scura, bell disattivato e scrollback limitato;
 - GTK/libadwaita configurato con preferenza scura per mantenere Nautilus
   coerente con il tema del desktop;
 - DMS configurato per sincronizzare modalità chiara/scura con GTK e Qt tramite

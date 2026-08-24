@@ -49,6 +49,16 @@ if [ ! -f "${user_mimeapps_file}" ] && [ -f /etc/xdg/mimeapps.list ]; then
     cp /etc/xdg/mimeapps.list "${user_mimeapps_file}"
 fi
 
+# Make the Material Ptyxis palette available to the live user as well as to
+# users created from /etc/skel. The dconf profile selects it by name.
+ptyxis_palette_dir="$HOME/.local/share/org.gnome.Ptyxis/palettes"
+if [ ! -f "${ptyxis_palette_dir}/mevya-material.palette" ] \
+    && [ -f /usr/share/org.gnome.Ptyxis/palettes/mevya-material.palette ]; then
+    mkdir -p "${ptyxis_palette_dir}"
+    cp /usr/share/org.gnome.Ptyxis/palettes/mevya-material.palette \
+        "${ptyxis_palette_dir}/mevya-material.palette"
+fi
+
 # greetd's initial_session starts labwc directly, so activate the standard
 # user-session target before starting services that require it (including DMS).
 systemctl --user start graphical-session.target || true
