@@ -88,6 +88,8 @@ Non viene copiato il modello uBlue/bootc e non vengono inclusi `uupd`,
 - la live usa italiano (`it_IT.UTF-8`) e tastiera italiana come impostazioni
   predefinite;
 - Anaconda include tutti i locale disponibili tramite `glibc-all-langpacks`;
+- la lingua scelta in Anaconda viene esportata da `/etc/locale.conf` nella
+  sessione, così DMS, GTK, Qt e le applicazioni usano lo stesso locale;
 - il nome host predefinito dell’installazione è `mevya`, modificabile in
   Anaconda;
 - la live avvia automaticamente labwc tramite greetd dentro

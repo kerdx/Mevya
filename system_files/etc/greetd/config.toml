@@ -6,8 +6,8 @@ vt = 1
 # future installer option explicitly enables autologin.
 [initial_session]
 user = "mevya"
-command = "dbus-run-session -- /usr/bin/labwc"
+command = "/usr/local/bin/mevya-session"
 
 [default_session]
 user = "greeter"
-command = "/usr/bin/dms-greeter --command labwc"
+command = "/usr/bin/dms-greeter --command /usr/local/bin/mevya-session"

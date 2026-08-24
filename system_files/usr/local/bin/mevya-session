@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -eu
+
+# Anaconda writes the selected language and LC_* values to /etc/locale.conf.
+# Export them before starting D-Bus so labwc, DMS, GTK, Qt and their child
+# applications all inherit the same locale.
+if [ -r /etc/locale.conf ]; then
+    set -a
+    . /etc/locale.conf
+    set +a
+fi
+
+exec dbus-run-session -- /usr/bin/labwc
