@@ -64,7 +64,7 @@
   "clockDateFormat": "",
   "lockDateFormat": "",
   "mediaSize": 1,
-  "dankBarLeftWidgets": ["launcherButton", "workspaceSwitcher", "runningApps"],
+  "dankBarLeftWidgets": ["launcherButton", "workspaceSwitcher", "runningApps", "focusedWindow"],
   "dankBarCenterWidgets": ["music", "clock", { "id": "weather", "enabled": false }],
   "dankBarRightWidgets": ["systemTray", "clipboard", "notificationButton", "battery", "controlCenterButton", "dankSoftwareDepot"],
   "appLauncherViewMode": "list",
