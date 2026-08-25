@@ -98,7 +98,6 @@ libva-intel-media-driver
 mesa-dri-drivers
 mesa-va-drivers
 mesa-va-drivers-freeworld
-mesa-vdpau-drivers
 mesa-vulkan-drivers
 libvpx
 opus
