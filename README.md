@@ -146,6 +146,7 @@ indipendentemente dalla distribuzione.
   solo se selezionato dall’utente in Anaconda;
 - l’utente tecnico live `mevya` viene rimosso al primo avvio del sistema
   installato; l’accesso normale passa dal greeter;
+- AccountsService assegna un avatar Mevya predefinito solo agli utenti senza immagine personale;
 - l’opzione “Installa Mevya” resta nella live e viene rimossa dal sistema
   installato;
 - dalla live `liveinst` viene avviato direttamente tramite il launcher Fedora,

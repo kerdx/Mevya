@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Mevya user avatar">
+  <defs>
+    <linearGradient id="mevya-avatar-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6750a4"/>
+      <stop offset="1" stop-color="#1d192b"/>
+    </linearGradient>
+  </defs>
+  <circle cx="128" cy="128" r="124" fill="url(#mevya-avatar-bg)"/>
+  <circle cx="128" cy="100" r="43" fill="#f7f2fa"/>
+  <path d="M51 226c9-45 38-72 77-72s68 27 77 72" fill="#f7f2fa"/>
+  <path d="M86 132h18l24-31 24 31h18l-42-55z" fill="#6750a4"/>
+</svg>

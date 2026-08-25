@@ -11,6 +11,36 @@ if [ -e /run/initramfs/live ] || [ -e /run/live/medium ] || [ "${root_fstype}" =
     is_live=1
     logger -t mevya-firstboot 'Live system detected; will configure the live session without removing its account'
 fi
+# Give users without a personal image a branded default avatar. AccountsService
+# keeps a user-selected Icon= entry untouched.
+default_avatar=/usr/share/pixmaps/mevya-avatar.svg
+accounts_users_dir=/var/lib/AccountsService/users
+if [ -f "${default_avatar}" ] && command -v getent >/dev/null 2>&1; then
+    install -d -o root -g root -m 0755 "${accounts_users_dir}"
+    getent passwd | while IFS=: read -r username _ uid _ _ home_dir _; do
+        case "${uid}" in
+            ''|*[!0-9]*) continue ;;
+        esac
+        [ "${uid}" -ge 1000 ] || continue
+        [ "${home_dir}" != / ] || continue
+        [ "${home_dir}" != /nonexistent ] || continue
+        account_file="${accounts_users_dir}/${username}"
+        if [ -f "${account_file}" ]; then
+            if grep -Eq '^Icon=.+$' "${account_file}"; then
+                :
+            elif grep -q '^Icon=' "${account_file}"; then
+                sed -i "s|^Icon=.*|Icon=${default_avatar}|" "${account_file}"
+            else
+                printf '%s\n' "Icon=${default_avatar}" >> "${account_file}"
+            fi
+        else
+            temp_account="$(mktemp)"
+            printf '[User]\nIcon=%s\n' "${default_avatar}" > "${temp_account}"
+            install -o root -g root -m 0644 "${temp_account}" "${account_file}"
+            rm -f "${temp_account}"
+        fi
+    done
+fi
 # The build environment may not have DNS while the image is assembled. Make
 # the installed system converge on the intended Flatpak source once networking
 # is available, without making first boot fail when the network is still down.
