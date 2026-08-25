@@ -13,12 +13,37 @@ fi
 
 # Create the standard user directories (Documents, Downloads, and others)
 # using the locale selected by Anaconda before starting the desktop session.
+# greetd's initial_session can start the command without the complete HOME/XDG
+# environment normally assembled by a display manager, so derive and prepare
+# the paths explicitly before invoking xdg-user-dirs-update.
 if command -v xdg-user-dirs-update >/dev/null 2>&1; then
-    if ! xdg-user-dirs-update; then
-        printf '%s\n' 'Warning: unable to create standard user directories.' >&2
+    if [ -z "${HOME:-}" ] || [ ! -d "${HOME}" ]; then
+        detected_home=$(getent passwd "$(id -u)" | cut -d: -f6)
+        if [ -n "${detected_home}" ]; then
+            HOME=${detected_home}
+            export HOME
+        fi
+    fi
+
+    if [ -n "${HOME:-}" ] && [ -d "${HOME}" ] && [ -w "${HOME}" ]; then
+        XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-${HOME}/.config}
+        export XDG_CONFIG_HOME
+        mkdir -p "${XDG_CONFIG_HOME}"
+
+        user_dirs_file="${XDG_CONFIG_HOME}/user-dirs.dirs"
+        if [ -f "${user_dirs_file}" ]; then
+            xdg_user_dirs_args=''
+        else
+            xdg_user_dirs_args='--force'
+        fi
+
+        if ! xdg-user-dirs-update ${xdg_user_dirs_args}; then
+            printf '%s\n' 'Warning: unable to create standard user directories.' >&2
+        fi
+    else
+        printf '%s\n' 'Warning: user home is unavailable or not writable.' >&2
     fi
 fi
-
 # Anaconda writes the selected keyboard to the installed XKB/vconsole
 # configuration. Prefer the XKB file because it can preserve layout options;
 # fall back to the vconsole keymap used by the live image.

@@ -52,6 +52,17 @@ set -eux
 # yet during Anaconda's post-install phase.
 __MEVYA_CONFIG_POST__
 
+# Ensure the technical live account has a writable home before greetd starts
+# its initial session. This is normally created by the Kickstart user command,
+# but making it explicit avoids XDG user-directory failures in live media.
+if id mevya >/dev/null 2>&1; then
+    live_home=$(getent passwd mevya | cut -d: -f6)
+    live_group=$(id -gn mevya)
+    if [ -n "${live_home}" ] && [ -n "${live_group}" ]; then
+        install -d -o mevya -g "${live_group}" -m 0755 "${live_home}"
+        install -d -o mevya -g "${live_group}" -m 0700 "${live_home}/.config"
+    fi
+fi
 # Compile the system dconf defaults so GTK/libadwaita applications, including
 # Nautilus, follow the dark desktop preference in the live and installed image.
 dconf update
