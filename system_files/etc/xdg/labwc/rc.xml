@@ -287,4 +287,14 @@
       </action>
     </keybind>
   </keyboard>
+
+  <!-- Use DMS as the desktop application menu instead of labwc's root menu. -->
+  <mouse>
+    <default />
+    <context name="Root">
+      <mousebind button="Right" action="Press">
+        <action name="Execute" command="dms ipc call spotlight openWith apps" />
+      </mousebind>
+    </context>
+  </mouse>
 </labwc_config>
