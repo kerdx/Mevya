@@ -148,6 +148,9 @@ indipendentemente dalla distribuzione.
   propagati al sistema installato, a DMS, GTK, Qt e labwc;
 - il profilo Anaconda Mevya eredita quello Fedora e usa Btrfs con compressione
   zstd come schema automatico; il partizionamento manuale resta disponibile;
+- il profilo Anaconda Mevya viene selezionato esplicitamente dagli argomenti di
+  boot della live e abilita automaticamente la prima rete cablata disponibile,
+  come Fedora Workstation;
 - la live avvia automaticamente labwc/DMS tramite greetd e `dbus-run-session`;
 - l’autologin è attivo solo nella live. Nel sistema installato viene applicato
   solo se selezionato dall’utente in Anaconda;
@@ -156,7 +159,7 @@ indipendentemente dalla distribuzione.
 - AccountsService assegna un avatar Mevya predefinito solo agli utenti senza immagine personale,
   usando `/usr/share/pixmaps/mevya-avatar.svg`; le immagini personalizzate restano intatte;
 - l’opzione “Installa Mevya” resta nella live e viene rimossa dal sistema
-  installato;
+  installato insieme al launcher e alla regola polkit esclusivi della live;
 - dalla live `liveinst` viene avviato direttamente tramite il launcher Fedora,
   che gestisce escalation dei privilegi e ambiente Wayland senza il wrapper di
   focus precedente;
@@ -191,6 +194,8 @@ sezioni `%packages`/`%post`, manifest, configurazioni e pacchetti esclusi. Esegu
 `ksvalidator` quando disponibile; la CI mantiene il controllo Kickstart bloccante.
 compose usa Fedora 44 e viene eseguita in un container Fedora privilegiato su
 GitHub Actions; genera ISO e checksum come artifact.
+
+Il renderer Kickstart normalizza i terminatori CRLF, così la preparazione della live resta coerente anche quando il workspace viene usato da Windows.
 
 Per generare e controllare il Kickstart:
 

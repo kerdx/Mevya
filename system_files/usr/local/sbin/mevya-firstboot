@@ -14,6 +14,18 @@ fi
 # The installed system performs this local migration only once.
 state_dir=/var/lib/mevya
 complete_marker="${state_dir}/.firstboot-complete"
+# These files are needed only by the live session. Remove them before any
+# installed-system early exit so the installed image cannot retain a policy
+# that grants the technical live account passwordless access to liveinst.
+live_installer_desktop=/usr/share/applications/mevya-installer.desktop
+live_installer_launcher=/usr/local/bin/mevya-installer
+live_installer_polkit_rule=/etc/polkit-1/rules.d/49-mevya-liveinst.rules
+if [ "${is_live}" -eq 0 ]; then
+    rm -f "${live_installer_desktop}" \
+        "${live_installer_launcher}" \
+        "${live_installer_polkit_rule}"
+    logger -t mevya-firstboot 'Removed live-only installer files and polkit rule'
+fi
 if [ "${is_live}" -eq 0 ] && [ -e "${complete_marker}" ]; then
     exit 0
 fi
@@ -71,9 +83,6 @@ if [ -f "${greetd_config}" ]; then
     install -o root -g root -m 0644 "${config_tmp}" "${greetd_config}"
     rm -f "${config_tmp}"
 fi
-
-# The graphical installer belongs only to the live environment.
-rm -f /usr/share/applications/mevya-installer.desktop
 
 userdel --remove mevya
 install -d -o root -g root -m 0755 "${state_dir}"

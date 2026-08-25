@@ -16,6 +16,7 @@ OUTPUT="${1:-${MEVYA_ROOT}/kickstarts/mevya-live.ks}"
 mkdir -p "$(dirname -- "${OUTPUT}")"
 
 while IFS= read -r line || [[ -n "${line}" ]]; do
+    line=${line%$'\r'}
     case "${line}" in
         __MEVYA_PACKAGES__)
             sed '/^[[:space:]]*#/d;/^[[:space:]]*$/d' "${PACKAGES}"

@@ -124,6 +124,17 @@ else
     printf '%s\n' 'Validation warning: ksvalidator not available; install pykickstart for local Kickstart syntax checks.' >&2
 fi
 
+if ! grep -q 'inst.profile=mevya' scripts/build-iso.sh; then
+    error "live boot arguments do not select the Mevya Anaconda profile explicitly"
+fi
+
+if ! grep -q '^default_on_boot = FIRST_WIRED_WITH_LINK$' system_files/etc/anaconda/profile.d/mevya.conf; then
+    error "Mevya Anaconda profile does not configure the first wired network on boot"
+fi
+
+if ! grep -q '49-mevya-liveinst.rules' system_files/usr/local/sbin/mevya-firstboot; then
+    error "firstboot does not remove the live-only liveinst polkit rule"
+fi
 for service in power-profiles-daemon.service systemd-oomd.service; do
     if ! grep -q "systemctl enable ${service}" "${render_dir}/mevya-live.ks"; then
         error "resource-management service is not enabled in Kickstart: ${service}"
