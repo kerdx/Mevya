@@ -117,6 +117,8 @@ NetworkManager-wwan
 NetworkManager-tui
 nm-connection-editor
 power-profiles-daemon
+thermald
+usb_modeswitch
 firewalld
 chrony
 zram-generator-defaults

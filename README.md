@@ -102,6 +102,8 @@ Il manifest include inoltre:
 - lettori d’impronte tramite `fprintd` e modem WWAN tramite `ModemManager`;
 - supporto per ospiti VirtualBox tramite `virtualbox-guest-additions`.
 
+Per i laptop sono inclusi anche thermald, che gestisce dinamicamente la temperatura e il throttling soprattutto su piattaforme Intel, e usb_modeswitch per modem e dispositivi USB che devono passare dalla modalità storage a quella operativa.
+
 I driver NVIDIA proprietari non sono incorporati nella ISO: l’immagine usa la
 base Fedora con Nouveau/Mesa e può essere estesa in seguito con i pacchetti
 RPM Fusion appropriati per il modello installato.
