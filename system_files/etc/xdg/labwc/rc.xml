@@ -67,6 +67,9 @@
   <windowRules>
     <windowRule identifier="com.danklinux.dms" serverDecoration="no" />
     <windowRule identifier="org.danklinux.dms" serverDecoration="no" />
+    <windowRule identifier="com.danklinux.dankcalendar" serverDecoration="no" />
+    <windowRule identifier="org.danklinux.dankcalendar" serverDecoration="no" />
+    <windowRule identifier="dcal" serverDecoration="no" />
 
     <!-- Native fixed-size Wayland windows are reported as dialogs by labwc;
          center them so installer/settings/authentication dialogs do not open
