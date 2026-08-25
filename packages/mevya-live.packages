@@ -145,6 +145,10 @@ lm_sensors
 fwupd
 fwupd-efi
 linux-firmware
+iwlwifi-mvm-firmware
+atheros-firmware
+brcmfmac-firmware
+realtek-firmware
 intel-audio-firmware
 cirrus-audio-firmware
 amd-gpu-firmware
