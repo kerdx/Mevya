@@ -1,0 +1,29 @@
+[Desktop Entry]
+Name=Terminal
+Name[it]=Terminale
+Comment=A container-oriented terminal for GNOME
+Comment[it]=Un terminale orientato ai container per GNOME
+Exec=ptyxis --new-window
+Icon=org.gnome.Ptyxis
+DBusActivatable=false
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;System;TerminalEmulator;
+GenericName=Terminal
+GenericName[it]=Terminale
+
+[Desktop Action new-window]
+Name=New Window
+Name[it]=Nuova finestra
+Exec=ptyxis --new-window
+
+[Desktop Action new-tab]
+Name=New Tab
+Name[it]=Nuova scheda
+Exec=ptyxis --tab
+
+[Desktop Action preferences]
+Name=Preferences
+Name[it]=Preferenze
+Exec=ptyxis --preferences
