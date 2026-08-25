@@ -1,0 +1,52 @@
+#!/bin/sh
+
+set -eu
+
+state_dir=/var/lib/mevya
+complete_marker="${state_dir}/.network-firstboot-complete"
+
+if [ -e "${complete_marker}" ]; then
+    exit 0
+fi
+
+log() {
+    logger -t mevya-firstboot-network -- "$*" 2>/dev/null || true
+}
+
+plugin_ok=0
+flatpak_ok=0
+
+# Network integrations are deliberately best effort. A failed download must
+# never prevent greetd or the desktop from starting; the missing marker makes
+# this unit retry on the next boot.
+if [ -x /usr/local/sbin/mevya-install-dank-software-depot ]; then
+    if timeout 120s /usr/local/sbin/mevya-install-dank-software-depot; then
+        plugin_ok=1
+        log 'Dank Software Depot configured'
+    else
+        log 'Dank Software Depot unavailable; retrying on the next boot'
+    fi
+fi
+
+if command -v flatpak >/dev/null 2>&1; then
+    if timeout 30s flatpak remote-add --system --if-not-exists flathub \
+        https://dl.flathub.org/repo/flathub.flatpakrepo; then
+        flatpak_ok=1
+        flatpak remote-delete --system fedora >/dev/null 2>&1 || true
+        log 'Flathub system remote configured'
+    else
+        log 'Flathub unavailable; retrying on the next boot'
+    fi
+else
+    flatpak_ok=1
+fi
+
+if [ "${plugin_ok}" -eq 1 ] && [ "${flatpak_ok}" -eq 1 ]; then
+    install -d -o root -g root -m 0755 "${state_dir}"
+    : > "${complete_marker}"
+    chmod 0644 "${complete_marker}"
+    log 'Network integrations completed'
+fi
+
+# Do not fail the boot target when optional network services are unavailable.
+exit 0

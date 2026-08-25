@@ -90,6 +90,7 @@ fi
 systemctl set-default graphical.target
 systemctl enable greetd.service
 systemctl enable mevya-firstboot.service
+systemctl enable mevya-firstboot-network.timer
 systemctl enable power-profiles-daemon.service
 systemctl enable systemd-oomd.service
 systemctl enable firewalld.service
@@ -99,7 +100,7 @@ systemctl enable fwupd-refresh.timer || true
 
 # Use the unrestricted Flathub remote for Flatpak applications. Network/DNS
 # is not guaranteed during Anaconda's chrooted %post, so this is best effort;
-# mevya-firstboot retries it once the installed system has networking.
+# mevya-firstboot-network retries optional remote integrations once the installed system has networking.
 if timeout 30s flatpak remote-add --system --if-not-exists flathub \
     https://dl.flathub.org/repo/flathub.flatpakrepo; then
     printf '%s\n' 'Flathub system remote configured during image build.'

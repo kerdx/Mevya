@@ -156,9 +156,10 @@ indipendentemente dalla distribuzione.
 - dalla live `liveinst` viene avviato direttamente tramite il launcher Fedora,
   che gestisce escalation dei privilegi e ambiente Wayland senza il wrapper di
   focus precedente;
-- `mevya-firstboot` configura la live anche quando il plugin Dank Software Depot
-  non era disponibile durante la compose; l’account tecnico viene mantenuto
-  nella live e rimosso solo dal sistema installato;
+- `mevya-firstboot` esegue solo la preparazione locale e non blocca il login;
+- `mevya-firstboot-network` configura Flathub e Dank Software Depot in modo
+  asincrono e idempotente, ritentando al boot successivo se la rete non è disponibile;
+- l'account tecnico viene mantenuto nella live e rimosso solo dal sistema installato;
 - hostname predefinito: `mevya`; nella WebUI Anaconda di Fedora 44 il campo non è
   ancora esposto durante una live installation;
 - `/etc/os-release`, GRUB e Plymouth riportano il branding Mevya 44;

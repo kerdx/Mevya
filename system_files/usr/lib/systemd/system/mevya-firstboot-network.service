@@ -1,0 +1,10 @@
+[Unit]
+Description=Configure Mevya optional network integrations
+Wants=network-online.target
+After=network-online.target
+ConditionPathExists=/usr/local/sbin/mevya-firstboot-network
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/mevya-firstboot-network
+TimeoutStartSec=180s
