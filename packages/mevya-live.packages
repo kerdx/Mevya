@@ -102,6 +102,7 @@ opus
 pipewire-codec-aptx
 lame
 x265
+libdvdcss
 rpmfusion-free-release
 rpmfusion-nonfree-release
 

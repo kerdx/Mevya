@@ -13,7 +13,7 @@ reversibile.
 | Desktop | labwc + DMS integrati, con tema Material per GTK e Qt |
 | Installer | Anaconda live con lingua, tastiera e hostname configurabili |
 | Branding | Mevya 44 su sistema, GRUB e Plymouth |
-| Multimedia | Codec, GStreamer, PipeWire e accelerazione hardware inclusi |
+| Multimedia | Codec, GStreamer, PipeWire, DVD video e accelerazione hardware inclusi |
 | Hardware | Firmware, driver Mesa, moduli kernel extra e strumenti per periferiche |
 | Aggiornamenti firmware | fwupd con supporto EFI per gli aggiornamenti UEFI |
 | Build | Kickstart e workflow GitHub Actions pronti per la compose |
@@ -77,10 +77,10 @@ Fusion, GStreamer base/good/bad/ugly/libav, OpenH264, PipeWire, H.264, H.265,
 x265, AV1, VP8/VP9, Opus, LAME, `fdk-aac-free`, libcamera, VA-API, Mesa,
 driver Intel, header NVIDIA NVENC e `ffmpegthumbnailer`.
 
-Sono inclusi anche WirePlumber, Bluetooth aptX e PackageKit GStreamer. Browser,
+Sono inclusi anche WirePlumber, Bluetooth aptX, PackageKit GStreamer e
+`libdvdcss` da RPM Fusion nonfree per la riproduzione dei DVD video. Browser,
 VLC, MPV, OBS, Steam, Blender e Kdenlive restano installabili dall’utente e
-non fanno parte della base. `libdvdcss` è escluso per le diverse normative
-nazionali.
+non fanno parte della base.
 
 ## Audio e firmware
 
