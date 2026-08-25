@@ -26,8 +26,13 @@ reversibile.
 - greetd con `dms-greeter` per il login;
 - Ptyxis come terminale predefinito, con profilo “Mevya Material”, JetBrains
   Mono, palette Material 3 chiara/scura, bell disattivato e scrollback limitato;
+- il launcher desktop di Ptyxis usa lo stesso percorso del menu contestuale
+  (`ptyxis --new-window`), evitando l’attivazione D-Bus separata;
 - Nautilus come file manager, con GVfs, SMB, MTP, associazioni XDG e “Apri nel
   terminale” configurato per Ptyxis;
+- il click destro sull’area vuota del desktop apre il launcher applicazioni di
+  DMS direttamente nella vista delle app, invece del menu root predefinito di
+  labwc;
 - xdg-user-dirs crea le cartelle standard (Documenti, Scaricati e Immagini)
   usando la lingua selezionata;
 - Qt6ct, GTK/libadwaita e `adw-gtk3-theme` configurati per seguire la palette
@@ -139,8 +144,12 @@ indipendentemente dalla distribuzione.
   installato; l’accesso normale passa dal greeter;
 - l’opzione “Installa Mevya” resta nella live e viene rimossa dal sistema
   installato;
-- dalla live `liveinst` può essere avviato senza una seconda richiesta di
-  autenticazione; il launcher riporta il focus alla finestra Anaconda;
+- dalla live `liveinst` viene avviato direttamente tramite il launcher Fedora,
+  che gestisce escalation dei privilegi e ambiente Wayland senza il wrapper di
+  focus precedente;
+- `mevya-firstboot` configura la live anche quando il plugin Dank Software Depot
+  non era disponibile durante la compose; l’account tecnico viene mantenuto
+  nella live e rimosso solo dal sistema installato;
 - hostname predefinito: `mevya`, modificabile durante l’installazione;
 - `/etc/os-release`, GRUB e Plymouth riportano il branding Mevya 44;
 - l'account tecnico live `mevya` è bloccato e non ha una password predefinita;
@@ -152,11 +161,12 @@ indipendentemente dalla distribuzione.
 - `kickstarts/mevya-live.ks.in`: template Kickstart;
 - `system_files/`: configurazioni della live e del sistema installato;
 - `system_files/etc/dms/mevya-dms-environment`: ambiente DMS condiviso;
+- `system_files/usr/share/applications/org.gnome.Ptyxis.desktop`: override Mevya
+  del launcher Ptyxis;
 - `scripts/render-kickstart.sh`: genera il Kickstart completo;
 - `scripts/validate-project.sh`: verifica script, configurazioni, manifest e
   Kickstart renderizzato;
 - `scripts/build-iso.sh`: prepara o compone localmente la ISO;
-- `lorax-custom/`: spazio per future personalizzazioni Lorax;
 - `.github/workflows/build.yml`: workflow GitHub Actions della ISO.
 
 ## Controlli e build
@@ -182,6 +192,19 @@ BUILD=1 ./scripts/build-iso.sh
 
 La ISO viene salvata in `release/`. Compose precedenti hanno già generato ISO, checksum e artifact; ogni modifica successiva va comunque ricostruita e verificata. La build GitHub Actions è manuale:
 `Actions > Build Mevya 44 ISO > Run workflow`.
+
+## Verifiche ancora necessarie
+
+La configurazione è presente nel repository, ma deve ancora essere verificata
+su una ISO aggiornata nei casi seguenti:
+
+- click destro sul desktop e apertura del launcher DMS nella vista applicazioni;
+- apertura di Ptyxis dal launcher e dal menu contestuale con tema coerente;
+- avvio di “Installa Mevya 44” e apertura corretta di Anaconda;
+- creazione delle directory utente nella live e mantenimento dell’account live;
+- installazione o retry del plugin Dank Software Depot nella sessione live;
+- installazione completa e primo avvio del sistema, inclusi audio, video,
+  monitor, firmware, VirtualBox e rimozione dell’account tecnico.
 
 Mevya 44 resta sperimentale finché la ISO non viene verificata con boot live,
 installazione, labwc/DMS, Anaconda, Nautilus, Ptyxis, audio/video, monitor e
