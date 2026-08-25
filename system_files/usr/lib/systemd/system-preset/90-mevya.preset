@@ -1,0 +1,11 @@
+# Mevya desktop baseline. Optional hardware and developer services remain
+# package-installed but are not enabled unless the user selects them.
+enable greetd.service
+enable mevya-firstboot.service
+enable mevya-firstboot-network.timer
+enable power-profiles-daemon.service
+enable systemd-oomd.service
+enable firewalld.service
+enable chronyd.service
+enable cups.socket
+enable fwupd-refresh.timer

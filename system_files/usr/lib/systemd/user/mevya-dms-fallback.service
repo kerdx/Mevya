@@ -1,5 +1,7 @@
 [Unit]
 Description=Mevya DMS compatibility fallback
+StartLimitIntervalSec=60s
+StartLimitBurst=5
 PartOf=graphical-session.target
 After=graphical-session.target
 ConditionPathExists=/usr/bin/dms

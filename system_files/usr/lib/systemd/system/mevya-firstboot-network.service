@@ -5,6 +5,15 @@ After=network-online.target
 ConditionPathExists=/usr/local/sbin/mevya-firstboot-network
 
 [Service]
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictNamespaces=yes
+LockPersonality=yes
+SystemCallArchitectures=native
+UMask=0077
 Type=oneshot
 ExecStart=/usr/local/sbin/mevya-firstboot-network
 TimeoutStartSec=180s

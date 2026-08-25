@@ -1,5 +1,7 @@
 [Unit]
 Description=DMS clipboard history
+StartLimitIntervalSec=60s
+StartLimitBurst=5
 After=dms.service
 PartOf=dms.service
 
