@@ -11,7 +11,7 @@ reversibile.
 | Area | Stato |
 | --- | --- |
 | Desktop | labwc + DMS integrati, con tema Material per GTK e Qt |
-| Installer | Anaconda live con lingua e tastiera configurabili; profilo Mevya con Btrfs predefinito |
+| Installer | Anaconda live con lingua e tastiera configurabili; profilo Mevya con Btrfs predefinito e GRUB UEFI/BIOS |
 | Branding | Mevya 44 su sistema, GRUB e Plymouth |
 | Multimedia | Codec, GStreamer, PipeWire e accelerazione hardware inclusi |
 | Hardware | Firmware, driver Mesa, moduli kernel extra e strumenti per periferiche |

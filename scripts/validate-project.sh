@@ -73,6 +73,12 @@ mapfile -t packages < <(
 )
 
 required_packages=(
+    grub2-efi-x64
+    grub2-efi-x64-modules
+    grub2-tools-efi
+    grub2-tools-extra
+    grub2-pc
+    grub2-pc-modules
     power-profiles-daemon
     zram-generator-defaults
     systemd-oomd-defaults
