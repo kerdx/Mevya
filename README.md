@@ -13,7 +13,7 @@ reversibile.
 | Desktop | labwc + DMS integrati, con tema Material per GTK e Qt |
 | Installer | Anaconda live con lingua, tastiera e hostname configurabili |
 | Branding | Mevya 44 su sistema, GRUB e Plymouth |
-| Multimedia | Codec, GStreamer, PipeWire, DVD video e accelerazione hardware inclusi |
+| Multimedia | Codec, GStreamer, PipeWire e accelerazione hardware inclusi |
 | Hardware | Firmware, driver Mesa, moduli kernel extra e strumenti per periferiche |
 | Aggiornamenti firmware | fwupd con supporto EFI per gli aggiornamenti UEFI |
 | Build | Kickstart e workflow GitHub Actions pronti per la compose |
@@ -23,6 +23,7 @@ reversibile.
 - labwc come compositor/window manager Wayland e DMS per pannello, launcher,
   notifiche, calendario e impostazioni;
 - due spazi di lavoro globali, gestiti da DMS e labwc;
+- DankBar preconfigurata con launcher applicazioni, workspace switcher, running apps e focused window nella sezione sinistra;
 - greetd con `dms-greeter` per il login;
 - Ptyxis come terminale predefinito, con profilo “Mevya Material”, JetBrains
   Mono, palette Material 3 chiara/scura, bell disattivato e scrollback limitato;
@@ -78,6 +79,7 @@ x265, AV1, VP8/VP9, Opus, LAME, `fdk-aac-free`, libcamera, VA-API, Mesa,
 driver Intel, header NVIDIA NVENC e `ffmpegthumbnailer`.
 
 Sono inclusi anche WirePlumber, Bluetooth aptX e PackageKit GStreamer.
+La libreria proprietaria `libdvdcss` non è inclusa nella ISO base.
 VLC, MPV, OBS, Steam, Blender e Kdenlive restano installabili dall’utente e
 non fanno parte della base; Firefox è incluso per il frontend Web UI di
 Anaconda nella sessione live.
@@ -145,7 +147,8 @@ indipendentemente dalla distribuzione.
   solo se selezionato dall’utente in Anaconda;
 - l’utente tecnico live `mevya` viene rimosso al primo avvio del sistema
   installato; l’accesso normale passa dal greeter;
-- AccountsService assegna un avatar Mevya predefinito solo agli utenti senza immagine personale;
+- AccountsService assegna un avatar Mevya predefinito solo agli utenti senza immagine personale,
+  usando `/usr/share/pixmaps/mevya-avatar.svg`; le immagini personalizzate restano intatte;
 - l’opzione “Installa Mevya” resta nella live e viene rimossa dal sistema
   installato;
 - dalla live `liveinst` viene avviato direttamente tramite il launcher Fedora,
