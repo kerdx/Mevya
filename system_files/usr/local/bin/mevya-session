@@ -2,6 +2,19 @@
 
 set -eu
 
+# VirtualBox's VMSVGA 3D path can expose an incomplete EGL/OpenGL stack to
+# QtQuick/Quickshell. Keep labwc hardware-independent, but use QtQuick's
+# software scene-graph backend for DMS in VirtualBox only. The variable must
+# be exported before D-Bus activation so the user service inherits it.
+virtualization=""
+if command -v systemd-detect-virt >/dev/null 2>&1; then
+    virtualization=$(systemd-detect-virt 2>/dev/null || true)
+fi
+if [ "${virtualization}" = "oracle" ]; then
+    export QT_QUICK_BACKEND=software
+    logger -t mevya-session 'VirtualBox detected; using QtQuick software rendering for DMS' || true
+fi
+
 # Anaconda writes the selected language and LC_* values to /etc/locale.conf.
 # Export them before starting D-Bus so labwc, DMS, GTK, Qt and their child
 # applications all inherit the same locale.

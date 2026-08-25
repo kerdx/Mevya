@@ -50,7 +50,10 @@ reversibile.
 - font Noto, JetBrains Mono, Cascadia Code NF e Material Symbols; zram,
   `systemd-oomd`, `power-profiles-daemon` e preset labwc performance/power-saver;
 - clipboard, fallback e log DMS, splash screen Plymouth e integrazione per
-  l’uso in VirtualBox.
+  l’uso in VirtualBox;
+- rilevamento automatico di VirtualBox: DMS/Quickshell usa il renderer Qt Quick
+  software nella VM per evitare incompatibilità VMSVGA 3D, senza modificare il
+  percorso grafico dei sistemi fisici.
 
 ### Scorciatoie
 
