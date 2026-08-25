@@ -103,9 +103,7 @@ opus
 pipewire-codec-aptx
 lame
 x265
-libdvdcss
 rpmfusion-free-release
-rpmfusion-free-release-tainted
 rpmfusion-nonfree-release
 
 # Power, networking, printing and desktop hardware support.

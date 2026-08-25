@@ -24,7 +24,6 @@ repo --name=mevya-dms --baseurl=https://download.copr.fedorainfracloud.org/resul
 repo --name=mevya-nautilus-terminal --baseurl=https://download.copr.fedorainfracloud.org/results/monkeygold/nautilus-open-any-terminal/fedora-$releasever-$basearch/
 repo --name=rpmfusion-free --baseurl=https://download1.rpmfusion.org/free/fedora/releases/$releasever/Everything/$basearch/os/
 repo --name=rpmfusion-free-updates --baseurl=https://download1.rpmfusion.org/free/fedora/updates/$releasever/$basearch/
-repo --name=rpmfusion-free-tainted --baseurl=https://download1.rpmfusion.org/free/fedora/tainted/$releasever/$basearch/os/
 repo --name=rpmfusion-nonfree --baseurl=https://download1.rpmfusion.org/nonfree/fedora/releases/$releasever/Everything/$basearch/os/
 repo --name=rpmfusion-nonfree-updates --baseurl=https://download1.rpmfusion.org/nonfree/fedora/updates/$releasever/$basearch/
 
