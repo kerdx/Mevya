@@ -82,14 +82,42 @@ if [ "${DMS_STARTED}" -eq 0 ]; then
     systemctl --user start mevya-dms-fallback.service
 fi
 
-# Synchronize DMS' initial mode with the GTK defaults exactly once. The
-# official IPC command also regenerates GTK4/libadwaita theme files and sends
-# the portal color-scheme update to applications started afterwards.
-if [ ! -e "${theme_marker}" ] && [ "${DMS_STARTED}" -eq 1 ] \
-    && dms ipc call theme dark >/dev/null 2>&1; then
-    : > "${theme_marker}"
-fi
+# Synchronize GTK4/libadwaita with the mode DMS currently exposes. DMS must
+# have its IPC socket ready before the theme command can regenerate the GTK4
+# files; retry briefly instead of recording a marker after a failed race.
+if [ "${DMS_STARTED}" -eq 1 ]; then
+    theme_mode=""
+    for attempt in 1 2 3 4 5 6 7 8 9 10; do
+        theme_mode="$(dms ipc call theme getMode 2>/dev/null | tr -d '\r\n' || true)"
+        case "${theme_mode}" in
+            *dark*|*light*) break ;;
+        esac
+        sleep 1
+    done
 
+    case "${theme_mode}" in
+        *dark*)
+            dms ipc call theme dark >/dev/null 2>&1 || true
+            if command -v gsettings >/dev/null 2>&1; then
+                gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' \
+                    >/dev/null 2>&1 || true
+                gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark' \
+                    >/dev/null 2>&1 || true
+            fi
+            : > "${theme_marker}"
+            ;;
+        *light*)
+            dms ipc call theme light >/dev/null 2>&1 || true
+            if command -v gsettings >/dev/null 2>&1; then
+                gsettings set org.gnome.desktop.interface color-scheme 'prefer-light' \
+                    >/dev/null 2>&1 || true
+                gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3' \
+                    >/dev/null 2>&1 || true
+            fi
+            : > "${theme_marker}"
+            ;;
+    esac
+fi
 # Apply personal monitor/dock profiles through a restartable user service only
 # when the user has configured Kanshi. Its output is kept in journald.
 if command -v kanshi >/dev/null 2>&1 \
