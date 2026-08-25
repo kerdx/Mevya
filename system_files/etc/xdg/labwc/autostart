@@ -34,6 +34,16 @@ if [ ! -d "${matugen_config_dir}" ] \
     cp -R /etc/skel/.config/matugen "${matugen_config_dir}"
 fi
 
+# Initialize the first session in dark mode. DMS then owns future light/dark
+# changes; the marker prevents this default from overriding a user's choice.
+theme_marker="${dms_config_dir}/.mevya-theme-initialized"
+if [ ! -e "${theme_marker}" ] && command -v gsettings >/dev/null 2>&1; then
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' \
+        >/dev/null 2>&1 || true
+    gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark' \
+        >/dev/null 2>&1 || true
+fi
+
 # Seed XDG file-manager defaults for users created before the image defaults
 # were installed, without overwriting personal associations.
 user_mimeapps_file="$HOME/.config/mimeapps.list"
@@ -70,6 +80,14 @@ if [ "${DMS_STARTED}" -eq 0 ]; then
     printf '%s\n' 'DMS service non avviato; uso il fallback gestito.' \
         | systemd-cat -t mevya-session
     systemctl --user start mevya-dms-fallback.service
+fi
+
+# Synchronize DMS' initial mode with the GTK defaults exactly once. The
+# official IPC command also regenerates GTK4/libadwaita theme files and sends
+# the portal color-scheme update to applications started afterwards.
+if [ ! -e "${theme_marker}" ] && [ "${DMS_STARTED}" -eq 1 ] \
+    && dms ipc call theme dark >/dev/null 2>&1; then
+    : > "${theme_marker}"
 fi
 
 # Apply personal monitor/dock profiles through a restartable user service only
