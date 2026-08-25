@@ -12,6 +12,9 @@ dracut-config-generic
 kernel
 kernel-modules
 kernel-modules-extra
+kernel-modules-extra-matched
+kernel-tools
+kmod
 livesys-scripts
 efibootmgr
 grub2
@@ -73,8 +76,6 @@ alsa-plugins-pulseaudio
 # libavcodec-free libraries, while RPM Fusion's ffmpeg-libs conflicts with it.
 ffmpeg-free
 libavcodec-freeworld
-libcamera-gstreamer
-libcamera-tools
 fdk-aac-free
 gstreamer1-plugins-base
 gstreamer1-plugins-base-tools
@@ -87,11 +88,16 @@ gstreamer1-libav
 gstreamer1-plugin-openh264
 pipewire-gstreamer
 PackageKit-gstreamer-plugin
+libcamera-gstreamer
+libcamera-tools
 libva
 libva-utils
 libva-intel-media-driver
+mesa-dri-drivers
 mesa-va-drivers
 mesa-va-drivers-freeworld
+mesa-vdpau-drivers
+mesa-vulkan-drivers
 libvpx
 opus
 pipewire-codec-aptx
@@ -112,9 +118,16 @@ iio-sensor-proxy
 ddcutil
 libinput-utils
 powerstat
+usbutils
+pciutils
+ethtool
+smartmontools
+nvme-cli
+v4l-utils
 cups-pk-helper
 cups
 cups-filters
+ipp-usb
 sane-backends
 avahi
 bluez
@@ -122,7 +135,17 @@ accountsservice
 switcheroo-control
 lm_sensors
 fwupd
+fwupd-efi
 linux-firmware
+amd-gpu-firmware
+amd-ucode-firmware
+intel-gpu-firmware
+udisks2
+upower
+bolt
+fprintd
+fprintd-pam
+ModemManager
 
 # Display, portals, monitor layout and desktop utilities.
 kanshi

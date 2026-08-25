@@ -14,6 +14,8 @@ reversibile.
 | Installer | Anaconda live con lingua, tastiera e hostname configurabili |
 | Branding | Mevya 44 su sistema, GRUB e Plymouth |
 | Multimedia | Codec, GStreamer, PipeWire e accelerazione hardware inclusi |
+| Hardware | Firmware, driver Mesa, moduli kernel extra e strumenti per periferiche |
+| Aggiornamenti firmware | fwupd con supporto EFI per gli aggiornamenti UEFI |
 | Build | Kickstart e workflow GitHub Actions pronti per la compose |
 
 ## Desktop
@@ -72,6 +74,28 @@ VLC, MPV, OBS, Steam, Blender e Kdenlive restano installabili dall’utente e
 non fanno parte della base. `libdvdcss` è escluso per le diverse normative
 nazionali.
 
+## Supporto hardware
+
+La base hardware segue il modello Fedora: kernel, moduli extra e firmware
+Linux vengono accompagnati dalla pila Mesa completa per grafica DRI, Vulkan e
+VDPAU. Sono inclusi firmware AMD per GPU e microcode CPU, firmware GPU Intel e
+`fwupd-efi` per gli aggiornamenti firmware UEFI compatibili con fwupd.
+
+Il manifest include inoltre:
+
+- gestione di dischi rimovibili, batterie, profili energetici e dispositivi
+  Thunderbolt tramite `udisks2`, `upower`, `power-profiles-daemon` e `bolt`;
+- supporto e diagnostica per USB, PCI, rete, NVMe, SMART, webcam e dispositivi
+  video tramite `usbutils`, `pciutils`, `ethtool`, `nvme-cli`, `smartmontools` e
+  `v4l-utils`;
+- stampa USB moderna con `ipp-usb`, scanner SANE, Bluetooth e sensori laptop;
+- lettori d’impronte tramite `fprintd` e modem WWAN tramite `ModemManager`;
+- supporto per ospiti VirtualBox tramite `virtualbox-guest-additions`.
+
+I driver NVIDIA proprietari non sono incorporati nella ISO: l’immagine usa la
+base Fedora con Nouveau/Mesa e può essere estesa in seguito con i pacchetti
+RPM Fusion appropriati per il modello installato.
+
 ## Repository e aggiornamenti
 
 Il Kickstart usa Fedora, RPM Fusion free/nonfree e i COPR necessari per DMS,
@@ -82,6 +106,12 @@ fallisce invece di generare una ISO incompleta.
 DNF5 è configurato con 10 download paralleli e `fastestmirror`; mantiene
 le conferme esplicite e non conserva la cache RPM (`defaultyes=False`, `keepcache=False`). Flatpak usa il remote di sistema Flathub; il remote Fedora viene
 rimosso durante la preparazione dell’immagine.
+
+Il plugin Dank Software Depot viene incluso direttamente nel manifest senza
+fork del progetto upstream. La sua integrazione usa il runtime Python/GObject
+e libdnf5 richiesto dal plugin, insieme ai dati AppStream e al supporto per le
+miniature video. Il progetto upstream resta separato e aggiornabile
+indipendentemente dalla distribuzione.
 
 ## Installer e sistema installato
 
