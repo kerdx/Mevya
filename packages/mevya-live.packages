@@ -4,6 +4,7 @@
 anaconda
 anaconda-install-env-deps
 anaconda-live
+firefox
 glibc-all-langpacks
 policycoreutils
 dnf5-plugins

@@ -78,9 +78,10 @@ x265, AV1, VP8/VP9, Opus, LAME, `fdk-aac-free`, libcamera, VA-API, Mesa,
 driver Intel, header NVIDIA NVENC e `ffmpegthumbnailer`.
 
 Sono inclusi anche WirePlumber, Bluetooth aptX, PackageKit GStreamer e
-`libdvdcss` da RPM Fusion nonfree per la riproduzione dei DVD video. Browser,
+`libdvdcss` da RPM Fusion nonfree per la riproduzione dei DVD video.
 VLC, MPV, OBS, Steam, Blender e Kdenlive restano installabili dall’utente e
-non fanno parte della base.
+non fanno parte della base; Firefox è incluso per il frontend Web UI di
+Anaconda nella sessione live.
 
 ## Audio e firmware
 
@@ -130,7 +131,7 @@ rimosso durante la preparazione dell’immagine.
 Il plugin Dank Software Depot viene incluso direttamente nel manifest senza
 fork del progetto upstream. La sua integrazione usa il runtime Python/GObject
 e libdnf5 richiesto dal plugin, insieme ai dati AppStream e al supporto per le
-miniature video. Il progetto upstream resta separato e aggiornabile
+miniature video.Il progetto upstream resta separato e aggiornabile
 indipendentemente dalla distribuzione.
 
 ## Installer e sistema installato
