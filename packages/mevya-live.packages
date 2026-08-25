@@ -6,7 +6,6 @@ anaconda-install-env-deps
 anaconda-live
 glibc-all-langpacks
 policycoreutils
-wlrctl
 dnf5-plugins
 dracut-config-generic
 kernel
@@ -93,7 +92,6 @@ PackageKit-gstreamer-plugin
 libcamera-gstreamer
 libcamera-tools
 libva
-libva-utils
 libva-intel-media-driver
 mesa-dri-drivers
 mesa-va-drivers
@@ -102,7 +100,6 @@ mesa-vulkan-drivers
 libvpx
 opus
 pipewire-codec-aptx
-nv-codec-headers
 lame
 x265
 rpmfusion-free-release
@@ -125,8 +122,6 @@ systemd-oomd-defaults
 i2c-tools
 iio-sensor-proxy
 ddcutil
-libinput-utils
-powerstat
 usbutils
 pciutils
 ethtool
@@ -173,11 +168,8 @@ wl-clipboard
 brightnessctl
 grim
 slurp
-swaybg
 
 # Selected system tools for containers and application distribution.
-distrobox
-podman
 flatpak
 curl
 ca-certificates
