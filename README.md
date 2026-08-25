@@ -11,7 +11,7 @@ reversibile.
 | Area | Stato |
 | --- | --- |
 | Desktop | labwc + DMS integrati, con tema Material per GTK e Qt |
-| Installer | Anaconda live con lingua, tastiera e hostname configurabili |
+| Installer | Anaconda live con lingua e tastiera configurabili; profilo Mevya con Btrfs predefinito |
 | Branding | Mevya 44 su sistema, GRUB e Plymouth |
 | Multimedia | Codec, GStreamer, PipeWire e accelerazione hardware inclusi |
 | Hardware | Firmware, driver Mesa, moduli kernel extra e strumenti per periferiche |
@@ -140,8 +140,10 @@ indipendentemente dalla distribuzione.
 - Anaconda usa la geolocalizzazione Fedora per proporre lingua e fuso orario;
   se non disponibile, usa inglese (en_US.UTF-8) e tastiera US, sempre modificabili;
   sono disponibili tutti i locale tramite `glibc-all-langpacks`;
-- lingua, layout tastiera, opzioni XKB e hostname scelti in Anaconda vengono
+- lingua, layout tastiera e opzioni XKB scelti in Anaconda vengono
   propagati al sistema installato, a DMS, GTK, Qt e labwc;
+- il profilo Anaconda Mevya eredita quello Fedora e usa Btrfs con compressione
+  zstd come schema automatico; il partizionamento manuale resta disponibile;
 - la live avvia automaticamente labwc/DMS tramite greetd e `dbus-run-session`;
 - l’autologin è attivo solo nella live. Nel sistema installato viene applicato
   solo se selezionato dall’utente in Anaconda;
@@ -157,7 +159,8 @@ indipendentemente dalla distribuzione.
 - `mevya-firstboot` configura la live anche quando il plugin Dank Software Depot
   non era disponibile durante la compose; l’account tecnico viene mantenuto
   nella live e rimosso solo dal sistema installato;
-- hostname predefinito: `mevya`, modificabile durante l’installazione;
+- hostname predefinito: `mevya`; nella WebUI Anaconda di Fedora 44 il campo non è
+  ancora esposto durante una live installation;
 - `/etc/os-release`, GRUB e Plymouth riportano il branding Mevya 44;
 - l'account tecnico live `mevya` è bloccato e non ha una password predefinita;
   viene usato solo per l'autologin della live.

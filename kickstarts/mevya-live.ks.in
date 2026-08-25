@@ -61,6 +61,16 @@ if id mevya >/dev/null 2>&1; then
     if [ -n "${live_home}" ] && [ -n "${live_group}" ]; then
         install -d -o mevya -g "${live_group}" -m 0755 "${live_home}"
         install -d -o mevya -g "${live_group}" -m 0700 "${live_home}/.config"
+        dms_live_home="${live_home}/.config/DankMaterialShell"
+        install -d -o mevya -g "${live_group}" -m 0700 "${dms_live_home}"
+        for dms_default in settings.json clsettings.json plugin_settings.json; do
+            if [ ! -e "${dms_live_home}/${dms_default}" ] \
+                && [ -f "/etc/skel/.config/DankMaterialShell/${dms_default}" ]; then
+                install -o mevya -g "${live_group}" -m 0600 \
+                    "/etc/skel/.config/DankMaterialShell/${dms_default}" \
+                    "${dms_live_home}/${dms_default}"
+            fi
+        done
     fi
 fi
 # Compile the system dconf defaults so GTK/libadwaita applications, including

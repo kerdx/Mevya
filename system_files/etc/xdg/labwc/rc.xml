@@ -71,6 +71,13 @@
     <windowRule identifier="org.danklinux.dankcalendar" serverDecoration="no" />
     <windowRule identifier="dcal" serverDecoration="no" />
 
+    <!-- Firefox Wayland may request client-side decorations and then expose
+         only its close button under labwc. Force the compositor titlebar so
+         the configured iconify/maximize/close controls are available, also
+         for the Anaconda Web UI instance. -->
+    <windowRule identifier="firefox" serverDecoration="yes" />
+    <windowRule identifier="org.mozilla.firefox" serverDecoration="yes" />
+
     <!-- Native fixed-size Wayland windows are reported as dialogs by labwc;
          center them so installer/settings/authentication dialogs do not open
          partly outside the active monitor. -->

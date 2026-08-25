@@ -21,6 +21,7 @@ required_files=(
     "system_files/etc/skel/.config/DankMaterialShell/settings.json"
     "system_files/etc/skel/.config/DankMaterialShell/clsettings.json"
     "system_files/usr/local/sbin/mevya-install-dank-software-depot"
+    "system_files/etc/anaconda/profile.d/mevya.conf"
 )
 
 for file in "${required_files[@]}"; do
