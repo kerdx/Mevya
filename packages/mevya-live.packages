@@ -72,6 +72,8 @@ pipewire-pulseaudio
 pipewire-utils
 wireplumber
 alsa-plugins-pulseaudio
+alsa-sof-firmware
+alsa-firmware
 # Keep Fedora's -free FFmpeg stack: Anaconda requires the matching
 # libavcodec-free libraries, while RPM Fusion's ffmpeg-libs conflicts with it.
 ffmpeg-free
@@ -137,6 +139,8 @@ lm_sensors
 fwupd
 fwupd-efi
 linux-firmware
+intel-audio-firmware
+cirrus-audio-firmware
 amd-gpu-firmware
 amd-ucode-firmware
 intel-gpu-firmware

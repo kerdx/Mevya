@@ -74,6 +74,10 @@ VLC, MPV, OBS, Steam, Blender e Kdenlive restano installabili dall’utente e
 non fanno parte della base. `libdvdcss` è escluso per le diverse normative
 nazionali.
 
+## Audio e firmware
+
+L'audio usa PipeWire e WirePlumber come server e session manager, con il bridge pipewire-alsa per le applicazioni ALSA. Sono inclusi i firmware audio SOF, Intel e Cirrus, oltre al firmware ALSA per hardware compatibile, così da coprire meglio i laptop moderni e le schede audio specialistiche.
+
 ## Supporto hardware
 
 La base hardware segue il modello Fedora: kernel, moduli extra e firmware
