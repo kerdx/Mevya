@@ -110,6 +110,12 @@ rpmfusion-free-release
 rpmfusion-nonfree-release
 
 # Power, networking, printing and desktop hardware support.
+NetworkManager
+NetworkManager-wifi
+NetworkManager-bluetooth
+NetworkManager-wwan
+NetworkManager-tui
+nm-connection-editor
 power-profiles-daemon
 firewalld
 chrony

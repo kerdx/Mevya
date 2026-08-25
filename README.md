@@ -78,6 +78,10 @@ nazionali.
 
 L'audio usa PipeWire e WirePlumber come server e session manager, con il bridge pipewire-alsa per le applicazioni ALSA. Sono inclusi i firmware audio SOF, Intel e Cirrus, oltre al firmware ALSA per hardware compatibile, così da coprire meglio i laptop moderni e le schede audio specialistiche.
 
+## Rete
+
+NetworkManager è incluso esplicitamente con i plugin Wi-Fi, Bluetooth e WWAN, oltre alla TUI e a nm-connection-editor per la configurazione manuale delle connessioni. In questo modo la live e il sistema installato non dipendono solo da dipendenze indirette di Anaconda o del desktop per la gestione della rete.
+
 ## Supporto hardware
 
 La base hardware segue il modello Fedora: kernel, moduli extra e firmware
