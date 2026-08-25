@@ -78,7 +78,7 @@ x265, AV1, VP8/VP9, Opus, LAME, `fdk-aac-free`, libcamera, VA-API, Mesa,
 driver Intel, header NVIDIA NVENC e `ffmpegthumbnailer`.
 
 Sono inclusi anche WirePlumber, Bluetooth aptX, PackageKit GStreamer e
-`libdvdcss` da RPM Fusion nonfree per la riproduzione dei DVD video.
+`libdvdcss` dal repository RPM Fusion free-tainted per la riproduzione dei DVD video.
 VLC, MPV, OBS, Steam, Blender e Kdenlive restano installabili dall’utente e
 non fanno parte della base; Firefox è incluso per il frontend Web UI di
 Anaconda nella sessione live.
