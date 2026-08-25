@@ -48,6 +48,8 @@ reversibile.
   Flatpak impostato su Flathub;
 - gestione di lock, idle e sospensione tramite DMS/loginctl, con aggiornamento
   sincronizzazione GTK4/libadwaita al cambio e all'avvio della sessione;
+- DMS verifica lo stato reale del servizio prima di avviare clipboard e fallback;
+  se il servizio principale fallisce, viene fermato e viene attivato il fallback;
 - servizi Mevya con preset systemd espliciti, limiti di restart e hardening
   conservativo; le integrazioni opzionali non bloccano la sessione grafica;
 - font Noto, JetBrains Mono, Cascadia Code NF e Material Symbols; zram,

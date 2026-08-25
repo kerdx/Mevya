@@ -75,18 +75,41 @@ systemctl --user start graphical-session.target || true
 # Prefer the packaged user service so failures and restarts are visible in the
 # user journal; use a managed fallback for older or broken DMS packages.
 DMS_STARTED=0
-if systemctl --user cat dms.service >/dev/null 2>&1 \
-    && systemctl --user start dms.service; then
-    DMS_STARTED=1
-    systemctl --user start dms-clipboard.service || true
+if systemctl --user cat dms.service >/dev/null 2>&1; then
+    # systemctl start only queues the unit. Wait for active state so a fast
+    # service failure cannot be mistaken for a working desktop shell.
+    systemctl --user start dms.service >/dev/null 2>&1 || true
+    for attempt in 1 2 3 4 5 6 7 8 9 10; do
+        if systemctl --user is-active --quiet dms.service; then
+            DMS_STARTED=1
+            break
+        fi
+        sleep 1
+    done
+
+    if [ "${DMS_STARTED}" -eq 1 ]; then
+        systemctl --user start dms-clipboard.service || true
+    else
+        systemctl --user stop dms.service >/dev/null 2>&1 || true
+        systemctl --user reset-failed dms.service >/dev/null 2>&1 || true
+    fi
 fi
 
 if [ "${DMS_STARTED}" -eq 0 ]; then
     printf '%s\n' 'DMS service non avviato; uso il fallback gestito.' \
         | systemd-cat -t mevya-session
-    systemctl --user start mevya-dms-fallback.service
+    if systemctl --user start mevya-dms-fallback.service >/dev/null 2>&1; then
+        for attempt in 1 2 3 4 5; do
+            if systemctl --user is-active --quiet mevya-dms-fallback.service; then
+                break
+            fi
+            sleep 1
+        done
+    else
+        printf '%s\n' 'Fallback DMS non avviato; la sessione labwc resta disponibile.' \
+            | systemd-cat -t mevya-session
+    fi
 fi
-
 # Initialize the DMS session in dark mode. DMS owns later user changes.
 theme_marker="${dms_config_dir}/.mevya-theme-initialized"
 if [ ! -e "${theme_marker}" ]; then
