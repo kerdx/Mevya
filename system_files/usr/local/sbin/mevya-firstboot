@@ -6,11 +6,11 @@ set -eu
 # Keep the live-only account for greetd autologin, but always clean it up on
 # the first boot of the installed system regardless of the chosen user UID.
 root_fstype="$(findmnt -n -o FSTYPE / 2>/dev/null || true)"
+is_live=0
 if [ -e /run/initramfs/live ] || [ -e /run/live/medium ] || [ "${root_fstype}" = "overlay" ]; then
-    logger -t mevya-firstboot 'Live system detected; keeping the live account'
-    exit 0
+    is_live=1
+    logger -t mevya-firstboot 'Live system detected; will configure the live session without removing its account'
 fi
-
 # The build environment may not have DNS while the image is assembled. Make
 # the installed system converge on the intended Flatpak source once networking
 # is available, without making first boot fail when the network is still down.
@@ -32,6 +32,10 @@ if command -v flatpak >/dev/null 2>&1; then
         logger -t mevya-firstboot 'Flathub unavailable; it can be added later with flatpak remote-add'
     fi
     flatpak remote-delete --system fedora || true
+fi
+if [ "${is_live}" -eq 1 ]; then
+    logger -t mevya-firstboot 'Live session setup complete; keeping the live account'
+    exit 0
 fi
 # The live image needs the technical `mevya` account for autologin. On an
 # installed system, remove it and leave greetd on its normal login screen.
