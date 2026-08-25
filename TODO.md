@@ -16,11 +16,24 @@ senza aumentare il peso e la superficie di manutenzione della ISO base.
   profili Mevya;
 - permettere rimozione e aggiornamento del profilo senza ricostruire la ISO.
 
+### Profilo hardware e diagnostica
+
+Pacchetti da lasciare fuori dalla ISO base e installare con il profilo hardware/diagnostica:
+
+- `i2c-tools`
+- `ddcutil`
+- `usbutils`
+- `pciutils`
+- `ethtool`
+- `smartmontools`
+- `nvme-cli`
+- `libcamera-tools`
+
+Restano nella ISO base per l'uso quotidiano: `lm_sensors`, `kernel-tools` e `v4l-utils`.
+
 ### Altri profili da valutare
 
 - Multimedia avanzato: strumenti di editing, registrazione e produzione;
-- Hardware e diagnostica: `smartmontools`, `nvme-cli`, `lm_sensors`,
-  `libinput-utils`, `libva-utils` e strumenti analoghi;
 - Stampa e scansione: CUPS, SANE, `ipp-usb` e discovery Avahi;
 - Virtualizzazione: strumenti Guest Additions, libvirt, QEMU/KVM e virt-manager;
 - Mobile e dispositivi: supporto esteso MTP, Android, modem e periferiche;

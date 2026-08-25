@@ -105,9 +105,9 @@ Il manifest include inoltre:
 
 - gestione di dischi rimovibili, batterie, profili energetici e dispositivi
   Thunderbolt tramite `udisks2`, `upower`, `power-profiles-daemon` e `bolt`;
-- supporto e diagnostica per USB, PCI, rete, NVMe, SMART, webcam e dispositivi
-  video tramite `usbutils`, `pciutils`, `ethtool`, `nvme-cli`, `smartmontools` e
-  `v4l-utils`;
+- strumenti hardware di base e diagnostica locale tramite `v4l-utils`,
+  `lm_sensors` e `kernel-tools`; gli strumenti diagnostici avanzati sono
+  pianificati nel profilo hardware Mevya;
 - stampa USB moderna con `ipp-usb`, scanner SANE, Bluetooth e sensori laptop;
 - lettori d’impronte tramite `fprintd` e modem WWAN tramite `ModemManager`;
 - supporto per ospiti VirtualBox tramite `virtualbox-guest-additions`.

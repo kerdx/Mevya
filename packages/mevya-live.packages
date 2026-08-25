@@ -91,7 +91,6 @@ gstreamer1-plugin-openh264
 pipewire-gstreamer
 PackageKit-gstreamer-plugin
 libcamera-gstreamer
-libcamera-tools
 libva
 libva-intel-media-driver
 mesa-dri-drivers
@@ -120,14 +119,7 @@ firewalld
 chrony
 zram-generator-defaults
 systemd-oomd-defaults
-i2c-tools
 iio-sensor-proxy
-ddcutil
-usbutils
-pciutils
-ethtool
-smartmontools
-nvme-cli
 v4l-utils
 cups-pk-helper
 cups
