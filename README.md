@@ -236,6 +236,7 @@ su una ISO aggiornata nei casi seguenti:
   installato;
 - installazione completa e primo avvio del sistema, inclusi audio, video,
 - accesso al greeter DMS e avvio di labwc nel sistema installato dopo la rimozione della sessione live;
+- copia/incolla bidirezionale di testo tra host Windows e guest Mevya nella live e dopo l'installazione;
   monitor, firmware, VirtualBox e rimozione dell’account tecnico.
 
 Mevya 44 resta sperimentale finché la ISO non viene verificata con boot live,

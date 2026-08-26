@@ -28,6 +28,8 @@ required_files=(
     "system_files/usr/lib/systemd/system/mevya-firstboot-network.timer"
     "system_files/usr/lib/systemd/system-preset/90-mevya.preset"
     "system_files/etc/anaconda/profile.d/mevya.conf"
+    "system_files/usr/lib/systemd/user/mevya-virtualbox-clipboard.service"
+    "system_files/usr/local/libexec/mevya-virtualbox-clipboard"
 )
 
 for file in "${required_files[@]}"; do
@@ -41,6 +43,7 @@ done < <(
         -path 'scripts/*.sh' -o \
         -path 'system_files/usr/local/bin/*' -o \
         -path 'system_files/usr/local/sbin/*' -o \
+        -path 'system_files/usr/local/libexec/*' -o \
         -path 'system_files/etc/xdg/labwc/autostart' \
     \) -print0 | sort -z
 )
@@ -95,6 +98,7 @@ required_packages=(
     systemd-oomd-defaults
     xdg-user-dirs
     rtkit
+    virtualbox-guest-additions
 )
 for required_package in "${required_packages[@]}"; do
     if ! printf '%s\n' "${packages[@]}" | grep -Fxq "${required_package}"; then

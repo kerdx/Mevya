@@ -1,0 +1,15 @@
+[Unit]
+Description=Mevya VirtualBox shared clipboard
+PartOf=graphical-session.target
+After=graphical-session.target
+ConditionVirtualization=oracle
+
+[Service]
+Type=simple
+ExecStart=/usr/local/libexec/mevya-virtualbox-clipboard
+Restart=on-failure
+RestartSec=3s
+TimeoutStopSec=5s
+
+[Install]
+WantedBy=graphical-session.target

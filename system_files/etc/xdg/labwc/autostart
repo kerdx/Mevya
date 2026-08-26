@@ -5,12 +5,8 @@ if command -v dbus-update-activation-environment >/dev/null 2>&1; then
     dbus-update-activation-environment --systemd --all || true
 fi
 
-# Enable VirtualBox host/guest clipboard integration when the image is
-# running inside VirtualBox. The command is harmless on other hypervisors.
-if command -v VBoxClient >/dev/null 2>&1; then
-    VBoxClient --clipboard >/dev/null 2>&1 &
-fi
-
+# VirtualBox clipboard is started as a supervised user service after labwc
+# has imported the complete Wayland session environment.
 # The live `mevya` user is created before /etc/skel is populated by the image
 # post-install step. Seed DMS' theme/Matugen profile without overwriting any
 # settings the user may already have changed. DMS then keeps GTK and Qt in
@@ -70,6 +66,7 @@ fi
 # labwc provides labwc-session.target, which activates the standard
 # graphical user session target before starting services that require it (including DMS).
 systemctl --user --no-block start labwc-session.target || true
+systemctl --user start mevya-virtualbox-clipboard.service >/dev/null 2>&1 || true
 
 # DMS is the desktop shell: bar, launcher, notifications and system UI.
 # Prefer the packaged user service so failures and restarts are visible in the

@@ -1,0 +1,58 @@
+#!/bin/sh
+set -eu
+
+# The service is guarded by ConditionVirtualization as well, but keep the
+# runtime check here for safe manual starts and older systemd environments.
+virtualization=$(systemd-detect-virt 2>/dev/null || true)
+if [ "$virtualization" != "oracle" ]; then
+    exit 0
+fi
+
+vbox_client=/usr/bin/VBoxClient
+if [ ! -x "$vbox_client" ]; then
+    logger -t mevya-virtualbox-clipboard "VBoxClient is not installed"
+    exit 1
+fi
+
+# The user service can start just before labwc has exported its Wayland
+# socket. Wait briefly instead of failing during the first session.
+runtime_dir=$(printenv XDG_RUNTIME_DIR 2>/dev/null || true)
+if [ -z "$runtime_dir" ]; then
+    runtime_dir="/run/user/$(id -u)"
+fi
+wayland_display=$(printenv WAYLAND_DISPLAY 2>/dev/null || true)
+if [ -z "$wayland_display" ]; then
+    logger -t mevya-virtualbox-clipboard "WAYLAND_DISPLAY is not available yet"
+    exit 1
+fi
+
+case "$wayland_display" in
+    /*) wayland_socket="$wayland_display" ;;
+    *) wayland_socket="$runtime_dir/$wayland_display" ;;
+esac
+
+attempt=0
+while [ ! -e "$wayland_socket" ] && [ "$attempt" -lt 30 ]; do
+    sleep 1
+    attempt=$((attempt + 1))
+done
+if [ ! -e "$wayland_socket" ]; then
+    logger -t mevya-virtualbox-clipboard "Wayland socket did not become available"
+    exit 1
+fi
+
+logger -t mevya-virtualbox-clipboard "Starting VBoxClient clipboard service"
+if "$vbox_client" --clipboard --nodaemon; then
+    exit 0
+fi
+
+# Older Guest Additions exposed a separate Wayland helper. Use it only when
+# the installed client advertises the option; current releases use --clipboard
+# for both X11 and Wayland.
+if "$vbox_client" --help 2>&1 | grep -q -- "--wayland"; then
+    logger -t mevya-virtualbox-clipboard "Falling back to VBoxClient --wayland"
+    exec "$vbox_client" --wayland --nodaemon
+fi
+
+logger -t mevya-virtualbox-clipboard "VBoxClient clipboard service failed"
+exit 1

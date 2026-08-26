@@ -68,6 +68,11 @@ require_text "$profile" 'btrfs_compression = zstd:1' 'Btrfs compression'
 require_text "$profile" 'webui_web_engine = firefox' 'Firefox Anaconda WebUI engine'
 require_text "system_files/etc/greetd/config.toml" 'command = "/usr/bin/dms-greeter --command labwc"' 'DMS greeter labwc compositor'
 require_text "system_files/etc/xdg/labwc/autostart" 'systemctl --user --no-block start labwc-session.target' 'labwc systemd session target'
+require_text "system_files/etc/xdg/labwc/autostart" 'systemctl --user start mevya-virtualbox-clipboard.service' 'VirtualBox clipboard service startup'
+require_text "system_files/usr/lib/systemd/user/mevya-virtualbox-clipboard.service" 'ConditionVirtualization=oracle' 'VirtualBox service virtualization guard'
+require_text "system_files/usr/lib/systemd/user/mevya-virtualbox-clipboard.service" 'Restart=on-failure' 'VirtualBox clipboard service restart policy'
+require_text "system_files/usr/local/libexec/mevya-virtualbox-clipboard" '--clipboard --nodaemon' 'supervised VirtualBox clipboard client'
+require_text "system_files/usr/local/libexec/mevya-virtualbox-clipboard" 'systemd-detect-virt' 'VirtualBox runtime detection'
 
 require_text "$installer" '/usr/bin/liveinst "$@"' 'official liveinst delegation'
 require_text "$installer" 'status=$?' 'installer exit status capture'
@@ -115,6 +120,7 @@ for repo in \
 done
 
 for package in anaconda anaconda-live anaconda-webui python3-langtable glibc-all-langpacks xkeyboard-config firefox grub2-efi-x64 grub2-pc NetworkManager \
+    virtualbox-guest-additions \
     python3-libdnf5 python3-gobject-base appstream-data ffmpegthumbnailer; do
     require_text "packages/mevya-live.packages" "$package" "required installer package"
 done
