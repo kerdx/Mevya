@@ -43,7 +43,7 @@ done < <(
         -path 'scripts/*.sh' -o \
         -path 'system_files/usr/local/bin/*' -o \
         -path 'system_files/usr/local/sbin/*' -o \
-        -path 'system_files/usr/local/libexec/*' -o \
+        -path 'system_files/usr/local/libexec/mevya-virtualbox-clipboard' -o \
         -path 'system_files/etc/xdg/labwc/autostart' \
     \) -print0 | sort -z
 )
