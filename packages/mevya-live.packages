@@ -4,6 +4,9 @@
 anaconda
 anaconda-install-env-deps
 anaconda-live
+anaconda-webui
+python3-langtable
+xkeyboard-config
 firefox
 glibc-all-langpacks
 policycoreutils

@@ -76,16 +76,6 @@ fi
 # Compile the system dconf defaults so GTK/libadwaita applications, including
 # Nautilus, follow the dark desktop preference in the live and installed image.
 dconf update
-# Include the community Dank Software Depot plugin in the image when the
-# compose network is available. The first-boot service retries this step for
-# installed systems if GitHub was unreachable during the compose.
-chmod 0755 /usr/local/sbin/mevya-install-dank-software-depot
-if timeout 120s /usr/local/sbin/mevya-install-dank-software-depot; then
-    printf '%s\n' 'Dank Software Depot plugin installed.'
-else
-    printf '%s\n' 'WARNING: Dank Software Depot unavailable during image build; first boot will retry.' >&2
-fi
-
 # Keep the live session in the same graphical path as the installed system.
 systemctl set-default graphical.target
 systemctl enable greetd.service

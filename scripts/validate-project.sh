@@ -61,6 +61,11 @@ for path in sorted((root / "system_files").rglob("*.json")):
     except (OSError, ValueError) as exc:
         errors.append(f"invalid JSON: {path.relative_to(root)} ({exc})")
 
+for path in sorted((root / "system_files").rglob("*.py")):
+    try:
+        compile(path.read_text(encoding="utf-8"), str(path), "exec")
+    except (OSError, SyntaxError) as exc:
+        errors.append(f"invalid Python: {path.relative_to(root)} ({exc})")
 labwc_config = root / "system_files/etc/xdg/labwc/rc.xml"
 try:
     element_tree.parse(labwc_config)

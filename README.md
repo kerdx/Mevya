@@ -133,17 +133,20 @@ DNF5 è configurato con 10 download paralleli e `fastestmirror`; mantiene
 le conferme esplicite e non conserva la cache RPM (`defaultyes=False`, `keepcache=False`). Flatpak usa il remote di sistema Flathub; il remote Fedora viene
 rimosso durante la preparazione dell’immagine.
 
-Il plugin Dank Software Depot viene incluso direttamente nel manifest senza
-fork del progetto upstream. La sua integrazione usa il runtime Python/GObject
-e libdnf5 richiesto dal plugin, insieme ai dati AppStream e al supporto per le
-miniature video.Il progetto upstream resta separato e aggiornabile
-indipendentemente dalla distribuzione.
+Il plugin Dank Software Depot non viene installato nella sessione live: il
+manifest mantiene soltanto il runtime Python/GObject e libdnf5 necessario al
+sistema installato, insieme ai dati AppStream e al supporto per le miniature
+video. Dopo l’installazione, mevya-firstboot-network scarica il commit
+upstream fissato e abilita il plugin con DMS quando la rete è disponibile. Gli
+hook DMS non modificano la configurazione della live; il progetto upstream
+resta separato e aggiornabile indipendentemente dalla distribuzione.
 
 ## Installer e sistema installato
 
 - Anaconda usa la geolocalizzazione Fedora per proporre lingua e fuso orario;
   se non disponibile, usa inglese (en_US.UTF-8) e tastiera US, sempre modificabili;
   sono disponibili tutti i locale tramite `glibc-all-langpacks`;
+  Il manifest include inoltre esplicitamente `anaconda-webui`, `python3-langtable` e `xkeyboard-config`; la schermata lingua non è forzata a un singolo locale e va verificata nella ISO aggiornata.
 - lingua, layout tastiera e opzioni XKB scelti in Anaconda vengono
   propagati al sistema installato, a DMS, GTK, Qt e labwc;
 - il profilo Anaconda Mevya eredita quello Fedora e usa Btrfs con compressione
@@ -167,8 +170,10 @@ indipendentemente dalla distribuzione.
   che gestisce escalation dei privilegi e ambiente Wayland senza il wrapper di
   focus precedente;
 - `mevya-firstboot` esegue solo la preparazione locale e non blocca il login;
-- `mevya-firstboot-network` configura Flathub e Dank Software Depot in modo
-  asincrono e idempotente, ritentando al boot successivo se la rete non è disponibile;
+- nella live mevya-firstboot-network configura solo le integrazioni necessarie
+  alla live e salta Dank Software Depot; nel sistema installato configura
+  Flathub e Depot in modo asincrono e idempotente, ritentando al boot successivo
+  se la rete non è disponibile;
 - l'account tecnico viene mantenuto nella live e rimosso solo dal sistema installato;
 - hostname predefinito: `mevya`; nella WebUI Anaconda di Fedora 44 il campo non è
   ancora esposto durante una live installation;
@@ -224,9 +229,12 @@ su una ISO aggiornata nei casi seguenti:
 - click destro sul desktop e apertura del launcher DMS nella vista applicazioni;
 - apertura di Ptyxis dal launcher e dal menu contestuale con tema coerente;
 - avvio di “Installa Mevya 44” e apertura corretta di Anaconda;
+- visualizzazione della schermata lingua di Anaconda con più lingue selezionabili e cambio del locale prima dell'installazione;
 - creazione delle directory utente nella live e mantenimento dell’account live;
-- installazione o retry del plugin Dank Software Depot nella sessione live;
+- assenza del Depot nella live e installazione o retry al primo avvio del sistema
+  installato;
 - installazione completa e primo avvio del sistema, inclusi audio, video,
+- accesso al greeter DMS e avvio di labwc nel sistema installato dopo la rimozione della sessione live;
   monitor, firmware, VirtualBox e rimozione dell’account tecnico.
 
 Mevya 44 resta sperimentale finché la ISO non viene verificata con boot live,

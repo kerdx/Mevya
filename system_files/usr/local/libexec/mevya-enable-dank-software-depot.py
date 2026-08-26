@@ -5,6 +5,25 @@ import os
 from pathlib import Path
 
 
+def running_from_live() -> bool:
+    if any(Path(marker).exists() for marker in ("/run/initramfs/live", "/run/live/medium")):
+        return True
+    try:
+        mounts = Path("/proc/mounts").read_text(encoding="utf-8")
+    except OSError:
+        return False
+    return any(
+        fields[1] == "/" and fields[2] == "overlay"
+        for line in mounts.splitlines()
+        for fields in [line.split()]
+        if len(fields) >= 3
+    )
+
+
+if running_from_live():
+    raise SystemExit(0)
+
+
 config_home = Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config"))
 dms_dir = config_home / "DankMaterialShell"
 settings_path = dms_dir / "settings.json"

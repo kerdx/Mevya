@@ -13,19 +13,34 @@ log() {
     logger -t mevya-firstboot-network -- "$*" 2>/dev/null || true
 }
 
+is_live=0
+if [ -e /run/initramfs/live ] || [ -e /run/live/medium ]; then
+    is_live=1
+elif command -v findmnt >/dev/null 2>&1 \
+    && [ "$(findmnt -n -o FSTYPE / 2>/dev/null || true)" = overlay ]; then
+    is_live=1
+fi
 plugin_ok=0
 flatpak_ok=0
 
 # Network integrations are deliberately best effort. A failed download must
 # never prevent greetd or the desktop from starting; the missing marker makes
 # this unit retry on the next boot.
-if [ -x /usr/local/sbin/mevya-install-dank-software-depot ]; then
+if [ "$is_live" -eq 1 ]; then
+    # The live session does not need the Depot plugin. Keep the runtime files
+    # in the image so the installed target can configure the plugin on first
+    # boot, but never download or mutate the live user's DMS configuration.
+    plugin_ok=1
+    log 'Live session detected; skipping Dank Software Depot'
+elif [ -x /usr/local/sbin/mevya-install-dank-software-depot ]; then
     if timeout 120s /usr/local/sbin/mevya-install-dank-software-depot; then
         plugin_ok=1
         log 'Dank Software Depot configured'
     else
         log 'Dank Software Depot unavailable; retrying on the next boot'
     fi
+else
+    plugin_ok=1
 fi
 
 if command -v flatpak >/dev/null 2>&1; then

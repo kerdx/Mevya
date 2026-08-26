@@ -10,4 +10,4 @@ command = "/usr/local/bin/mevya-session"
 
 [default_session]
 user = "greeter"
-command = "/usr/bin/dms-greeter --command /usr/local/bin/mevya-session"
+command = "/usr/bin/dms-greeter --command labwc"
