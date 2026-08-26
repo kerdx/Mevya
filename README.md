@@ -25,6 +25,7 @@ reversibile.
 - due spazi di lavoro globali, gestiti da DMS e labwc;
 - DankBar preconfigurata con launcher applicazioni, workspace switcher, running apps e focused window nella sezione sinistra;
 - greetd con `dms-greeter` per il login;
+- labwc attiva `labwc-session.target` all'avvio, così DMS e xdg-desktop-portal seguono correttamente il ciclo della sessione grafica;
 - Ptyxis come terminale predefinito, con profilo “Mevya Material”, JetBrains
   Mono, palette Material 3 chiara/scura, bell disattivato e scrollback limitato;
 - il launcher desktop di Ptyxis usa lo stesso percorso del menu contestuale

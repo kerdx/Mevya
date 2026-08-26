@@ -67,9 +67,9 @@ if [ ! -f "${ptyxis_palette_dir}/mevya-material.palette" ] \
         "${ptyxis_palette_dir}/mevya-material.palette"
 fi
 
-# greetd's initial_session starts labwc directly, so activate the standard
-# user-session target before starting services that require it (including DMS).
-systemctl --user start graphical-session.target || true
+# labwc provides labwc-session.target, which activates the standard
+# graphical user session target before starting services that require it (including DMS).
+systemctl --user --no-block start labwc-session.target || true
 
 # DMS is the desktop shell: bar, launcher, notifications and system UI.
 # Prefer the packaged user service so failures and restarts are visible in the

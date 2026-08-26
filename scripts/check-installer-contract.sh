@@ -40,6 +40,7 @@ required_files=(
     "system_files/usr/local/sbin/mevya-firstboot"
     "system_files/etc/polkit-1/rules.d/49-mevya-liveinst.rules"
     "system_files/etc/greetd/config.toml"
+    "system_files/etc/xdg/labwc/autostart"
 )
 
 for file in "${required_files[@]}"; do
@@ -66,11 +67,15 @@ require_text "$profile" 'default_scheme = BTRFS' 'Btrfs default scheme'
 require_text "$profile" 'btrfs_compression = zstd:1' 'Btrfs compression'
 require_text "$profile" 'webui_web_engine = firefox' 'Firefox Anaconda WebUI engine'
 require_text "system_files/etc/greetd/config.toml" 'command = "/usr/bin/dms-greeter --command labwc"' 'DMS greeter labwc compositor'
+require_text "system_files/etc/xdg/labwc/autostart" 'systemctl --user --no-block start labwc-session.target' 'labwc systemd session target'
 
 require_text "$installer" '/usr/bin/liveinst "$@"' 'official liveinst delegation'
 require_text "$installer" 'status=$?' 'installer exit status capture'
 if grep -Fq -- 'dms-greeter --command /usr/local/bin/mevya-session' "system_files/etc/greetd/config.toml"; then
     error "dms-greeter must receive the compositor id labwc, not the session wrapper path"
+fi
+if grep -Fq -- 'systemctl --user start graphical-session.target' "system_files/etc/xdg/labwc/autostart"; then
+    error "labwc must activate labwc-session.target so graphical-session.target dependencies become usable"
 fi
 if grep -Eq 'inst\.(lang|singlelang)(=|[[:space:]])' "$build_script" "$installer"; then
     error "Build must not force a single Anaconda installer language"
