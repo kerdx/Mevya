@@ -1,0 +1,42 @@
+#!/bin/sh
+
+set -u
+
+if [ "$#" -lt 1 ] || [ "$1" != "--collect" ]; then
+    printf '%s\n' \
+        'Usage: mevya-installer-diagnostics --collect [anaconda-exit-status]' >&2
+    exit 2
+fi
+
+status=unknown
+if [ "$#" -ge 2 ]; then
+    status=$2
+fi
+
+log_root=/var/tmp/mevya-installer-logs
+timestamp=$(date -u +%Y%m%dT%H%M%SZ)-$$
+destination=$log_root/$timestamp
+install -d -m 0700 "$log_root" "$destination"
+
+copied=0
+for logfile in /tmp/*.log; do
+    [ -f "$logfile" ] || continue
+    if cp -p -- "$logfile" "$destination/"; then
+        copied=$((copied + 1))
+    fi
+done
+
+if command -v journalctl >/dev/null 2>&1; then
+    journalctl -b --no-pager > "$destination/journal.log" 2>/dev/null || true
+fi
+
+{
+    printf '%s\n' 'Mevya Anaconda diagnostic bundle'
+    printf 'Installer exit status: %s\n' "$status"
+    printf 'Log directory: %s\n' "$destination"
+    printf 'Copied /tmp log files: %s\n' "$copied"
+    printf '%s\n' 'Important files, when present: anaconda.log, program.log, storage.log, packaging.log, ks-script-*.log and journal.log.'
+} > "$destination/README.txt"
+
+chmod 0600 "$destination/README.txt"
+printf 'Mevya installer diagnostic logs: %s\n' "$destination"

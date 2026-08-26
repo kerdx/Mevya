@@ -1,8 +1,24 @@
 #!/bin/sh
 
-set -eu
+set -u
 
 # Fedora's liveinst launcher handles the required privilege escalation and
-# Wayland environment setup itself. Do not wait for a guessed window id here:
-# that could leave the desktop launcher blocked before Anaconda is shown.
-exec /usr/bin/liveinst "$@"
+# Wayland environment setup itself. Keep this wrapper small and preserve its
+# exit status so diagnostics can be collected after every installer session.
+/usr/bin/liveinst "$@"
+status=$?
+
+diagnostic_path=''
+if [ -x /usr/local/bin/mevya-installer-diagnostics ]; then
+    diagnostic_path=$(/usr/local/bin/mevya-installer-diagnostics --collect "$status" 2>/dev/null || true)
+fi
+
+if command -v logger >/dev/null 2>&1; then
+    if [ -n "$diagnostic_path" ]; then
+        logger -t mevya-installer "Anaconda exited with status $status; $diagnostic_path"
+    else
+        logger -t mevya-installer "Anaconda exited with status $status"
+    fi
+fi
+
+exit "$status"

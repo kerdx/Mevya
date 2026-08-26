@@ -19,10 +19,12 @@ complete_marker="${state_dir}/.firstboot-complete"
 # that grants the technical live account passwordless access to liveinst.
 live_installer_desktop=/usr/share/applications/mevya-installer.desktop
 live_installer_launcher=/usr/local/bin/mevya-installer
+live_installer_diagnostics=/usr/local/bin/mevya-installer-diagnostics
 live_installer_polkit_rule=/etc/polkit-1/rules.d/49-mevya-liveinst.rules
 if [ "${is_live}" -eq 0 ]; then
     rm -f "${live_installer_desktop}" \
         "${live_installer_launcher}" \
+        "${live_installer_diagnostics}" \
         "${live_installer_polkit_rule}"
     logger -t mevya-firstboot 'Removed live-only installer files and polkit rule'
 fi

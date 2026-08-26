@@ -160,6 +160,9 @@ indipendentemente dalla distribuzione.
   usando `/usr/share/pixmaps/mevya-avatar.svg`; le immagini personalizzate restano intatte;
 - l’opzione “Installa Mevya” resta nella live e viene rimossa dal sistema
   installato insieme al launcher e alla regola polkit esclusivi della live;
+- in caso di uscita o errore dell’installer, il launcher raccoglie automaticamente
+  i log Anaconda, Kickstart e journal in /var/tmp/mevya-installer-logs/<timestamp>/;
+  i file temporanei restano disponibili anche in /tmp/ durante la sessione;
 - dalla live `liveinst` viene avviato direttamente tramite il launcher Fedora,
   che gestisce escalation dei privilegi e ambiente Wayland senza il wrapper di
   focus precedente;
